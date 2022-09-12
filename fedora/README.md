@@ -22,11 +22,11 @@
 
 		./install.sh
 
-- Partitioning: select custom, btrfs, create automatically
-- Root user: set password, enable SSH
-- Click install
-- When finished, click reboot
-- Login and `poweroff`
+	- Partitioning: select custom, btrfs, create automatically
+	- Root user: set password, enable SSH
+	- Click install
+	- When finished, click reboot
+	- Login and `poweroff`
 
 1. Start Fedora
 
