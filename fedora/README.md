@@ -2,7 +2,7 @@
 
 1. Install tools
 
-	brew install qemu wget
+		brew install qemu wget
 
 1. Download Fedora Server
 
