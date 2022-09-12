@@ -34,4 +34,6 @@
 
 	- wait for the login prompt, press enter
 
-		ssh -l root 127.0.0.1
+1. SSH into Fedora
+
+		ssh -l root localhost
