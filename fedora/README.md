@@ -32,6 +32,6 @@
 
 		./startup.sh &
 
-- wait for the login prompt, press enter
+	- wait for the login prompt, press enter
 
 		ssh -l root 127.0.0.1
