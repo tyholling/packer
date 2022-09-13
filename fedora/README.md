@@ -16,7 +16,7 @@
 
 1. Create empty disk for Fedora
 
-		qemu-img create -f raw fedora.img 100G
+		qemu-img create -f qcow2 fedora.img 100G
 
 1. Install Fedora
 
