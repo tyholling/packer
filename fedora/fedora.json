@@ -7,7 +7,6 @@
 			"firmware": "uefi.img",
 			"disk_size": "100G",
 			"format": "qcow2",
-			"headless": "true",
 			"machine_type": "virt,highmem=on",
 			"memory": "8192",
 			"output_directory": ".",
@@ -22,7 +21,7 @@
 				[ "-drive", "file=fedora.img,format=qcow2" ]
 			],
 			"qemu_binary": "qemu-system-aarch64",
-			"vnc_use_password": "true",
+			"display": "cocoa,show-cursor=on",
 			"vm_name": "fedora.img",
 			"iso_checksum": "0ab4000575ff8b258576750ecf4ca39b266f0c88cab5fe3d8d2f88c9bea4830d",
 			"iso_url": "https://download.fedoraproject.org/pub/fedora/linux/releases/36/Server/aarch64/iso/Fedora-Server-dvd-aarch64-36-1.5.iso",
@@ -31,7 +30,6 @@
 			"shutdown_command": "echo",
 			"shutdown_timeout": "1h",
 			"communicator": "none",
-			"boot_wait": "20s",
 			"boot_command": [
 				"<esc><up>e<wait><down><down>",
 				"<right><right><right><right><right><right><right><right><right><right><right><right><right><right><right>",
