@@ -11,13 +11,13 @@
 			"output_directory": ".",
 			"qemuargs": [
 				[ "-boot", "d" ],
-				[ "-cdrom", "Fedora-Server-dvd-aarch64-36-1.5.iso" ],
 				[ "-cpu", "host" ],
 				[ "-device", "qemu-xhci" ],
 				[ "-device", "usb-kbd" ],
 				[ "-device", "usb-tablet" ],
 				[ "-device", "virtio-gpu-pci" ],
-				[ "-drive", "file=fedora.img,format=qcow2" ]
+				[ "-drive", "file=fedora.img" ],
+				[ "-drive", "file=Fedora-Server-dvd-aarch64-36-1.5.iso" ]
 			],
 			"qemu_binary": "qemu-system-aarch64",
 			"display": "cocoa,show-cursor=on",
