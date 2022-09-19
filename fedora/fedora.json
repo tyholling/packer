@@ -6,7 +6,6 @@
 			"cpus": "8",
 			"firmware": "uefi.img",
 			"disk_size": "100G",
-			"format": "qcow2",
 			"machine_type": "virt,highmem=on",
 			"memory": "8192",
 			"output_directory": ".",

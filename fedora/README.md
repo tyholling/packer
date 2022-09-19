@@ -2,7 +2,8 @@
 
 1. Install tools
 
-		brew install qemu wget
+		brew tap hashicorp/tap
+		brew install hashicorp/tap/packer qemu wget
 
 1. Download Fedora Server
 
@@ -14,26 +15,10 @@
 		dd if=/dev/zero of=uefi.img bs=1m count=64
 		dd if=uefi.fd of=uefi.img conv=notrunc
 
-1. Create empty disk for Fedora
-
-		qemu-img create -f qcow2 fedora.img 100G
-
 1. Install Fedora
 
-		./install.sh
-
-	- Partitioning: select custom, btrfs, create automatically
-	- Root user: set password, enable SSH
-	- Click install
-	- When finished, click reboot
-	- Login and `poweroff`
+		packer build -force fedora.json
 
 1. Start Fedora
 
-		./startup.sh &
-
-	- wait for the login prompt, press enter
-
-1. SSH into Fedora
-
-		ssh -l root localhost
+		./startup.sh
