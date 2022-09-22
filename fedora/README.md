@@ -25,7 +25,7 @@
 
 1. Copy SSH key into Fedora
 
-	- Username: `root` Password: `dev`
+- Username: `root` Password: `dev`
 
 		ssh-copy-id -l root localhost
 
