@@ -15,23 +15,21 @@
 		dd if=/dev/zero of=uefi.img bs=1m count=64
 		dd if=uefi.fd of=uefi.img conv=notrunc
 
-1. Prepare install script
-
-	- Copy public SSH key:
-
-			cat ~/.ssh/id_ed25519.pub
-
-	- Add the following to `http/kickstart.cfg`:
-
-			%post
-			mkdir /root/.ssh
-			echo "<ssh-key>" > /root/.ssh/authorized_keys
-			%end
-
 1. Install Fedora
 
 		packer build -force fedora.json
 
 1. Start Fedora
 
-		./startup.sh
+		./startup.sh &
+
+1. Copy SSH key into Fedora
+
+	- Username: `root` Password: `dev`
+
+		ssh-copy-id -l root localhost
+
+1. Disable SSH login with password
+
+		ssh -l root localhost
+		rm /etc/ssh/sshd_config.d/01-permit-root-login.conf

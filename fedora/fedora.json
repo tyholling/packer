@@ -2,19 +2,18 @@
 	"builders": [
 		{
 			"type": "qemu",
-			"accelerator": "hvf",
 			"cpus": "8",
 			"firmware": "uefi.img",
 			"disk_size": "100G",
-			"headless": "true",
-			"machine_type": "virt,highmem=on",
 			"memory": "8192",
 			"output_directory": ".",
 			"qemuargs": [
 				[ "-boot", "d" ],
 				[ "-cpu", "host" ],
+				[ "-display", "none" ],
 				[ "-drive", "file=fedora.img" ],
-				[ "-drive", "file=Fedora-Server-dvd-aarch64-36-1.5.iso" ]
+				[ "-drive", "file=Fedora-Server-dvd-aarch64-36-1.5.iso" ],
+				[ "-machine", "type=virt,highmem=on,accel=hvf" ]
 			],
 			"qemu_binary": "qemu-system-aarch64",
 			"vnc_use_password": "true",
