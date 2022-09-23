@@ -25,9 +25,9 @@
 
 1. Copy SSH key into Fedora
 
-		ssh-copy-id -l root localhost # password: dev
+		ssh-copy-id root@localhost # password: dev
 
 1. Disable SSH login with password
 
-		ssh -l root localhost
+		ssh root@localhost
 		rm /etc/ssh/sshd_config.d/01-permit-root-login.conf
