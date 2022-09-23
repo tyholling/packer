@@ -6,7 +6,7 @@ qemu-system-aarch64 \
 -display none \
 -drive file=fedora.img,format=qcow2 \
 -m 8192 \
--machine type=virt,highmem=on,accel=hvf \
+-machine accel=hvf,highmem=on,type=virt \
 -nic user,hostfwd=tcp::22-:22 \
 -smp 8 \
 ;
