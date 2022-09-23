@@ -17,7 +17,7 @@
 
 1. Install Fedora
 
-		packer build -force fedora.json
+		packer build -force fedora.pkr.hcl
 
 1. Start Fedora
 
