@@ -2,4 +2,5 @@
 *.lock
 *.img
 *.fd
+*.pub
 *.sha256
