@@ -15,6 +15,10 @@
 		dd if=/dev/zero of=uefi.img bs=1m count=64
 		dd if=uefi.fd of=uefi.img conv=notrunc
 
+1. Set SSH key in `http/kickstart.cfg`
+
+		sshkey --username=root "..."
+
 1. Install Fedora
 
 		packer build -force fedora.pkr.hcl
@@ -22,12 +26,4 @@
 1. Start Fedora
 
 		./startup.sh &
-
-1. Copy SSH key into Fedora
-
-		ssh-copy-id root@localhost # password: dev
-
-1. Disable SSH login with password
-
 		ssh root@localhost
-		rm /etc/ssh/sshd_config.d/01-permit-root-login.conf
