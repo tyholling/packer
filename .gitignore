@@ -1,6 +1,6 @@
+*.bak
 *.iso
 *.lock
 *.img
 *.fd
-*.pub
 *.sha256
