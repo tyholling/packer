@@ -13,10 +13,10 @@
 
 	- Requires Docker
 
-		docker build -t uefi .
-		docker create --name extract uefi
-		docker cp extract:/root/uefi.img .
-		docker rm extract
+			docker build -t uefi .
+			docker create --name extract uefi
+			docker cp extract:/root/uefi.img .
+			docker rm extract
 
 1. Firmware: Option 2: Download nightly build
 
