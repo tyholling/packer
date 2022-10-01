@@ -11,7 +11,7 @@
 
 1. Firmware: Option 1: Build locally
 
-- Requires Docker
+	- Requires Docker
 
 		docker build -t uefi .
 		docker create --name extract uefi
