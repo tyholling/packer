@@ -3,24 +3,13 @@
 1. Install tools
 
 		brew tap hashicorp/tap
-		brew install hashicorp/tap/packer podman qemu wget
+		brew install hashicorp/tap/packer qemu
 
 1. Download Fedora Server
 
-		wget https://download.fedoraproject.org/pub/fedora/linux/releases/36/Server/aarch64/iso/Fedora-Server-dvd-aarch64-36-1.5.iso
+		curl -LO https://download.fedoraproject.org/pub/fedora/linux/releases/36/Server/aarch64/iso/Fedora-Server-dvd-aarch64-36-1.5.iso
 
-1. Build firmware
-
-		podman machine init
-		podman machine start
-		podman build -t uefi .
-		podman create --name extract uefi
-		podman cp extract:/root/uefi.img .
-		podman rm extract
-		podman machine stop
-		podman machine rm
-
-1. Set SSH key in `http/kickstart.cfg`
+1. Set SSH key in `kickstart.cfg`
 
 		sshkey --username=root "..."
 
@@ -31,4 +20,5 @@
 1. Start Fedora
 
 		./startup.sh &
+		sleep 30
 		ssh root@localhost

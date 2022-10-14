@@ -1,7 +1,7 @@
 #!/bin/bash
 
 qemu-system-aarch64 \
--bios uefi.img \
+-bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
 -cpu host \
 -display none \
 -drive file=fedora.img,format=qcow2 \
