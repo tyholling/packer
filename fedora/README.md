@@ -19,6 +19,6 @@
 
 1. Start Fedora
 
-		./startup.sh &
+		./startup.sh
 		sleep 30
 		ssh root@localhost
