@@ -3,11 +3,11 @@
 1. Install tools
 
 		brew tap hashicorp/tap
-		brew install hashicorp/tap/packer qemu
+		brew install hashicorp/tap/packer qemu watch wget
 
 1. Download Fedora Server
 
-		curl -LO https://download.fedoraproject.org/pub/fedora/linux/releases/36/Server/aarch64/iso/Fedora-Server-dvd-aarch64-36-1.5.iso
+		wget https://download.fedoraproject.org/pub/fedora/linux/releases/36/Server/aarch64/iso/Fedora-Server-dvd-aarch64-36-1.5.iso
 
 1. Set SSH key in `kickstart.cfg`
 
@@ -19,6 +19,13 @@
 
 1. Start Fedora
 
-		./startup.sh
-		sleep 30
-		ssh root@localhost
+		sudo echo
+		sudo ./startup.sh &
+
+1. Find the IP address for the VM
+
+		watch arp -a -i bridge100
+
+1. SSH into the VM
+
+		ssh root@<IP address>

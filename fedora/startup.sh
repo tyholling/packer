@@ -3,11 +3,14 @@
 qemu-system-aarch64 \
 -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
 -cpu host \
--daemonize \
 -display none \
 -drive file=fedora.img,format=qcow2 \
 -m 8192 \
 -machine accel=hvf,highmem=on,type=virt \
--nic user,hostfwd=tcp::22-:22 \
+-nic vmnet-shared \
 -smp 8 \
 ;
+
+# -nic vmnet-host
+# -nic vmnet-shared
+# -nic vmnet-bridged,ifname=en0
