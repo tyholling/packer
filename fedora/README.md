@@ -17,6 +17,11 @@
 
 		packer build -force fedora.pkr.hcl
 
+1. Optional: Create a snapshot
+
+		qemu-img snapshot fedora.img -c install
+		qemu-img snapshot fedora.img -l
+
 1. Start Fedora
 
 		sudo echo
