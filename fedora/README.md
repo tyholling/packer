@@ -24,7 +24,7 @@
 
 1. Find the IP address for the VM
 
-		watch arp -a -i bridge100
+		watch -n1 arp -a -i en1
 
 1. SSH into the VM
 
