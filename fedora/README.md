@@ -34,3 +34,5 @@
 1. SSH into the VM
 
 		ssh root@<IP address>
+
+1. Optional: [Install k3s](k3s.md)
