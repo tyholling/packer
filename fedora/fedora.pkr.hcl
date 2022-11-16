@@ -11,9 +11,9 @@ source "qemu" "fedora" {
   disk_size        = "100G"
   firmware         = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
   http_directory   = "."
-  iso_checksum     = "0ab4000575ff8b258576750ecf4ca39b266f0c88cab5fe3d8d2f88c9bea4830d"
-  iso_target_path  = "Fedora-Server-dvd-aarch64-36-1.5.iso"
-  iso_url          = "https://download.fedoraproject.org/pub/fedora/linux/releases/36/Server/aarch64/iso/Fedora-Server-dvd-aarch64-36-1.5.iso"
+  iso_checksum     = "1c2deba876bd2da3a429b1b0cd5e294508b8379b299913d97dd6dd6ebcd8b56f"
+  iso_target_path  = "Fedora-Server-dvd-aarch64-37-1.7.iso"
+  iso_url          = "https://download.fedoraproject.org/pub/fedora/linux/releases/37/Server/aarch64/iso/Fedora-Server-dvd-aarch64-37-1.7.iso"
   memory           = "8192"
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
@@ -22,7 +22,7 @@ source "qemu" "fedora" {
     ["-cpu", "host"],
     ["-display", "none"],
     ["-drive", "file=fedora.img"],
-    ["-drive", "file=Fedora-Server-dvd-aarch64-36-1.5.iso"],
+    ["-drive", "file=Fedora-Server-dvd-aarch64-37-1.7.iso"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   vm_name          = "fedora.img"
