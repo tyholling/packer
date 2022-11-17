@@ -93,8 +93,8 @@ mirrors:
 
 1. deploy
 
-		dnf install httpd-tools
 		cd golang/deploy
+		dnf install httpd-tools
 		htpasswd -2bc auth admin password
 		kubectl create secret generic basic-auth --from-file=auth
 		kubectl apply -f http-deployment.yaml
@@ -110,3 +110,16 @@ mirrors:
 		dnf install jq
 		# test grpc service
 		./bin/client | jq .msg
+
+1. charts
+
+		cd golang/deploy
+		helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+		helm install prometheus prometheus-community/prometheus -f prometheus-values.yaml
+		kubectl apply -f prometheus-ingress.yaml
+		helm repo add grafana https://grafana.github.io/helm-charts
+		helm install grafana grafana/grafana -f grafana-values.yaml
+		kubectl apply -f grafana-ingress.yaml
+		# get grafana password
+		kubectl get secret grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+		# login to /grafana and add data source for prometheus: /prometheus with scrape interval: 10s
