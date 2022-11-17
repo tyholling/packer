@@ -12,10 +12,10 @@
 1. update
 
 		dnf update
-		reboot
 
 1. config
 
+		# optional: remove config
 		rm -f anaconda-ks.cfg original-ks.cfg .bash_history .bash_logout .bash_profile .bashrc .cshrc .tcshrc .viminfo
 		ssh-keygen -t ed25519
 		# add ssh key to github
@@ -38,11 +38,12 @@
 		systemctl enable container-registry
 		systemctl start container-registry
 		vim /etc/containers/registries.conf.d/localhost.conf
-```
-[[registry]]
-location = "localhost:5000"
-insecure = true
-```
+
+			```
+			[[registry]]
+			location = "localhost:5000"
+			insecure = true
+			```
 
 1. golang
 
@@ -65,16 +66,20 @@ insecure = true
 		cp /etc/rancher/k3s/k3s.yaml .kube/config
 		systemctl stop k3s
 		vim /etc/rancher/k3s/registries.yaml
-```
-mirrors:
-  localhost:
-    endpoint:
-    - "http://localhost:5000"
-```
+
+			```
+			mirrors:
+				localhost:
+					endpoint:
+					- "http://localhost:5000"
+			```
+
 		vim /etc/systemd/system/k3s.service
-```
-    server --disable metrics-server,traefik \
-```
+
+			```
+					server --disable metrics-server,traefik \
+			```
+
 		systemctl daemon-reload
 		systemctl start k3s
 		cd /tmp

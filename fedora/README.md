@@ -7,7 +7,7 @@
 
 1. Download Fedora Server
 
-		wget https://download.fedoraproject.org/pub/fedora/linux/releases/36/Server/aarch64/iso/Fedora-Server-dvd-aarch64-36-1.5.iso
+		wget https://download.fedoraproject.org/pub/fedora/linux/releases/37/Server/aarch64/iso/Fedora-Server-dvd-aarch64-37-1.7.iso
 
 1. Set SSH key in `kickstart.cfg`
 
@@ -19,7 +19,7 @@
 
 1. Optional: Create a snapshot
 
-		qemu-img snapshot fedora.img -c install
+		qemu-img snapshot fedora.img -c fedora
 		qemu-img snapshot fedora.img -l
 
 1. Start Fedora
