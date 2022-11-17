@@ -37,13 +37,11 @@
 		podman rm -f registry
 		systemctl enable container-registry
 		systemctl start container-registry
-		vim /etc/containers/registries.conf.d/localhost.conf
 
-			```
-			[[registry]]
-			location = "localhost:5000"
-			insecure = true
-			```
+		# vim /etc/containers/registries.conf.d/localhost.conf
+		[[registry]]
+		location = "localhost:5000"
+		insecure = true
 
 1. golang
 
@@ -65,20 +63,15 @@
 		kubectl completion bash > /etc/bash_completion.d/kubectl.sh
 		cp /etc/rancher/k3s/k3s.yaml .kube/config
 		systemctl stop k3s
-		vim /etc/rancher/k3s/registries.yaml
 
-			```
-			mirrors:
-				localhost:
-					endpoint:
-					- "http://localhost:5000"
-			```
+		# vim /etc/rancher/k3s/registries.yaml
+		mirrors:
+		  localhost:
+		    endpoint:
+		    - "http://localhost:5000"
 
-		vim /etc/systemd/system/k3s.service
-
-			```
-					server --disable metrics-server,traefik \
-			```
+		# vim /etc/systemd/system/k3s.service
+		server --disable metrics-server,traefik \
 
 		systemctl daemon-reload
 		systemctl start k3s
