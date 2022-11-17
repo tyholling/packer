@@ -55,7 +55,7 @@ insecure = true
 		dnf install gcc make
 		make setup
 		make builder
-		make build check images
+		make build check images push
 
 1. k3s.io
 
