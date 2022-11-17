@@ -61,6 +61,7 @@ insecure = true
 
 		curl -sfL https://get.k3s.io | sh -
 		kubectl version
+		kubectl completion bash > /etc/bash_completion.d/kubectl.sh
 		cp /etc/rancher/k3s/k3s.yaml .kube/config
 		systemctl stop k3s
 		vim /etc/rancher/k3s/registries.yaml
@@ -78,25 +79,29 @@ mirrors:
 		systemctl start k3s
 		cd /tmp
 		# https://github.com/helm/helm/releases
-		wget -4 https://get.helm.sh/helm-v3.10.1-linux-arm64.tar.gz
-		tar xf helm-v3.10.1-linux-arm64.tar.gz
+		wget -4 https://get.helm.sh/helm-v3.10.2-linux-arm64.tar.gz
+		tar xf helm-v3.10.2-linux-arm64.tar.gz
 		mv linux-arm64/helm /usr/local/bin
 		cd
 		# watch k3s for changes
 		watch -t -n1 kubectl get ing,svc,deploy,pod -A
 		helm version
 		helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-		helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx --create-namespace
+		kubectl create ns ingress-nginx
+		cd golang/deploy
+		helm install ingress-nginx ingress-nginx/ingress-nginx -n ingress-nginx -f ingress-nginx-values.yaml
 
 1. deploy
 
-		cd golang/deploy
 		dnf install httpd-tools
+		cd golang/deploy
 		htpasswd -2bc auth admin password
 		kubectl create secret generic basic-auth --from-file=auth
 		kubectl apply -f http-deployment.yaml
 		kubectl apply -f http-service.yaml
 		kubectl apply -f http-ingress.yaml
+		# wait until the address is set
+		kubectl get ing -w
 		# test http service
 		curl -i localhost -u admin
 		kubectl apply -f server-deployment.yaml
