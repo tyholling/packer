@@ -116,8 +116,10 @@
 		helm install prometheus prometheus-community/prometheus -f prometheus-values.yaml
 		kubectl apply -f prometheus-ingress.yaml
 		helm repo add grafana https://grafana.github.io/helm-charts
-		helm install grafana grafana/grafana -f grafana-values.yaml
+		helm install grafana grafana/grafana -f grafana-values.yaml --set-file dashboards.default.client-metrics.json=client-metrics.json
 		kubectl apply -f grafana-ingress.yaml
 		# get grafana password
-		kubectl get secret grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-		# login to /grafana and add data source for prometheus: /prometheus with scrape interval: 10s
+		kubectl get secret grafana -o jsonpath="{.data.admin-password}" | base64 --decode; echo
+		# run the client to collect metrics
+		./bin/client >& /tmp/client.log &
+		# login to /grafana as admin
