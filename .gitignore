@@ -3,4 +3,4 @@
 *.lock
 *.img
 *.fd
-*.sha256
+*.sha512
