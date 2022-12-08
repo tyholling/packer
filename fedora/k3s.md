@@ -60,7 +60,7 @@
 		    - "http://localhost:5000"
 
 		# vim /etc/systemd/system/k3s.service
-		server --disable metrics-server,traefik \
+		server --disable traefik \
 
 		systemctl daemon-reload
 		systemctl start k3s
