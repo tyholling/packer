@@ -1,6 +1,5 @@
-*.bak
 *.img
 *.iso
 *.lock
-*.md5
+*.sha256
 *.swp
