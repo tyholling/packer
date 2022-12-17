@@ -1,9 +1,7 @@
 source "qemu" "fedora" {
   boot_command = [
-    "<esc><up>e<wait><down><down>",
-    "<right><right><right><right><right><right><right><right><right><right><right><right><right><right><right>",
-    "<right><right><right><right><right><right><right><right><right><right><right><right><right><right><right>",
-    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<wait>",
+    "<esc><up>e<wait><down><down><down><left>",
+    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg",
     "<leftCtrlOn>x<leftCtrlOff>"
   ]
   communicator     = "none"
