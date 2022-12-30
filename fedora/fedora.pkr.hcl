@@ -1,14 +1,19 @@
 source "qemu" "fedora" {
   boot_command = [
-    "<esc><up>e<wait><down><down><down><left>",
-    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg",
-    "<leftCtrlOn>x<leftCtrlOff>"
+    "<esc>c<wait>",
+    "linux /images/pxeboot/vmlinuz",
+    " inst.repo=hd:vdb",
+    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<enter><wait>",
+    "initrd /images/pxeboot/initrd.img<enter><wait>",
+    "boot<enter>"
   ]
-  communicator     = "none"
-  cpus             = "8"
-  disk_size        = "100G"
-  firmware         = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
-  http_directory   = "."
+  communicator = "none"
+  cpus         = "8"
+  disk_size    = "100G"
+  firmware     = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
+  http_content = {
+    "/kickstart.cfg" = file("kickstart.cfg")
+  }
   iso_checksum     = "1c2deba876bd2da3a429b1b0cd5e294508b8379b299913d97dd6dd6ebcd8b56f"
   iso_target_path  = "Fedora-Server-dvd-aarch64-37-1.7.iso"
   iso_url          = "https://download.fedoraproject.org/pub/fedora/linux/releases/37/Server/aarch64/iso/Fedora-Server-dvd-aarch64-37-1.7.iso"
