@@ -24,12 +24,11 @@
 
 1. Start Fedora
 
-		sudo echo
-		sudo ./startup.sh &
+		sudo ./start.sh
 
 1. Find the IP address for the VM
 
-		watch -n1 arp -a -i en1
+		watch -n1 arp -a -i bridge100
 
 1. SSH into the VM
 
