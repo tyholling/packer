@@ -1,0 +1,14 @@
+#cloud-config
+autoinstall:
+  version: 1
+  source:
+    search_drivers: false
+    id: ubuntu-server
+  ssh:
+    install-server: true
+    authorized-keys: [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINAqUQxkW7kO/0Gc54de36KKfNJsjZZvl8dkKQEy7wgJ" ]
+  timezone: America/Los_Angeles
+  shutdown: poweroff
+  user-data:
+    disable_root: false
+    hostname: ubuntu
