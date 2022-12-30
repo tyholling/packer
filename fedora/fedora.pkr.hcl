@@ -2,8 +2,7 @@ source "qemu" "fedora" {
   boot_command = [
     "<esc>c<wait>",
     "linux /images/pxeboot/vmlinuz",
-    " inst.repo=hd:vdb",
-    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<enter><wait>",
+    " inst.repo=hd:vdb inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<enter><wait>",
     "initrd /images/pxeboot/initrd.img<enter><wait>",
     "boot<enter>"
   ]
@@ -28,6 +27,7 @@ source "qemu" "fedora" {
     ["-drive", "file=Fedora-Server-dvd-aarch64-37-1.7.iso"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
+  shutdown_timeout = "1h"
   vm_name          = "fedora.img"
   vnc_use_password = "true"
 }
