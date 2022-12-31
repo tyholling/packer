@@ -25,18 +25,18 @@
 
 1. Start Fedora
 
-		sudo ./start.sh
+		sudo ./start.sh &
 
-1. Find the IP address for the VM
+1. Wait for the VM to start
 
-		while sleep 1; do arp -a -i bridge100; done
+		until ssh-keyscan fedora; do sleep 5; done
+		ssh -l root fedora
 
 1. Update and snapshot
 
-		ssh -l root <IP address>
 		dnf update
 		dnf reboot
-		ssh -l root <IP address>
+		ssh -l root fedora
 
 		# snapshot with label: update
 		poweroff
@@ -44,7 +44,7 @@
 		qemu-img snapshot fedora.img -l
 		qemu-img snapshot fedora.img -c update
 		qemu-img snapshot fedora.img -l
-		sudo ./start.sh
+		sudo ./start.sh &
 
 1. Config and snapshot
 
@@ -65,6 +65,6 @@
 		qemu-img snapshot fedora.img -l
 		qemu-img snapshot fedora.img -c config
 		qemu-img snapshot fedora.img -l
-		sudo ./start.sh
+		sudo ./start.sh &
 
 1. Optional: [Install k3s](k3s.md)
