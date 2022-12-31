@@ -35,7 +35,7 @@
 1. Update and snapshot
 
 		dnf update
-		dnf reboot
+		reboot
 		ssh -l root fedora
 
 		# snapshot with label: update
