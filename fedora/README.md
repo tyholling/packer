@@ -17,8 +17,9 @@
 
 		packer build -force fedora.pkr.hcl
 
-1. Optional: Create a snapshot
+1. Create a snapshot
 
+		qemu-img snapshot fedora.img -l
 		qemu-img snapshot fedora.img -c fedora
 		qemu-img snapshot fedora.img -l
 
@@ -28,10 +29,42 @@
 
 1. Find the IP address for the VM
 
-		watch -n1 arp -a -i bridge100
+		while sleep 1; do arp -a -i bridge100; done
 
-1. SSH into the VM
+1. Update and snapshot
 
-		ssh root@<IP address>
+		ssh -l root <IP address>
+		dnf update
+		dnf reboot
+		ssh -l root <IP address>
+
+		# snapshot with label: update
+		poweroff
+		while pgrep qemu; do sleep 10; done
+		qemu-img snapshot fedora.img -l
+		qemu-img snapshot fedora.img -c update
+		qemu-img snapshot fedora.img -l
+		sudo ./start.sh
+
+1. Config and snapshot
+
+		# optional: remove config
+		rm -f anaconda-ks.cfg original-ks.cfg .bash_history .bash_logout .bash_profile .bashrc .cshrc .tcshrc .viminfo
+		ssh-keygen -t ed25519
+		# add ssh key to github
+		cat .ssh/id_ed25519.pub
+		dnf install ack bat git git-delta jq tmux
+		# replace with your config repo
+		git clone git@github.com:tyholling/config.git
+		cd config
+		./install.sh
+
+		# snapshot with label: config
+		poweroff
+		while pgrep qemu; do sleep 10; done
+		qemu-img snapshot fedora.img -l
+		qemu-img snapshot fedora.img -c config
+		qemu-img snapshot fedora.img -l
+		sudo ./start.sh
 
 1. Optional: [Install k3s](k3s.md)

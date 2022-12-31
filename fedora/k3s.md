@@ -1,31 +1,5 @@
 # k3s on fedora
 
-1. snapshot between each step:
-
-		poweroff
-		# wait for qemu to exit
-		while pgrep qemu; do sleep 10; done
-		qemu-img snapshot fedora.img -c fedora
-		sudo echo
-		sudo ./startup.sh &
-
-1. update
-
-		dnf update
-
-1. config
-
-		# optional: remove config
-		rm -f anaconda-ks.cfg original-ks.cfg .bash_history .bash_logout .bash_profile .bashrc .cshrc .tcshrc .viminfo
-		ssh-keygen -t ed25519
-		# add ssh key to github
-		cat .ssh/id_ed25519.pub
-		dnf install ack bat git git-delta jq tmux
-		# replace with your config repo
-		git clone git@github.com:tyholling/config.git
-		cd config
-		./install.sh
-
 1. podman
 
 		dnf install podman
