@@ -51,7 +51,7 @@
 		ssh -l root ubuntu
 
 		# optional: remove config
-		rm -f anaconda-ks.cfg original-ks.cfg .bash_history .bash_logout .bash_profile .bashrc .cshrc .tcshrc .viminfo
+		rm -f .bash_history .bashrc .profile
 		ssh-keygen -t ed25519
 		# add ssh key to github
 		cat .ssh/id_ed25519.pub
