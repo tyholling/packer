@@ -7,6 +7,6 @@ qemu-system-aarch64 \
 -drive file=fedora.img \
 -m 8192 \
 -machine accel=hvf,highmem=on,type=virt \
--nic vmnet-bridged,ifname=en1 \
+-nic vmnet-bridged,ifname=en1,mac=2:0:0:0:0:0 \
 -smp 8 \
 ;

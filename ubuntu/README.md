@@ -3,7 +3,7 @@
 1. Install tools
 
 		brew tap hashicorp/tap
-		brew install hashicorp/tap/packer qemu watch wget
+		brew install hashicorp/tap/packer qemu wget
 
 1. Download Ubuntu Server
 
@@ -29,31 +29,33 @@
 
 1. Wait for the VM to start
 
-		until ssh-keyscan ubuntu; do sleep 5; done
+		until ssh-keyscan ubuntu; do sleep 1; done
+		ssh-keygen -R ubuntu
 		ssh -l root ubuntu
 
 1. Update and snapshot
 
 		apt update
-		reboot
-		ssh -l root ubuntu
+		apt upgrade
 
 		# snapshot with label: update
 		poweroff
-		while pgrep qemu; do sleep 10; done
+		while pgrep qemu; do sleep 1; done
 		qemu-img snapshot ubuntu.img -l
 		qemu-img snapshot ubuntu.img -c update
 		qemu-img snapshot ubuntu.img -l
-		sudo ./start.sh &
 
 1. Config and snapshot
+
+		sudo ./start.sh &
+		ssh -l root ubuntu
 
 		# optional: remove config
 		rm -f anaconda-ks.cfg original-ks.cfg .bash_history .bash_logout .bash_profile .bashrc .cshrc .tcshrc .viminfo
 		ssh-keygen -t ed25519
 		# add ssh key to github
 		cat .ssh/id_ed25519.pub
-		apt install ack bat git git-delta jq tmux
+		apt install ack delta
 		# replace with your config repo
 		git clone git@github.com:tyholling/config.git
 		cd config
@@ -61,8 +63,7 @@
 
 		# snapshot with label: config
 		poweroff
-		while pgrep qemu; do sleep 10; done
+		while pgrep qemu; do sleep 1; done
 		qemu-img snapshot ubuntu.img -l
 		qemu-img snapshot ubuntu.img -c config
 		qemu-img snapshot ubuntu.img -l
-		sudo ./start.sh &

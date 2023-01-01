@@ -7,6 +7,6 @@ qemu-system-aarch64 \
 -drive file=ubuntu.img \
 -m 8192 \
 -machine accel=hvf,highmem=on,type=virt \
--nic vmnet-shared \
+-nic vmnet-bridged,ifname=en1,mac=2:0:0:0:0:1 \
 -smp 8 \
 ;
