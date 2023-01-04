@@ -23,9 +23,12 @@ source "qemu" "ubuntu" {
   qemuargs = [
     ["-boot", "d"],
     ["-cpu", "host"],
+    ["-device", "virtio-scsi-device"],
     ["-display", "none"],
-    ["-drive", "file=ubuntu.img"],
-    ["-drive", "file=ubuntu-22.10-live-server-arm64.iso"],
+    ["-drive", "file=ubuntu.img,if=none,format=qcow2,id=disk"],
+    ["-device", "scsi-hd,drive=disk"],
+    ["-drive", "file=ubuntu-22.10-live-server-arm64.iso,if=none,format=raw,id=cdrom"],
+    ["-device", "scsi-cd,drive=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "1h"
