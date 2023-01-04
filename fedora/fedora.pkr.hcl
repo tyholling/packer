@@ -2,7 +2,7 @@ source "qemu" "fedora" {
   boot_command = [
     "<esc>c<wait>",
     "linux /images/pxeboot/vmlinuz",
-    " inst.repo=hd:vdb inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<enter><wait>",
+    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<enter><wait>",
     "initrd /images/pxeboot/initrd.img<enter><wait>",
     "boot<enter>"
   ]
@@ -22,9 +22,12 @@ source "qemu" "fedora" {
   qemuargs = [
     ["-boot", "d"],
     ["-cpu", "host"],
+    ["-device", "virtio-scsi-device"],
     ["-display", "none"],
-    ["-drive", "file=fedora.img"],
-    ["-drive", "file=Fedora-Server-dvd-aarch64-37-1.7.iso"],
+    ["-drive", "file=fedora.img,if=none,format=qcow2,id=disk"],
+    ["-device", "scsi-hd,drive=disk"],
+    ["-drive", "file=Fedora-Server-dvd-aarch64-37-1.7.iso,if=none,format=raw,id=cdrom"],
+    ["-device", "scsi-cd,drive=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "1h"
