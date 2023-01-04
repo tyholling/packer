@@ -20,9 +20,9 @@ source "qemu" "fedora" {
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
-    ["-boot", "d"],
+    ["-boot", "strict=off"],
     ["-cpu", "host"],
-    ["-device", "virtio-scsi-device"],
+    ["-device", "virtio-scsi"],
     ["-display", "none"],
     ["-drive", "file=fedora.img,if=none,format=qcow2,id=disk"],
     ["-device", "scsi-hd,drive=disk"],

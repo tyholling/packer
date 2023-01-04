@@ -21,9 +21,9 @@ source "qemu" "ubuntu" {
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
-    ["-boot", "d"],
+    ["-boot", "strict=off"],
     ["-cpu", "host"],
-    ["-device", "virtio-scsi-device"],
+    ["-device", "virtio-scsi"],
     ["-display", "none"],
     ["-drive", "file=ubuntu.img,if=none,format=qcow2,id=disk"],
     ["-device", "scsi-hd,drive=disk"],
