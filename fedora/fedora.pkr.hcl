@@ -22,7 +22,7 @@ source "qemu" "fedora" {
   qemuargs = [
     ["-boot", "strict=off"],
     ["-cpu", "host"],
-    ["-device", "virtio-scsi"],
+    ["-device", "virtio-scsi-device"],
     ["-display", "none"],
     ["-drive", "file=fedora.img,if=none,format=qcow2,id=disk"],
     ["-device", "scsi-hd,drive=disk"],

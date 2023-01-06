@@ -23,7 +23,7 @@ source "qemu" "ubuntu" {
   qemuargs = [
     ["-boot", "strict=off"],
     ["-cpu", "host"],
-    ["-device", "virtio-scsi"],
+    ["-device", "virtio-scsi-device"],
     ["-display", "none"],
     ["-drive", "file=ubuntu.img,if=none,format=qcow2,id=disk"],
     ["-device", "scsi-hd,drive=disk"],
