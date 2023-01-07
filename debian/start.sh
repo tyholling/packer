@@ -9,6 +9,6 @@ qemu-system-aarch64 \
 -device scsi-hd,drive=disk,bootindex=0 \
 -m 8192 \
 -machine accel=hvf,highmem=on,type=virt \
--nic vmnet-bridged,ifname=en1,mac=2:0:0:0:0:d \
+-nic vmnet-bridged,ifname=en1,mac=2:0:0:0:0:4 \
 -smp 8 \
 ;
