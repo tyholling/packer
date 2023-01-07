@@ -66,5 +66,3 @@
 		qemu-img snapshot fedora.img -l
 		qemu-img snapshot fedora.img -c config
 		qemu-img snapshot fedora.img -l
-
-1. Optional: [Install k3s](k3s.md)
