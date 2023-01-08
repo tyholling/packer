@@ -54,7 +54,7 @@
 		ssh-keygen -t ed25519
 		# add ssh key to github
 		cat .ssh/id_ed25519.pub
-		dnf install ack git git-delta tmux
+		dnf install ack git tmux
 		# replace with your config repo
 		git clone git@github.com:tyholling/config.git
 		cd config
