@@ -43,26 +43,3 @@
 		qemu-img snapshot oracle.img -l
 		qemu-img snapshot oracle.img -c update
 		qemu-img snapshot oracle.img -l
-
-1. Config and snapshot
-
-		sudo ./start.sh &
-		ssh -l root oracle
-
-		# optional: remove config
-		rm -f anaconda-ks.cfg original-ks.cfg .bash_history .bash_logout .bash_profile .bashrc .cshrc .tcshrc .viminfo
-		ssh-keygen -t ed25519
-		# add ssh key to github
-		cat .ssh/id_ed25519.pub
-		dnf install ack git tmux
-		# replace with your config repo
-		git clone git@github.com:tyholling/config.git
-		cd config
-		./install.sh
-
-		# snapshot with label: config
-		poweroff
-		while pgrep qemu; do sleep 1; done
-		qemu-img snapshot oracle.img -l
-		qemu-img snapshot oracle.img -c config
-		qemu-img snapshot oracle.img -l

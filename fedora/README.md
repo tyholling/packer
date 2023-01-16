@@ -43,26 +43,3 @@
 		qemu-img snapshot fedora.img -l
 		qemu-img snapshot fedora.img -c update
 		qemu-img snapshot fedora.img -l
-
-1. Config and snapshot
-
-		sudo ./start.sh &
-		ssh -l root fedora
-
-		# optional: remove config
-		rm -f anaconda-ks.cfg original-ks.cfg .bash_history .bash_logout .bash_profile .bashrc .cshrc .tcshrc .viminfo
-		ssh-keygen -t ed25519
-		# add ssh key to github
-		cat .ssh/id_ed25519.pub
-		dnf install ack git git-delta tmux
-		# replace with your config repo
-		git clone git@github.com:tyholling/config.git
-		cd config
-		./install.sh
-
-		# snapshot with label: config
-		poweroff
-		while pgrep qemu; do sleep 1; done
-		qemu-img snapshot fedora.img -l
-		qemu-img snapshot fedora.img -c config
-		qemu-img snapshot fedora.img -l

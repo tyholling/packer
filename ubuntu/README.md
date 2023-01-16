@@ -44,26 +44,3 @@
 		qemu-img snapshot ubuntu.img -l
 		qemu-img snapshot ubuntu.img -c update
 		qemu-img snapshot ubuntu.img -l
-
-1. Config and snapshot
-
-		sudo ./start.sh &
-		ssh -l root ubuntu
-
-		# optional: remove config
-		rm -f .bashrc .profile
-		ssh-keygen -t ed25519
-		# add ssh key to github
-		cat .ssh/id_ed25519.pub
-		apt install ack delta
-		# replace with your config repo
-		git clone git@github.com:tyholling/config.git
-		cd config
-		./install.sh
-
-		# snapshot with label: config
-		poweroff
-		while pgrep qemu; do sleep 1; done
-		qemu-img snapshot ubuntu.img -l
-		qemu-img snapshot ubuntu.img -c config
-		qemu-img snapshot ubuntu.img -l

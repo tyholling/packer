@@ -43,26 +43,3 @@
 		qemu-img snapshot debian.img -l
 		qemu-img snapshot debian.img -c update
 		qemu-img snapshot debian.img -l
-
-1. Config and snapshot
-
-		sudo ./start.sh &
-		ssh -l root debian
-
-		# optional: remove config
-		rm -f .bashrc .profile
-		ssh-keygen -t ed25519
-		# add ssh key to github
-		cat .ssh/id_ed25519.pub
-		apt install ack delta git tmux vim
-		# replace with your config repo
-		git clone git@github.com:tyholling/config.git
-		cd config
-		./install.sh
-
-		# snapshot with label: config
-		poweroff
-		while pgrep qemu; do sleep 1; done
-		qemu-img snapshot debian.img -l
-		qemu-img snapshot debian.img -c config
-		qemu-img snapshot debian.img -l
