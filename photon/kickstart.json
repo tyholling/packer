@@ -1,0 +1,14 @@
+{
+  "hostname": "photon",
+  "password": {
+    "crypted": false,
+    "text": "photon"
+  },
+  "disk": "/dev/sda",
+  "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINAqUQxkW7kO/0Gc54de36KKfNJsjZZvl8dkKQEy7wgJ",
+  "packages": [
+    "initramfs",
+    "linux",
+    "minimal"
+  ]
+}
