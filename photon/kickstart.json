@@ -5,7 +5,7 @@
     "text": "photon"
   },
   "disk": "/dev/sda",
-  "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINAqUQxkW7kO/0Gc54de36KKfNJsjZZvl8dkKQEy7wgJ",
+  "public_key": "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmJiTeqkdmDBrk/s001UfR1IwyHD/9gUMbllm3QNE02",
   "packages": [
     "initramfs",
     "linux",
