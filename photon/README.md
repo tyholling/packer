@@ -25,13 +25,12 @@
 
 1. Start Photon
 
-		sudo ./start.sh &
+		./start.sh &
 
-1. Wait for the VM to start
+1. Connect to the VM
 
-		sleep 30
-		dig +short photon
-		ssh -l root <ip address>
+		until ssh -l root localhost:61622; do sleep 1; done
+		ssh -l root localhost:61622
 
 1. Update and snapshot
 

@@ -25,13 +25,12 @@
 
 1. Start Ubuntu
 
-		sudo ./start.sh &
+		./start.sh &
 
-1. Wait for the VM to start
+1. Connect to the VM
 
-		until ssh-keyscan ubuntu; do sleep 1; done
-		ssh-keygen -R ubuntu
-		ssh -l root ubuntu
+		until ssh -l root localhost:62122; do sleep 1; done
+		ssh -l root localhost:62122
 
 1. Update and snapshot
 

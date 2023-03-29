@@ -25,13 +25,12 @@
 
 1. Start Debian
 
-		sudo ./start.sh &
+		./start.sh &
 
-1. Wait for the VM to start
+1. Connect to the VM
 
-		until ssh-keyscan debian; do sleep 1; done
-		ssh-keygen -R debian
-		ssh -l root debian
+		until ssh -l root localhost:60422; do sleep 1; done
+		ssh -l root localhost:60422
 
 1. Update and snapshot
 

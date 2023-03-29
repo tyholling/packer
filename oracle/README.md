@@ -25,13 +25,12 @@
 
 1. Start Oracle
 
-		sudo ./start.sh &
+		./start.sh &
 
-1. Wait for the VM to start
+1. Connect to the VM
 
-		until ssh-keyscan oracle; do sleep 1; done
-		ssh-keygen -R oracle
-		ssh -l root oracle
+		until ssh -l root localhost:61522; do sleep 1; done
+		ssh -l root localhost:61522
 
 1. Update and snapshot
 

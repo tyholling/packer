@@ -25,13 +25,12 @@
 
 1. Start Fedora
 
-		sudo ./start.sh &
+		./start.sh &
 
-1. Wait for the VM to start
+1. Connect to the VM
 
-		until ssh-keyscan fedora; do sleep 1; done
-		ssh-keygen -R fedora
-		ssh -l root fedora
+		until ssh -l root localhost:60622; do sleep 1; done
+		ssh -l root localhost:60622
 
 1. Update and snapshot
 
