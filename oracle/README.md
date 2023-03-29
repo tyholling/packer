@@ -29,7 +29,7 @@
 
 1. Connect to the VM
 
-		until ssh -l root localhost:61522; do sleep 1; done
+		until ssh -l root localhost:61522 uptime; do sleep 1; done
 		ssh -l root localhost:61522
 
 1. Update and snapshot
