@@ -23,14 +23,24 @@
 		qemu-img snapshot fedora.img -c fedora
 		qemu-img snapshot fedora.img -l
 
+1. Configure networking
+
+		$ vim /var/db/dhcpd_leases
+		{
+			name=fedora
+			ip_address=192.168.64.6
+			hw_address=1,2:0:0:0:0:6
+			identifier=1,2:0:0:0:0:6
+			lease=0
+		}
+
 1. Start Fedora
 
 		./start.sh &
 
 1. Connect to the VM
 
-		until ssh -l root localhost:60622 uptime; do sleep 1; done
-		ssh -l root localhost:60622
+		ssh -l root 192.168.64.6
 
 1. Update and snapshot
 

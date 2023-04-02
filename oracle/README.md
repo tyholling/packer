@@ -23,14 +23,24 @@
 		qemu-img snapshot oracle.img -c oracle
 		qemu-img snapshot oracle.img -l
 
+1. Configure networking
+
+		$ vim /var/db/dhcpd_leases
+		{
+			name=oracle
+			ip_address=192.168.64.15
+			hw_address=1,2:0:0:0:0:f
+			identifier=1,2:0:0:0:0:f
+			lease=0
+		}
+
 1. Start Oracle
 
 		./start.sh &
 
 1. Connect to the VM
 
-		until ssh -l root localhost:61522 uptime; do sleep 1; done
-		ssh -l root localhost:61522
+		ssh -l root 192.168.64.15
 
 1. Update and snapshot
 

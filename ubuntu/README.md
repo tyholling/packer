@@ -23,14 +23,24 @@
 		qemu-img snapshot ubuntu.img -c ubuntu
 		qemu-img snapshot ubuntu.img -l
 
+1. Configure networking
+
+		$ vim /var/db/dhcpd_leases
+		{
+			name=ubuntu
+			ip_address=192.168.64.21
+			hw_address=1,2:0:0:0:0:15
+			identifier=1,2:0:0:0:0:15
+			lease=0
+		}
+
 1. Start Ubuntu
 
 		./start.sh &
 
 1. Connect to the VM
 
-		until ssh -l root localhost:62122 uptime; do sleep 1; done
-		ssh -l root localhost:62122
+		ssh -l root 192.168.64.21
 
 1. Update and snapshot
 

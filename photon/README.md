@@ -23,14 +23,24 @@
 		qemu-img snapshot photon.img -c photon
 		qemu-img snapshot photon.img -l
 
+1. Configure networking
+
+		$ vim /var/db/dhcpd_leases
+		{
+			name=photon
+			ip_address=192.168.64.16
+			hw_address=1,2:0:0:0:0:10
+			identifier=1,2:0:0:0:0:10
+			lease=0
+		}
+
 1. Start Photon
 
 		./start.sh &
 
 1. Connect to the VM
 
-		until ssh -l root localhost:61622 uptime; do sleep 1; done
-		ssh -l root localhost:61622
+		ssh -l root 192.168.64.16
 
 1. Update and snapshot
 
