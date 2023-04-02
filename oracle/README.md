@@ -36,7 +36,7 @@
 
 1. Start Oracle
 
-		./start.sh &
+		sudo ./start.sh &
 
 1. Connect to the VM
 
