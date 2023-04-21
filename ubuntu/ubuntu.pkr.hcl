@@ -14,9 +14,9 @@ source "qemu" "ubuntu" {
     "/user-data" = file("user-data")
     "/meta-data" = ""
   }
-  iso_checksum     = "a19d956e993a16fc6496c371e36dcc0eb85d2bdf6a8e86028b92ce62e9f585cd"
-  iso_target_path  = "ubuntu-22.10-live-server-arm64.iso"
-  iso_url          = "https://cdimage.ubuntu.com/releases/22.10/release/ubuntu-22.10-live-server-arm64.iso"
+  iso_checksum     = "ad306616e37132ee00cc651ac0233b0e24b0b6e5e93b4a8ad36aa30c95b74e8c"
+  iso_target_path  = "ubuntu-23.04-live-server-arm64.iso"
+  iso_url          = "https://cdimage.ubuntu.com/releases/23.04/release/ubuntu-23.04-live-server-arm64.iso"
   memory           = "8192"
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
@@ -27,7 +27,7 @@ source "qemu" "ubuntu" {
     ["-display", "none"],
     ["-drive", "file=ubuntu.img,if=none,format=qcow2,id=disk"],
     ["-device", "scsi-hd,drive=disk"],
-    ["-drive", "file=ubuntu-22.10-live-server-arm64.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=ubuntu-23.04-live-server-arm64.iso,if=none,format=raw,id=cdrom"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
