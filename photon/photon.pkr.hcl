@@ -13,9 +13,9 @@ source "qemu" "photon" {
   http_content = {
     "/kickstart.json" = file("kickstart.json")
   }
-  iso_checksum     = "c2d509ba868c6257149005afccd546d697d6f984c1864696f157cee4eee6b02a"
-  iso_target_path  = "photon-5.0-4d5974638.aarch64.iso"
-  iso_url          = "https://packages.vmware.com/photon/5.0/RC/iso/photon-5.0-4d5974638.aarch64.iso"
+  iso_checksum     = "06f4b20d3097fcebc3ea067e41e4fb64ffe41828bdb9fa96cebc7a49f290c0d9"
+  iso_target_path  = "photon-5.0-dde71ec57.aarch64.iso"
+  iso_url          = "https://packages.vmware.com/photon/5.0/GA/iso/photon-5.0-dde71ec57.aarch64.iso"
   memory           = "8192"
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
@@ -26,7 +26,7 @@ source "qemu" "photon" {
     ["-display", "none"],
     ["-drive", "file=photon.img,if=none,format=qcow2,id=disk"],
     ["-device", "scsi-hd,drive=disk"],
-    ["-drive", "file=photon-5.0-4d5974638.aarch64.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=photon-5.0-dde71ec57.aarch64.iso,if=none,format=raw,id=cdrom"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
