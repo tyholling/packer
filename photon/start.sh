@@ -9,6 +9,6 @@ qemu-system-aarch64 \
 -device scsi-hd,drive=disk,bootindex=0 \
 -m 8192 \
 -machine accel=hvf,highmem=on,type=virt \
--nic vmnet-shared,mac=2:0:0:0:0:10 \
+-nic user,hostfwd=tcp::61622-:22 \
 -smp 8 \
 ;

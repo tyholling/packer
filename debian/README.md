@@ -1,13 +1,13 @@
 # macOS QEMU Debian Server (aarch64)
 
-1. Install tools
+1. Install QEMU
 
 		brew tap hashicorp/tap
-		brew install hashicorp/tap/packer qemu wget
+		brew install hashicorp/tap/packer qemu
 
 1. Download Debian Server
 
-		wget https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-11.6.0-arm64-DVD-1.iso
+		https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-11.6.0-arm64-DVD-1.iso
 
 1. Set SSH key in `preseed.cfg`
 
@@ -23,28 +23,18 @@
 		qemu-img snapshot debian.img -c debian
 		qemu-img snapshot debian.img -l
 
-1. Configure networking
-
-		$ vim /var/db/dhcpd_leases
-		{
-			name=debian
-			ip_address=192.168.64.4
-			hw_address=1,2:0:0:0:0:4
-			identifier=1,2:0:0:0:0:4
-			lease=0
-		}
-
 1. Start Debian
 
-		sudo ./start.sh &
+		./start.sh &
 
 1. Connect to the VM
 
-		ssh -l root 192.168.64.4
+		ssh -l root localhost:60422
 
 1. Update and snapshot
 
 		apt update
+		apt upgrade
 
 		# snapshot with label: update
 		poweroff

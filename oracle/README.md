@@ -1,13 +1,13 @@
 # macOS QEMU Oracle Server (aarch64)
 
-1. Install tools
+1. Install QEMU
 
 		brew tap hashicorp/tap
-		brew install hashicorp/tap/packer qemu wget
+		brew install hashicorp/tap/packer qemu
 
 1. Download Oracle Server
 
-		wget https://yum.oracle.com/ISOS/OracleLinux/OL9/u1/aarch64/OracleLinux-R9-U1-aarch64-dvd.iso
+		https://yum.oracle.com/ISOS/OracleLinux/OL9/u1/aarch64/OracleLinux-R9-U1-aarch64-dvd.iso
 
 1. Set SSH key in `kickstart.cfg`
 
@@ -23,24 +23,13 @@
 		qemu-img snapshot oracle.img -c oracle
 		qemu-img snapshot oracle.img -l
 
-1. Configure networking
-
-		$ vim /var/db/dhcpd_leases
-		{
-			name=oracle
-			ip_address=192.168.64.15
-			hw_address=1,2:0:0:0:0:f
-			identifier=1,2:0:0:0:0:f
-			lease=0
-		}
-
 1. Start Oracle
 
-		sudo ./start.sh &
+		./start.sh &
 
 1. Connect to the VM
 
-		ssh -l root 192.168.64.15
+		ssh -l root localhost:61522
 
 1. Update and snapshot
 

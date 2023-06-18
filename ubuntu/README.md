@@ -1,13 +1,13 @@
 # macOS QEMU Ubuntu Server (aarch64)
 
-1. Install tools
+1. Install QEMU
 
 		brew tap hashicorp/tap
-		brew install hashicorp/tap/packer qemu wget
+		brew install hashicorp/tap/packer qemu
 
 1. Download Ubuntu Server
 
-		wget https://cdimage.ubuntu.com/releases/22.10/release/ubuntu-22.10-live-server-arm64.iso
+		https://cdimage.ubuntu.com/releases/22.10/release/ubuntu-22.10-live-server-arm64.iso
 
 1. Set SSH key in `user-data`
 
@@ -23,24 +23,13 @@
 		qemu-img snapshot ubuntu.img -c ubuntu
 		qemu-img snapshot ubuntu.img -l
 
-1. Configure networking
-
-		$ vim /var/db/dhcpd_leases
-		{
-			name=ubuntu
-			ip_address=192.168.64.21
-			hw_address=1,2:0:0:0:0:15
-			identifier=1,2:0:0:0:0:15
-			lease=0
-		}
-
 1. Start Ubuntu
 
-		sudo ./start.sh &
+		./start.sh &
 
 1. Connect to the VM
 
-		ssh -l root 192.168.64.21
+		ssh -l root localhost:62122
 
 1. Update and snapshot
 
