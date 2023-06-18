@@ -6,7 +6,7 @@ source "qemu" "photon" {
     "initrd /isolinux/initrd.img<enter><wait>",
     "boot<enter>"
   ]
-  boot_wait = "2s"
+  boot_wait = "5s"
   cpus      = "8"
   disk_size = "100G"
   firmware  = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
