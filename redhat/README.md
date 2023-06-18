@@ -5,7 +5,7 @@
 		brew tap hashicorp/tap
 		brew install hashicorp/tap/packer qemu
 
-1. Download Red Hat Server
+1. Download Red Hat Enterprise Linux
 
 		https://developers.redhat.com/content-gateway/file/rhel/9.2/rhel-9.2-aarch64-dvd.iso
 
