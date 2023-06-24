@@ -35,10 +35,9 @@
 
 		apt update
 		apt upgrade
-
-		# snapshot with label: update
 		poweroff
 		while pgrep qemu; do sleep 1; done
+
 		qemu-img snapshot debian.img -l
 		qemu-img snapshot debian.img -c update
 		qemu-img snapshot debian.img -l

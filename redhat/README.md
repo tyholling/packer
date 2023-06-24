@@ -5,7 +5,7 @@
 		brew tap hashicorp/tap
 		brew install hashicorp/tap/packer qemu
 
-1. Download Red Hat Enterprise Linux
+1. Download Red Hat
 
 		https://developers.redhat.com/content-gateway/file/rhel/9.2/rhel-9.2-aarch64-dvd.iso
 
@@ -34,10 +34,9 @@
 1. Update and snapshot
 
 		dnf update
-
-		# snapshot with label: update
 		poweroff
 		while pgrep qemu; do sleep 1; done
+
 		qemu-img snapshot redhat.img -l
 		qemu-img snapshot redhat.img -c update
 		qemu-img snapshot redhat.img -l

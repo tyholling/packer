@@ -34,10 +34,9 @@
 1. Update and snapshot
 
 		tdnf update
-
-		# snapshot with label: update
 		poweroff
 		while pgrep qemu; do sleep 1; done
+
 		qemu-img snapshot photon.img -l
 		qemu-img snapshot photon.img -c update
 		qemu-img snapshot photon.img -l

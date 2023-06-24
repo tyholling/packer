@@ -34,10 +34,9 @@
 1. Update and snapshot
 
 		dnf update
-
-		# snapshot with label: update
 		poweroff
 		while pgrep qemu; do sleep 1; done
+
 		qemu-img snapshot fedora.img -l
 		qemu-img snapshot fedora.img -c update
 		qemu-img snapshot fedora.img -l
