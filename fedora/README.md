@@ -7,7 +7,7 @@
 
 1. Download Fedora Server
 
-		https://download.fedoraproject.org/pub/fedora/linux/releases/37/Server/aarch64/iso/Fedora-Server-dvd-aarch64-37-1.7.iso
+		https://download.fedoraproject.org/pub/fedora/linux/releases/38/Server/aarch64/iso/Fedora-Server-dvd-aarch64-38-1.6.iso
 
 1. Set SSH key in `kickstart.cfg`
 

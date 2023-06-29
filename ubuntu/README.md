@@ -7,7 +7,7 @@
 
 1. Download Ubuntu Server
 
-		https://cdimage.ubuntu.com/releases/22.10/release/ubuntu-22.10-live-server-arm64.iso
+		https://cdimage.ubuntu.com/releases/23.04/release/ubuntu-23.04-live-server-arm64.iso
 
 1. Set SSH key in `user-data`
 

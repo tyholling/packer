@@ -7,7 +7,7 @@
 
 1. Download Photon Server
 
-		https://packages.vmware.com/photon/5.0/Beta/iso/photon-5.0-9e778f409-aarch64.iso
+		https://packages.vmware.com/photon/5.0/GA/iso/photon-5.0-dde71ec57.aarch64.iso
 
 1. Set SSH key in `kickstart.json`
 
