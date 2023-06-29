@@ -35,7 +35,7 @@
 
 		tdnf update
 		poweroff
-		while pgrep qemu; do sleep 1; done
+		while pgrep -f photon.img; do sleep 1; done
 
 		qemu-img snapshot photon.img -l
 		qemu-img snapshot photon.img -c update

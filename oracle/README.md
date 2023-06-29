@@ -35,7 +35,7 @@
 
 		dnf update
 		poweroff
-		while pgrep qemu; do sleep 1; done
+		while pgrep -f oracle.img; do sleep 1; done
 
 		qemu-img snapshot oracle.img -l
 		qemu-img snapshot oracle.img -c update

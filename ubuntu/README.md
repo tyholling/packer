@@ -36,7 +36,7 @@
 		apt update
 		apt upgrade
 		poweroff
-		while pgrep qemu; do sleep 1; done
+		while pgrep -f ubuntu.img; do sleep 1; done
 
 		qemu-img snapshot ubuntu.img -l
 		qemu-img snapshot ubuntu.img -c update

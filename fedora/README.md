@@ -35,7 +35,7 @@
 
 		dnf update
 		poweroff
-		while pgrep qemu; do sleep 1; done
+		while pgrep -f fedora.img; do sleep 1; done
 
 		qemu-img snapshot fedora.img -l
 		qemu-img snapshot fedora.img -c update
