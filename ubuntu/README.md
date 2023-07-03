@@ -5,10 +5,6 @@
 		brew tap hashicorp/tap
 		brew install hashicorp/tap/packer qemu
 
-1. Download Ubuntu Server
-
-		https://cdimage.ubuntu.com/releases/23.04/release/ubuntu-23.04-live-server-arm64.iso
-
 1. Set SSH key in `user-data`
 
 		authorized-keys: [ "..." ]

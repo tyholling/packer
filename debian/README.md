@@ -5,10 +5,6 @@
 		brew tap hashicorp/tap
 		brew install hashicorp/tap/packer qemu
 
-1. Download Debian Server
-
-		https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-12.0.0-arm64-DVD-1.iso
-
 1. Set SSH key in `preseed.cfg`
 
 		echo "..." > /root/.ssh/authorized_keys

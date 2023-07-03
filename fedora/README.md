@@ -5,10 +5,6 @@
 		brew tap hashicorp/tap
 		brew install hashicorp/tap/packer qemu
 
-1. Download Fedora Server
-
-		https://download.fedoraproject.org/pub/fedora/linux/releases/38/Server/aarch64/iso/Fedora-Server-dvd-aarch64-38-1.6.iso
-
 1. Set SSH key in `kickstart.cfg`
 
 		sshkey --username=root "..."
