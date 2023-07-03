@@ -13,7 +13,7 @@ source "qemu" "fedora" {
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
-  iso_checksum     = "0b40485d74fc60c0a78f071396aba78fafb2f8f3b1ab4cbc3388bda82f764f9b"
+  iso_checksum     = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/38/Server/aarch64/iso/Fedora-Server-38-1.6-aarch64-CHECKSUM"
   iso_target_path  = "Fedora-Server-dvd-aarch64-38-1.6.iso"
   iso_url          = "https://download.fedoraproject.org/pub/fedora/linux/releases/38/Server/aarch64/iso/Fedora-Server-dvd-aarch64-38-1.6.iso"
   memory           = "8192"

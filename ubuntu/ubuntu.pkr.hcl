@@ -14,7 +14,7 @@ source "qemu" "ubuntu" {
     "/user-data" = file("user-data")
     "/meta-data" = ""
   }
-  iso_checksum     = "ad306616e37132ee00cc651ac0233b0e24b0b6e5e93b4a8ad36aa30c95b74e8c"
+  iso_checksum     = "file:https://cdimage.ubuntu.com/releases/23.04/release/SHA256SUMS"
   iso_target_path  = "ubuntu-23.04-live-server-arm64.iso"
   iso_url          = "https://cdimage.ubuntu.com/releases/23.04/release/ubuntu-23.04-live-server-arm64.iso"
   memory           = "8192"

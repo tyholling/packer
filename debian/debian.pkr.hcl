@@ -13,7 +13,7 @@ source "qemu" "debian" {
   http_content = {
     "/preseed.cfg" = file("preseed.cfg")
   }
-  iso_checksum     = "ca3df1d40c4488825b489d2bf32deb58c27e28020cc070699159cf010febf0bd"
+  iso_checksum     = "file:https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/SHA256SUMS"
   iso_target_path  = "debian-12.0.0-arm64-DVD-1.iso"
   iso_url          = "https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-12.0.0-arm64-DVD-1.iso"
   memory           = "8192"
