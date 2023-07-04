@@ -4,6 +4,9 @@ autoinstall:
   source:
     search_drivers: false
     id: ubuntu-server
+  storage:
+    layout:
+      name: direct
   ssh:
     install-server: true
     authorized-keys: [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmJiTeqkdmDBrk/s001UfR1IwyHD/9gUMbllm3QNE02" ]
