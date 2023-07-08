@@ -1,4 +1,4 @@
-# macOS QEMU Debian Server (aarch64)
+# macOS QEMU Debian Server (arm64)
 
 1. Install QEMU
 

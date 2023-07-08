@@ -1,4 +1,4 @@
-# macOS QEMU CentOS Server (aarch64)
+# macOS QEMU CentOS Server (arm64)
 
 1. Install QEMU
 

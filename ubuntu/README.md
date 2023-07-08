@@ -1,4 +1,4 @@
-# macOS QEMU Ubuntu Server (aarch64)
+# macOS QEMU Ubuntu Server (arm64)
 
 1. Install QEMU
 

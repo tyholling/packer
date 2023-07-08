@@ -1,4 +1,4 @@
-# macOS QEMU Fedora Server (aarch64)
+# macOS QEMU Fedora Server (arm64)
 
 1. Install QEMU
 
