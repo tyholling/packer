@@ -25,7 +25,7 @@
 
 1. Connect to the VM
 
-		ssh -l root localhost:60622
+		ssh -l root -p 60622 localhost
 
 1. Update and snapshot
 
