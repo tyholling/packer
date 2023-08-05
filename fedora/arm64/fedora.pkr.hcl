@@ -38,3 +38,12 @@ source "qemu" "fedora" {
 build {
   sources = ["source.qemu.fedora"]
 }
+
+packer {
+  required_plugins {
+    qemu = {
+      source  = "github.com/hashicorp/qemu"
+      version = "~> 1"
+    }
+  }
+}

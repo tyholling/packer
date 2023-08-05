@@ -38,3 +38,12 @@ source "qemu" "centos" {
 build {
   sources = ["source.qemu.centos"]
 }
+
+packer {
+  required_plugins {
+    qemu = {
+      source  = "github.com/hashicorp/qemu"
+      version = "~> 1"
+    }
+  }
+}
