@@ -21,7 +21,7 @@
 
 1. Start Ubuntu
 
-		./start.sh &
+		sudo ./start.sh &
 
 1. Connect to the VM
 
