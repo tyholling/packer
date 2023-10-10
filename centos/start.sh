@@ -10,6 +10,5 @@ qemu-system-aarch64 \
 -m 8192 \
 -machine accel=hvf,highmem=on,type=virt \
 -nic user,hostfwd=tcp::60322-:22 \
--nic vmnet-shared,mac=2:0:0:0:0:3 \
 -smp 8 \
 ;
