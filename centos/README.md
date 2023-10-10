@@ -21,7 +21,7 @@
 
 1. Start CentOS
 
-		sudo ./start.sh &
+		./start.sh &
 
 1. Connect to the VM
 
