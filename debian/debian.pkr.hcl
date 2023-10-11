@@ -14,8 +14,8 @@ source "qemu" "debian" {
     "/preseed.cfg" = file("preseed.cfg")
   }
   iso_checksum     = "file:https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/SHA256SUMS"
-  iso_target_path  = "debian-12.1.0-arm64-DVD-1.iso"
-  iso_url          = "https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-12.1.0-arm64-DVD-1.iso"
+  iso_target_path  = "debian-12.2.0-arm64-DVD-1.iso"
+  iso_url          = "https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-12.2.0-arm64-DVD-1.iso"
   memory           = "8192"
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
@@ -26,7 +26,7 @@ source "qemu" "debian" {
     ["-display", "none"],
     ["-drive", "file=debian.img,if=none,format=qcow2,id=disk"],
     ["-device", "scsi-hd,drive=disk"],
-    ["-drive", "file=debian-12.1.0-arm64-DVD-1.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=debian-12.2.0-arm64-DVD-1.iso,if=none,format=raw,id=cdrom"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
