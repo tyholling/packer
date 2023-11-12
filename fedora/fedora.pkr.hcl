@@ -13,9 +13,9 @@ source "qemu" "fedora" {
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
-  iso_checksum     = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/38/Server/aarch64/iso/Fedora-Server-38-1.6-aarch64-CHECKSUM"
-  iso_target_path  = "Fedora-Server-dvd-aarch64-38-1.6.iso"
-  iso_url          = "https://download.fedoraproject.org/pub/fedora/linux/releases/38/Server/aarch64/iso/Fedora-Server-dvd-aarch64-38-1.6.iso"
+  iso_checksum     = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/39/Server/aarch64/iso/Fedora-Server-39-1.5-aarch64-CHECKSUM"
+  iso_target_path  = "Fedora-Server-dvd-aarch64-39-1.5.iso"
+  iso_url          = "https://download.fedoraproject.org/pub/fedora/linux/releases/39/Server/aarch64/iso/Fedora-Server-dvd-aarch64-39-1.5.iso"
   memory           = "8192"
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
@@ -26,7 +26,7 @@ source "qemu" "fedora" {
     ["-display", "none"],
     ["-drive", "file=fedora.img,if=none,format=qcow2,id=disk"],
     ["-device", "scsi-hd,drive=disk"],
-    ["-drive", "file=Fedora-Server-dvd-aarch64-38-1.6.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=Fedora-Server-dvd-aarch64-39-1.5.iso,if=none,format=raw,id=cdrom"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
