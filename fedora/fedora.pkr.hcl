@@ -6,10 +6,12 @@ source "qemu" "fedora" {
     "initrd /images/pxeboot/initrd.img<enter><wait>",
     "boot<enter>"
   ]
-  communicator = "none"
-  cpus         = "8"
-  disk_size    = "100G"
-  firmware     = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
+  boot_key_interval = "1ms"
+  boot_wait         = "-1s"
+  communicator      = "none"
+  cpus              = "8"
+  disk_size         = "100G"
+  firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
@@ -20,8 +22,9 @@ source "qemu" "fedora" {
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
-    ["-boot", "strict=off"],
+    ["-boot", "menu=on,splash-time=0"],
     ["-cpu", "host"],
+    ["-device", "virtio-rng-device"],
     ["-device", "virtio-scsi-device"],
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
