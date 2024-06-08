@@ -6,31 +6,34 @@ source "qemu" "debian" {
     "initrd /install.a64/initrd.gz<enter><wait>",
     "boot<enter>"
   ]
-  communicator = "none"
-  cpus         = "8"
-  disk_size    = "100G"
-  firmware     = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
+  boot_key_interval = "1ms"
+  boot_wait         = "-1s"
+  communicator      = "none"
+  cpus              = "8"
+  disk_size         = "100G"
+  firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
   http_content = {
     "/preseed.cfg" = file("preseed.cfg")
   }
   iso_checksum     = "file:https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/SHA256SUMS"
-  iso_target_path  = "debian-12.2.0-arm64-DVD-1.iso"
-  iso_url          = "https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-12.2.0-arm64-DVD-1.iso"
+  iso_target_path  = "debian-12.5.0-arm64-DVD-1.iso"
+  iso_url          = "https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-12.5.0-arm64-DVD-1.iso"
   memory           = "8192"
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
-    ["-boot", "strict=off"],
+    ["-boot", "menu=on,splash-time=0"],
     ["-cpu", "host"],
+    ["-device", "virtio-rng-device"],
     ["-device", "virtio-scsi-device"],
+    ["-device", "scsi-hd,drive=disk"],
+    ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
     ["-drive", "file=debian.img,if=none,format=qcow2,id=disk"],
-    ["-device", "scsi-hd,drive=disk"],
-    ["-drive", "file=debian-12.2.0-arm64-DVD-1.iso,if=none,format=raw,id=cdrom"],
-    ["-device", "scsi-cd,drive=cdrom"],
+    ["-drive", "file=debian-12.5.0-arm64-DVD-1.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
-  shutdown_timeout = "1h"
+  shutdown_timeout = "10m"
   vm_name          = "debian.img"
   vnc_use_password = "true"
 }

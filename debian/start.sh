@@ -2,11 +2,13 @@
 
 qemu-system-aarch64 \
 -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
+-boot menu=on,splash-time=0 \
 -cpu host \
+-device virtio-rng-device \
 -device virtio-scsi-device \
+-device scsi-hd,drive=disk \
 -display none \
 -drive file=debian.img,if=none,format=qcow2,id=disk \
--device scsi-hd,drive=disk,bootindex=0 \
 -m 8192 \
 -machine accel=hvf,highmem=on,type=virt \
 -nic user,hostfwd=tcp::60422-:22 \
