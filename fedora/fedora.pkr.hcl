@@ -33,7 +33,7 @@ source "qemu" "fedora" {
     ["-drive", "file=Fedora-Server-dvd-aarch64-40-1.14.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
-  shutdown_timeout = "1h"
+  shutdown_timeout = "10m"
   vm_name          = "fedora.img"
   vnc_use_password = "true"
 }
