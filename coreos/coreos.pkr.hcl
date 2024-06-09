@@ -1,14 +1,13 @@
 source "qemu" "coreos" {
   boot_command = [
-    "<enter><wait20s>",
+    "<enter><wait10s>",
     "sudo /usr/bin/coreos-installer install",
     " --ignition-url http://{{ .HTTPIP }}:{{ .HTTPPort }}/ignition.cfg",
     " --ignition-hash sha256-c286585fd30bdfc70a275375009e640454a4c0192428061b948a5eab155315a6",
-    " /dev/sda",
-    "<enter><wait40s>",
-    "poweroff<enter>"
+    " /dev/sda && sudo poweroff",
+    "<enter>",
   ]
-  boot_key_interval = "2ms"
+  boot_key_interval = "1ms"
   boot_wait         = "-1s"
   communicator      = "none"
   cpus              = "8"
@@ -30,11 +29,7 @@ source "qemu" "coreos" {
     ["-device", "virtio-scsi-device"],
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
-    ["-device", "qemu-xhci"],
-    ["-device", "usb-kbd"],
-    ["-device", "usb-tablet"],
-    ["-device", "ramfb"],
-    ["-display", "cocoa"],
+    ["-display", "none"],
     ["-drive", "file=coreos.img,if=none,format=qcow2,id=disk"],
     ["-drive", "file=fedora-coreos-40.20240519.3.0-live.aarch64.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
