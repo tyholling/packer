@@ -6,6 +6,8 @@ source "qemu" "ubuntu" {
     "initrd /casper/initrd<enter><wait>",
     "boot<enter>"
   ]
+  boot_key_interval = "1ms"
+  boot_wait         = "-1s"
   communicator = "none"
   cpus         = "8"
   disk_size    = "100G"
@@ -14,24 +16,25 @@ source "qemu" "ubuntu" {
     "/user-data" = file("user-data")
     "/meta-data" = ""
   }
-  iso_checksum     = "file:https://cdimage.ubuntu.com/releases/23.10/release/SHA256SUMS"
-  iso_target_path  = "ubuntu-23.10-live-server-arm64.iso"
-  iso_url          = "https://cdimage.ubuntu.com/releases/23.10/release/ubuntu-23.10-live-server-arm64.iso"
+  iso_checksum     = "file:https://cdimage.ubuntu.com/releases/24.04/release/SHA256SUMS"
+  iso_target_path  = "ubuntu-24.04-live-server-arm64.iso"
+  iso_url          = "https://cdimage.ubuntu.com/releases/24.04/release/ubuntu-24.04-live-server-arm64.iso"
   memory           = "8192"
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
-    ["-boot", "strict=off"],
+    ["-boot", "menu=on,splash-time=0"],
     ["-cpu", "host"],
+    ["-device", "virtio-rng-device"],
     ["-device", "virtio-scsi-device"],
+    ["-device", "scsi-hd,drive=disk"],
+    ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
     ["-drive", "file=ubuntu.img,if=none,format=qcow2,id=disk"],
-    ["-device", "scsi-hd,drive=disk"],
-    ["-drive", "file=ubuntu-23.10-live-server-arm64.iso,if=none,format=raw,id=cdrom"],
-    ["-device", "scsi-cd,drive=cdrom"],
+    ["-drive", "file=ubuntu-24.04-live-server-arm64.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
-  shutdown_timeout = "1h"
+  shutdown_timeout = "10m"
   vm_name          = "ubuntu.img"
   vnc_use_password = "true"
 }

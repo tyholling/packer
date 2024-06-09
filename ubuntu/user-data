@@ -9,7 +9,7 @@ autoinstall:
       name: direct
   ssh:
     install-server: true
-    authorized-keys: [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEmJiTeqkdmDBrk/s001UfR1IwyHD/9gUMbllm3QNE02" ]
+    authorized-keys: [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEi+A8Uk3nEUarGBY6d0cbhZmf0u+jOzZv15cv15Eaqt" ]
   timezone: US/Pacific
   shutdown: poweroff
   user-data:
