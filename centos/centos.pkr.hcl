@@ -28,7 +28,7 @@ source "qemu" "centos" {
     ["-device", "virtio-scsi-device"],
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
-    ["-display", "cocoa"],
+    ["-display", "none"],
     ["-drive", "file=centos.img,if=none,format=qcow2,id=disk"],
     ["-drive", "file=CentOS-Stream-9-latest-aarch64-dvd1.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
