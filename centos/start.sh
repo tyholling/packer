@@ -8,7 +8,7 @@ qemu-system-aarch64 \
 -device virtio-scsi-device \
 -device scsi-hd,drive=disk \
 -display none \
--drive file=coreos.img,if=none,format=qcow2,id=disk \
+-drive file=centos.img,if=none,format=qcow2,id=disk \
 -m 8192 \
 -machine accel=hvf,highmem=on,type=virt \
 -nic user,hostfwd=tcp::60322-:22 \
