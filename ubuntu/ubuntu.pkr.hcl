@@ -16,9 +16,9 @@ source "qemu" "ubuntu" {
     "/user-data" = file("user-data")
     "/meta-data" = ""
   }
-  iso_checksum     = "file:https://cdimage.ubuntu.com/releases/24.10/release/SHA256SUMS"
-  iso_target_path  = "ubuntu-24.10-live-server-arm64.iso"
-  iso_url          = "https://cdimage.ubuntu.com/releases/24.10/release/ubuntu-24.10-live-server-arm64.iso"
+  iso_checksum     = "file:https://cdimage.ubuntu.com/releases/25.04/release/SHA256SUMS"
+  iso_target_path  = "ubuntu-25.04-live-server-arm64.iso"
+  iso_url          = "https://cdimage.ubuntu.com/releases/25.04/release/ubuntu-25.04-live-server-arm64.iso"
   memory           = "8192"
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
@@ -31,7 +31,7 @@ source "qemu" "ubuntu" {
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
     ["-drive", "file=ubuntu.img,if=none,format=qcow2,id=disk"],
-    ["-drive", "file=ubuntu-24.10-live-server-arm64.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=ubuntu-25.04-live-server-arm64.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"
