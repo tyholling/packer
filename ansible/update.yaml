@@ -1,0 +1,15 @@
+- name: update
+  hosts: centos, fedora
+  tasks:
+  - name: update
+    dnf:
+      name: "*"
+      state: latest
+
+- name: update
+  hosts: debian, ubuntu
+  tasks:
+  - name: update
+    apt:
+      name: "*"
+      state: latest

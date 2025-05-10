@@ -1,0 +1,44 @@
+- name: config
+  hosts: all
+  tasks:
+  - name: remove bash history
+    file: { state: "absent", path: "/root/.bash_history" }
+  - name: remove bash logout
+    file: { state: "absent", path: "/root/.bash_logout" }
+  - name: remove bash profile
+    file: { state: "absent", path: "/root/.bash_profile" }
+  - name: remove bashrc
+    file: { state: "absent", path: "/root/.bashrc" }
+  - name: remove cshrc
+    file: { state: "absent", path: "/root/.cshrc" }
+  - name: remove profile
+    file: { state: "absent", path: "/root/.profile" }
+  - name: remove tcshrc
+    file: { state: "absent", path: "/root/.tcshrc" }
+  - name: remove viminfo
+    file: { state: "absent", path: "/root/.viminfo" }
+  - name: remove anaconda kickstart config
+    file: { state: "absent", path: "/root/anaconda-ks.cfg" }
+  - name: remove original kickstart config
+    file: { state: "absent", path: "/root/original-ks.cfg" }
+
+  - name: install ssh private key
+    copy:
+      src: ~/.ssh/id_ed25519
+      dest: /root/.ssh/id_ed25519
+      mode: 0400
+  - name: install ssh public key
+    copy:
+      src: ~/.ssh/id_ed25519.pub
+      dest: /root/.ssh/id_ed25519.pub
+      mode: 0400
+
+  - name: checkout config
+    git:
+      repo: "git@github.com:tyholling/config.git"
+      dest: /opt/config
+      accept_hostkey: true
+  - name: install config
+    shell:
+      cmd: /opt/config/install.sh
+      chdir: /opt/config

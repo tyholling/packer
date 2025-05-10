@@ -1,0 +1,33 @@
+- name: kubens
+  hosts: all
+  tasks:
+  - name: install kubectl
+    shell: |
+      cd $(mktemp -d)
+      wget https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl
+      install -m 0755 kubectl /usr/local/bin/kubectl
+      kubectl completion bash > /etc/bash_completion.d/kubectl.sh
+  - name: install kubectx
+    shell: |
+      cd $(mktemp -d)
+      wget https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubectx_v0.9.5_linux_arm64.tar.gz
+      tar xf kubectx_v0.9.5_linux_arm64.tar.gz kubectx
+      install -m 0755 kubectx /usr/local/bin/kc
+  - name: install kubens
+    shell: |
+      cd $(mktemp -d)
+      wget https://github.com/ahmetb/kubectx/releases/download/v0.9.5/kubens_v0.9.5_linux_arm64.tar.gz
+      tar xf kubens_v0.9.5_linux_arm64.tar.gz kubens
+      install -m 0755 kubens /usr/local/bin/kn
+  - name: install k9s
+    shell: |
+      cd $(mktemp -d)
+      wget https://github.com/derailed/k9s/releases/download/v0.50.5/k9s_Linux_arm64.tar.gz
+      tar xf k9s_Linux_arm64.tar.gz k9s
+      install -m 0755 k9s /usr/local/bin/k9s
+  - name: install helm
+    shell: |
+      cd $(mktemp -d)
+      wget https://get.helm.sh/helm-v3.17.3-linux-arm64.tar.gz
+      tar xf helm-v3.17.3-linux-arm64.tar.gz linux-arm64/helm
+      install -m 0755 linux-arm64/helm /usr/local/bin/helm

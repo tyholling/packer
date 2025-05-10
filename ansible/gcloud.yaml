@@ -1,0 +1,36 @@
+- name: gcloud
+  hosts: centos, fedora
+  tasks:
+  - name: add google cloud sdk repo
+    copy:
+      src: ./gcloud/google-cloud-sdk.repo
+      dest: /etc/yum.repos.d/google-cloud-sdk.repo
+      mode: 0644
+  - name: update cache
+    dnf:
+      update_cache: true
+  - name: install google-cloud-cli
+    dnf:
+      name:
+      - google-cloud-cli
+      - google-cloud-sdk-gke-gcloud-auth-plugin
+
+- name: gcloud
+  hosts: debian, ubuntu
+  tasks:
+  - name: add google cloud gpg key
+    shell: |
+      curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor --yes -o /usr/share/keyrings/cloud.google.gpg
+  - name: add google cloud sdk repo
+    copy:
+      src: ./gcloud/google-cloud-sdk.sources
+      dest: /etc/apt/sources.list.d/google-cloud-sdk.sources
+      mode: 0644
+  - name: update cache
+    apt:
+      update_cache: true
+  - name: install google-cloud-cli
+    apt:
+      pkg:
+      - google-cloud-cli
+      - google-cloud-sdk-gke-gcloud-auth-plugin

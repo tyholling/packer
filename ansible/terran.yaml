@@ -1,0 +1,16 @@
+- name: terran
+  hosts: all
+  tasks:
+  - name: install terraform
+    shell: |
+      cd $(mktemp -d)
+      wget https://releases.hashicorp.com/terraform/1.11.4/terraform_1.11.4_linux_arm64.zip
+      unzip terraform_1.11.4_linux_arm64.zip terraform
+      install -m 0755 terraform /usr/local/bin/terraform
+      ln -fs /usr/local/bin/terraform /usr/local/bin/tf
+  - name: install terragrunt
+    shell: |
+      cd $(mktemp -d)
+      wget https://github.com/gruntwork-io/terragrunt/releases/download/v0.78.2/terragrunt_linux_arm64
+      install -m 0755 terragrunt_linux_arm64 /usr/local/bin/terragrunt
+      ln -fs /usr/local/bin/terragrunt /usr/local/bin/tg

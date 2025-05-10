@@ -1,0 +1,5 @@
+Types: deb
+URIs: https://packages.cloud.google.com/apt
+Suites: cloud-sdk
+Components: main
+Signed-By: /usr/share/keyrings/cloud.google.gpg
