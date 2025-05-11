@@ -13,6 +13,11 @@
       - tmux
       - vim
       - wget
+  - name: remove rootfiles
+    dnf:
+      state: absent
+      name:
+      - rootfiles
 
 - name: common
   hosts: debian
