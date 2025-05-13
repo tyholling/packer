@@ -1,16 +1,11 @@
 - name: common
-  hosts: centos
+  hosts: centos, fedora
   tasks:
   - name: install common tools
     dnf:
       name:
       - curl
       - git
-      - golang
-      - jq
-      - make
-      - podman
-      - tmux
       - vim
       - wget
   - name: remove rootfiles
@@ -20,63 +15,12 @@
       - rootfiles
 
 - name: common
-  hosts: debian
-  tasks:
-  - apt:
-      name:
-      - ack
-      - bat
-      - btop
-      - curl
-      - fzf
-      - git
-      - golang
-      - jq
-      - make
-      - podman
-      - tmux
-      - unzip
-      - vim
-      - wget
-
-- name: common
-  hosts: fedora
+  hosts: debian, ubuntu
   tasks:
   - name: install common tools
-    dnf:
+    apt:
       name:
-      - ack
-      - bat
-      - btop
       - curl
-      - fzf
       - git
-      - git-delta
-      - golang
-      - jq
-      - make
-      - podman
-      - tmux
-      - vim
-      - wget
-
-- name: common
-  hosts: ubuntu
-  tasks:
-  - apt:
-      name:
-      - ack
-      - bat
-      - btop
-      - curl
-      - fzf
-      - git
-      - git-delta
-      - golang
-      - jq
-      - make
-      - podman
-      - tmux
-      - unzip
       - vim
       - wget
