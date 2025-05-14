@@ -1,17 +1,17 @@
-# macOS QEMU Debian Server (arm64)
+# macOS QEMU CentOS Stream Server (arm64)
 
 1. Install QEMU
    ```
    brew tap hashicorp/tap
    brew install hashicorp/tap/packer qemu
    ```
-1. Set SSH key in `preseed.cfg`
+1. Set SSH key in `kickstart.cfg`
    ```
-   echo "..." > /root/.ssh/authorized_keys
+   sshkey --username=root "..."
    ```
-1. Install Debian
+1. Install CentOS Stream
    ```
-   packer build -force debian.pkr.hcl
+   packer build -force fedora.pkr.hcl
    ```
 1. Start the VM
    ```
