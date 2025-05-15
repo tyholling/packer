@@ -3,7 +3,7 @@ autoinstall:
   version: 1
   source:
     search_drivers: false
-    id: ubuntu-server
+    id: ubuntu-server-minimal
   storage:
     layout:
       name: direct
