@@ -8,10 +8,10 @@ source "qemu" "ubuntu" {
   ]
   boot_key_interval = "1ms"
   boot_wait         = "-1s"
-  communicator = "none"
-  cpus         = "8"
-  disk_size    = "100G"
-  firmware     = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
+  communicator      = "none"
+  cpus              = "8"
+  disk_size         = "100G"
+  firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
   http_content = {
     "/user-data" = file("user-data")
     "/meta-data" = ""
