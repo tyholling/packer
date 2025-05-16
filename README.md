@@ -1,9 +1,9 @@
 # Packer scripts for Apple Silicon
 
-## [CentOS Stream Server](centos)
+## [CentOS Stream Server (arm64)](centos)
 
-## [Debian Server](debian)
+## [Debian Server (arm64)](debian)
 
-## [Fedora Server](fedora)
+## [Fedora Server (arm64)](fedora)
 
-## [Ubuntu Server](ubuntu)
+## [Ubuntu Server (arm64)](ubuntu)
