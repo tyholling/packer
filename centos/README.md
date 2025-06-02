@@ -21,7 +21,11 @@
    ```
    cat /var/db/dhcpd_leases
    ```
+1. Set a static IP
+   ```
+   ssh -l root 192.168.64.2 bash -s < network.sh
+   ```
 1. Connect to the VM
    ```
-   ssh -l root <ip address>
+   ssh -l root 192.168.64.2
    ```
