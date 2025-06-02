@@ -23,7 +23,7 @@
    ```
 1. Set a static IP
    ```
-   ssh -l root 192.168.64.3 bash -s < network.sh
+   ssh -l root 192.168.64.3 bash -s < network.sh 192.168.64.3
    ```
 1. Connect to the VM
    ```
