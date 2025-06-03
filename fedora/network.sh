@@ -1,5 +1,6 @@
 #!/bin/bash
 
-nmcli connection modify enp0s1 ipv4.addresses $1/24 ipv4.gateway 192.168.64.1 ipv4.method manual
+nmcli connection modify enp0s1 \
+ipv4.addresses $1/24 ipv4.dns 192.168.64.1 ipv4.gateway 192.168.64.1 ipv4.method manual
 
 reboot
