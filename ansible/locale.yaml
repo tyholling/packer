@@ -1,0 +1,5 @@
+- name: locale
+  hosts: all
+  tasks:
+  - name: set locale
+    command: localectl set-locale C.UTF-8
