@@ -10,22 +10,12 @@
    authorized-keys: [ "..." ]
    ```
 1. Install Ubuntu
+   - Use a unique hostname (`ubuntu`), it will be added to `/etc/hosts`
    ```
-   packer build -force ubuntu.pkr.hcl
+   sudo echo
+   ./provision.sh ubuntu
    ```
-1. Start the VM
+1. Connect to the machine
    ```
-   sudo ./start.sh &
-   ```
-1. Find the IP
-   ```
-   cat /var/db/dhcpd_leases
-   ```
-1. Set a static IP
-   ```
-   ssh -l root 192.168.64.5 bash -s < network.sh 192.168.64.5
-   ```
-1. Connect to the VM
-   ```
-   ssh -l root 192.168.64.5
+   ssh -l root ubuntu
    ```

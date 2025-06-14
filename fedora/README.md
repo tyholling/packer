@@ -10,22 +10,12 @@
    sshkey --username=root "..."
    ```
 1. Install Fedora
+   - Use a unique hostname (`fedora`), it will be added to `/etc/hosts`
    ```
-   packer build -force fedora.pkr.hcl
+   sudo echo
+   ./provision.sh fedora
    ```
-1. Start the VM
+1. Connect to the machine
    ```
-   sudo ./start.sh &
-   ```
-1. Find the IP
-   ```
-   cat /var/db/dhcpd_leases
-   ```
-1. Set a static IP
-   ```
-   ssh -l root 192.168.64.4 bash -s < network.sh 192.168.64.4
-   ```
-1. Connect to the VM
-   ```
-   ssh -l root 192.168.64.4
+   ssh -l root fedora
    ```
