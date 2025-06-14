@@ -14,4 +14,3 @@ autoinstall:
   shutdown: poweroff
   user-data:
     disable_root: false
-    hostname: ubuntu
