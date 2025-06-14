@@ -12,13 +12,12 @@ macaddress=$(cat .macaddress | perl -pe 's/0(\w)/\1/g')
 until arp -an | grep -q $macaddress; do sleep 1; done
 
 ip_address=$(arp -an | grep $macaddress | grep -o -m1 "192.168.64.\d\+")
-echo -e "[debian]\n$ip_address ansible_user=root" > .inventory
+printf "%-15s %s\n" $ip_address $hostname | sudo tee -a /etc/hosts > /dev/null
+printf "[all]\n$hostname ansible_user=root\n" > .inventory
 
-ansible debian -i .inventory -m wait_for_connection
-ansible debian -i .inventory -m hostname -a name=$hostname
+ansible all -i .inventory -m wait_for_connection
+ansible all -i .inventory -m hostname -a name=$hostname
 
-ansible-playbook -l debian -i .inventory ../ansible/script.yaml
+ansible-playbook -l $hostname -i .inventory ../ansible/script.yaml
 
-ssh -l root $ip_address bash -s < kubelet.sh
-
-echo "$ip_address $hostname" | sudo tee -a /etc/hosts
+ssh -l root $hostname bash -s < kubelet.sh
