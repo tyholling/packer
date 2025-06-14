@@ -19,5 +19,3 @@ ansible all -i .inventory -m wait_for_connection
 ansible all -i .inventory -m hostname -a name=$hostname
 
 ansible-playbook -l $hostname -i .inventory ../ansible/script.yaml
-
-ssh -l root $hostname bash -s < kubelet.sh
