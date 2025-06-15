@@ -10,12 +10,19 @@
    sshkey --username=root "..."
    ```
 1. Install CentOS Stream
+   ```
+   packer build -force centos.pkr.hcl
+   ```
+1. Provision the system
    - Use a unique hostname (`centos`), it will be added to `/etc/hosts`
    ```
-   sudo echo
-   ./provision.sh centos
+   sudo ./provision.sh centos
    ```
 1. Connect to the machine
    ```
    ssh -l root centos
+   ```
+1. Example: install kubernetes
+   ```
+   ssh -l root centos bash -s < kubelet.sh
    ```
