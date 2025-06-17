@@ -1,9 +1,9 @@
 # macOS QEMU CentOS Stream Server (arm64)
 
-1. Install QEMU
+1. Install dependencies
    ```
    brew tap hashicorp/tap
-   brew install hashicorp/tap/packer qemu
+   brew install ansible hashicorp/tap/packer qemu
    ```
 1. Set SSH key in `kickstart.cfg`
    ```
