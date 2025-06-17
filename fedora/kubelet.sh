@@ -38,7 +38,7 @@ sysctl --system
 
 # install cri-o
 
-CRIO_VERSION=v1.32
+CRIO_VERSION=v1.33
 cat << eof > /etc/yum.repos.d/cri-o.repo
 [cri-o]
 name=CRI-O
@@ -53,7 +53,7 @@ systemctl enable --now crio
 
 # install kubernetes
 
-KUBERNETES_VERSION=v1.32
+KUBERNETES_VERSION=v1.33
 cat << eof > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
