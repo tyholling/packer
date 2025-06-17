@@ -15,9 +15,9 @@ source "qemu" "centos" {
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
-  iso_checksum     = "file:https://mirror.stream.centos.org/9-stream/BaseOS/aarch64/iso/CentOS-Stream-9-latest-aarch64-dvd1.iso.SHA256SUM"
-  iso_target_path  = "CentOS-Stream-9-latest-aarch64-dvd1.iso"
-  iso_url          = "https://mirror.stream.centos.org/9-stream/BaseOS/aarch64/iso/CentOS-Stream-9-latest-aarch64-dvd1.iso"
+  iso_checksum     = "file:https://mirror.stream.centos.org/10-stream/BaseOS/aarch64/iso/CentOS-Stream-10-latest-aarch64-dvd1.iso.SHA256SUM"
+  iso_target_path  = "CentOS-Stream-10-latest-aarch64-dvd1.iso"
+  iso_url          = "https://mirror.stream.centos.org/10-stream/BaseOS/aarch64/iso/CentOS-Stream-10-latest-aarch64-dvd1.iso"
   memory           = "8192"
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
@@ -30,7 +30,7 @@ source "qemu" "centos" {
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
     ["-drive", "file=centos.img,if=none,format=qcow2,id=disk"],
-    ["-drive", "file=CentOS-Stream-9-latest-aarch64-dvd1.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=CentOS-Stream-10-latest-aarch64-dvd1.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"
