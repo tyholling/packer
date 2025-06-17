@@ -16,7 +16,6 @@ systemctl disable --now firewalld
 
 # configure dns
 
-systemctl disable --now systemd-resolved
 ln -fs /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 # load kernel modules
