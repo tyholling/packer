@@ -4,6 +4,7 @@
 
 swapoff -a
 sed -i '/swap/s/^[^#]/# /g' /etc/fstab
+rm /swap.img
 
 # configure dns
 
