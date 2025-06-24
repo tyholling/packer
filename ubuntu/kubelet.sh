@@ -4,11 +4,6 @@
 
 swapoff -a
 sed -i '/swap/s/^[^#]/# /g' /etc/fstab
-rm /swap.img
-
-# configure dns
-
-ln -fs /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
 # load kernel modules
 

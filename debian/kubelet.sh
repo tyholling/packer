@@ -4,7 +4,6 @@
 
 swapoff -a
 sed -i '/swap/s/^[^#]/# /g' /etc/fstab
-echo ',,83' | sfdisk --part-type /dev/sda 3
 
 # load kernel modules
 

@@ -15,10 +15,6 @@ sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
 
 systemctl disable --now firewalld
 
-# configure dns
-
-ln -fs /run/systemd/resolve/resolv.conf /etc/resolv.conf
-
 # load kernel modules
 
 cat << eof > /etc/modules-load.d/kubernetes.conf
