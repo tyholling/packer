@@ -5,8 +5,37 @@ autoinstall:
     search_drivers: false
     id: ubuntu-server-minimal
   storage:
-    layout:
-      name: direct
+    config:
+    - id: sda
+      path: /dev/sda
+      ptable: gpt
+      type: disk
+    - id: sda1
+      device: sda
+      size: 100M
+      flag: boot
+      grub_device: true
+      type: partition
+    - id: sda2
+      device: sda
+      size: -1
+      type: partition
+    - id: format1
+      volume: sda1
+      fstype: fat32
+      type: format
+    - id: format2
+      volume: sda2
+      fstype: ext4
+      type: format
+    - id: mount1
+      device: format1
+      path: /boot/efi
+      type: mount
+    - id: mount2
+      device: format2
+      path: /
+      type: mount
   ssh:
     install-server: true
     authorized-keys: [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEi+A8Uk3nEUarGBY6d0cbhZmf0u+jOzZv15cv15Eaqt" ]
