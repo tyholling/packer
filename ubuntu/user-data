@@ -5,6 +5,8 @@ autoinstall:
     search_drivers: false
     id: ubuntu-server-minimal
   storage:
+    swap:
+      size: 0
     config:
     - id: sda
       path: /dev/sda
