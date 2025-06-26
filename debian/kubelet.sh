@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# disable swap
-
-swapoff -a
-sed -i '/swap/s/^[^#]/# /g' /etc/fstab
-
 # load kernel modules
 
 cat << eof > /etc/modules-load.d/kubernetes.conf

@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# disable swap
-
-swapoff -a
-sed -i '/swap/s/^[^#]/# /g' /etc/fstab
-dnf remove -y zram-generator
-
 # disable selinux
 
 setenforce 0
