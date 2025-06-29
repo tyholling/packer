@@ -15,14 +15,12 @@ cat << eof > /etc/modules-load.d/kubernetes.conf
 br_netfilter
 overlay
 eof
-systemctl restart systemd-modules-load
+modprobe br_netfilter overlay
 
-# configure kernel parameters
+# set kernel parameters
 
 cat << eof > /etc/sysctl.d/kubernetes.conf
 net.ipv4.ip_forward = 1
-net.bridge.bridge-nf-call-iptables = 1
-net.bridge.bridge-nf-call-ip6tables = 1
 eof
 sysctl --system
 
