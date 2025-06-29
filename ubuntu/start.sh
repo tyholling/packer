@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -f .macaddress ] || printf "0200%x\n" $(date +%s) | sed 's/../&:/g;s/:$//' > .macaddress
+[ -f .macaddress ] || printf "0200%x\n" $(date +%s) | sed 's/../&:/g; s/:$//' > .macaddress
 read macaddress < .macaddress
 
 qemu-system-aarch64 \
