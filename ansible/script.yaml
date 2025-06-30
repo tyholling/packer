@@ -1,4 +1,3 @@
 - import_playbook: static.yaml
 - import_playbook: locale.yaml
 - import_playbook: update.yaml
-- import_playbook: common.yaml
