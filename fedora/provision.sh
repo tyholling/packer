@@ -15,8 +15,8 @@ printf "%-15s %s # %s\n" $ip_address $hostname $mac_address | tee -a /etc/hosts 
 printf "[fedora]\n$hostname ansible_user=root\n" > .inventory
 
 sudo -u $SUDO_USER sh -c "
-ansible fedora -i .inventory -u root -m wait_for_connection --ssh-common-args='-o StrictHostKeyChecking=no'
-ansible fedora -i .inventory -u root -m hostname -a name=$hostname
-ansible-playbook -l fedora -i .inventory -u root ../ansible/script.yaml
+ansible fedora -i .inventory -m wait_for_connection --ssh-common-args='-o StrictHostKeyChecking=no'
+ansible fedora -i .inventory -m hostname -a name=$hostname
+ansible-playbook -l fedora -i .inventory ../ansible/script.yaml
 ssh -l root $hostname bash -s < kubelet.sh
 "
