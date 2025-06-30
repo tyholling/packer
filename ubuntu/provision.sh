@@ -15,7 +15,7 @@ printf "%-15s %s # %s\n" $ip_address $hostname $mac_address >> /etc/hosts
 printf "[ubuntu]\n$hostname ansible_user=root\n" > .inventory
 
 sudo -u $SUDO_USER sh -c "
-ansible ubuntu -i .inventory -m wait_for_connection --ssh-common-args='-o StrictHostKeyChecking=no'
-ansible ubuntu -i .inventory -m hostname -a name=$hostname
-ansible-playbook -l ubuntu -i .inventory ../ansible/script.yaml
+ansible all -i .inventory -m wait_for_connection --ssh-common-args='-o StrictHostKeyChecking=no'
+ansible all -i .inventory -m hostname -a name=$hostname
+ansible-playbook -i .inventory ../ansible/script.yaml
 "
