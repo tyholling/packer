@@ -5,6 +5,9 @@
     dnf:
       name: "*"
       state: latest
+  - name: autoremove
+    dnf:
+      autoremove: true
 
 - name: update
   hosts: debian, ubuntu
@@ -13,3 +16,6 @@
     apt:
       name: "*"
       state: latest
+  - name: autoremove
+    apt:
+      autoremove: true
