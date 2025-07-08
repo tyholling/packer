@@ -2,7 +2,7 @@
 
 shopt -s nullglob
 
-cd ~/Documents/packer
+cd ..
 
 for distro in centos debian fedora ubuntu; do
   pushd $distro > /dev/null
@@ -22,4 +22,4 @@ done
 
 while pgrep qemu | xargs; do sleep 1; done
 
-sudo rm -f /var/db/dhcpd_leases
+[ -f /var/db/dhcpd_leases ] && sudo rm -i /var/db/dhcpd_leases
