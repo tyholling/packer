@@ -11,7 +11,7 @@
    ```
 1. Install Debian
    ```
-   packer build -force debian.pkr.hcl
+   packer build debian.pkr.hcl
    ```
 1. Provision the system
    - Use a unique hostname (`debian`), it will be added to `/etc/hosts`
@@ -21,8 +21,4 @@
 1. Connect to the machine
    ```
    ssh -l root debian
-   ```
-1. Example: install kubernetes
-   ```
-   ssh -l root debian bash -s < kubelet.sh
    ```

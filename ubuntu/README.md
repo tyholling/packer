@@ -11,7 +11,7 @@
    ```
 1. Install Ubuntu
    ```
-   packer build -force ubuntu.pkr.hcl
+   packer build ubuntu.pkr.hcl
    ```
 1. Provision the system
    - Use a unique hostname (`ubuntu`), it will be added to `/etc/hosts`
@@ -21,8 +21,4 @@
 1. Connect to the machine
    ```
    ssh -l root ubuntu
-   ```
-1. Example: install kubernetes
-   ```
-   ssh -l root ubuntu bash -s < kubelet.sh
    ```
