@@ -6,6 +6,7 @@ cd ..
 
 for distro in centos debian fedora ubuntu; do
   pushd $distro > /dev/null
+  rm -f $distro.pkr.hcl
   for machine in */; do
     machine="${machine%/}"
     [ -d $machine ] && pushd $machine > /dev/null || continue
