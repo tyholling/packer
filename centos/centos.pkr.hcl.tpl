@@ -1,13 +1,9 @@
-variable "output_directory" {
-  type    = string
-  default = "fedora"
-}
-
-source "qemu" "fedora" {
+{{ range $i, $dir := (datasource "dirs") -}}
+source "qemu" "centos_{{ $dir }}" {
   boot_command = [
     "<esc>c<wait>",
     "linux /images/pxeboot/vmlinuz",
-    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<enter><wait>",
+    " inst.ks=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/kickstart.cfg<enter><wait>",
     "initrd /images/pxeboot/initrd.img<enter><wait>",
     "boot<enter>"
   ]
@@ -20,11 +16,11 @@ source "qemu" "fedora" {
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
-  iso_checksum     = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/42/Server/aarch64/iso/Fedora-Server-42-1.1-aarch64-CHECKSUM"
-  iso_target_path  = "Fedora-Server-dvd-aarch64-42-1.1.iso"
-  iso_url          = "https://download.fedoraproject.org/pub/fedora/linux/releases/42/Server/aarch64/iso/Fedora-Server-dvd-aarch64-42-1.1.iso"
+  iso_checksum     = "file:https://mirror.stream.centos.org/10-stream/BaseOS/aarch64/iso/CentOS-Stream-10-latest-aarch64-dvd1.iso.SHA256SUM"
+  iso_target_path  = "CentOS-Stream-10-latest-aarch64-dvd1.iso"
+  iso_url          = "https://mirror.stream.centos.org/10-stream/BaseOS/aarch64/iso/CentOS-Stream-10-latest-aarch64-dvd1.iso"
   memory           = "8192"
-  output_directory = var.output_directory
+  output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
     ["-boot", "menu=on,splash-time=0"],
@@ -34,17 +30,23 @@ source "qemu" "fedora" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file=${var.output_directory}/fedora.img,if=none,format=qcow2,id=disk"],
-    ["-drive", "file=Fedora-Server-dvd-aarch64-42-1.1.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file={{ $dir }}/centos.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file=CentOS-Stream-10-latest-aarch64-dvd1.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"
-  vm_name          = "fedora.img"
+  vm_name          = "centos.img"
   vnc_use_password = "true"
 }
 
+{{ end -}}
 build {
-  sources = ["source.qemu.fedora"]
+  sources = [
+    {{- $dirs := (datasource "dirs") -}}
+    {{- range $i, $dir := (datasource "dirs") }}
+    "source.qemu.centos_{{ $dir }}",
+    {{- end }}
+  ]
 }
 
 packer {

@@ -1,13 +1,9 @@
-variable "output_directory" {
-  type    = string
-  default = "debian"
-}
-
-source "qemu" "debian" {
+{{ range $i, $dir := (datasource "dirs") -}}
+source "qemu" "debian_{{ $dir }}" {
   boot_command = [
     "<esc>c<wait>",
     "linux /install.a64/vmlinuz auto=true priority=critical",
-    " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter><wait>",
+    " url=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/preseed.cfg<enter><wait>",
     "initrd /install.a64/initrd.gz<enter><wait>",
     "boot<enter>"
   ]
@@ -24,7 +20,7 @@ source "qemu" "debian" {
   iso_target_path  = "debian-12.11.0-arm64-DVD-1.iso"
   iso_url          = "https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-12.11.0-arm64-DVD-1.iso"
   memory           = "8192"
-  output_directory = var.output_directory
+  output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
     ["-boot", "menu=on,splash-time=0"],
@@ -34,7 +30,7 @@ source "qemu" "debian" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file=${var.output_directory}/debian.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file={{ $dir }}/debian.img,if=none,format=qcow2,id=disk"],
     ["-drive", "file=debian-12.11.0-arm64-DVD-1.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
@@ -43,8 +39,14 @@ source "qemu" "debian" {
   vnc_use_password = "true"
 }
 
+{{ end -}}
 build {
-  sources = ["source.qemu.debian"]
+  sources = [
+    {{- $dirs := (datasource "dirs") -}}
+    {{- range $i, $dir := (datasource "dirs") }}
+    "source.qemu.debian_{{ $dir }}",
+    {{- end }}
+  ]
 }
 
 packer {

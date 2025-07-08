@@ -1,13 +1,9 @@
-variable "output_directory" {
-  type    = string
-  default = "ubuntu"
-}
-
-source "qemu" "ubuntu" {
+{{ range $i, $dir := (datasource "dirs") -}}
+source "qemu" "ubuntu_{{ $dir }}" {
   boot_command = [
     "<esc>c<wait>",
     "linux /casper/vmlinuz",
-    " autoinstall 'ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/'<enter><wait>",
+    " autoinstall 'ds=nocloud-net;s=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/'<enter><wait>",
     "initrd /casper/initrd<enter><wait>",
     "boot<enter>"
   ]
@@ -25,7 +21,7 @@ source "qemu" "ubuntu" {
   iso_target_path  = "ubuntu-25.04-live-server-arm64.iso"
   iso_url          = "https://cdimage.ubuntu.com/releases/25.04/release/ubuntu-25.04-live-server-arm64.iso"
   memory           = "8192"
-  output_directory = var.output_directory
+  output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
     ["-boot", "menu=on,splash-time=0"],
@@ -35,7 +31,7 @@ source "qemu" "ubuntu" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file=${var.output_directory}/ubuntu.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file={{ $dir }}/ubuntu.img,if=none,format=qcow2,id=disk"],
     ["-drive", "file=ubuntu-25.04-live-server-arm64.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
@@ -44,8 +40,14 @@ source "qemu" "ubuntu" {
   vnc_use_password = "true"
 }
 
+{{ end -}}
 build {
-  sources = ["source.qemu.ubuntu"]
+  sources = [
+    {{- $dirs := (datasource "dirs") -}}
+    {{- range $i, $dir := (datasource "dirs") }}
+    "source.qemu.ubuntu_{{ $dir }}",
+    {{- end }}
+  ]
 }
 
 packer {
