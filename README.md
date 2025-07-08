@@ -7,3 +7,5 @@
 ## [Fedora Server (arm64)](fedora)
 
 ## [Ubuntu Server (arm64)](ubuntu)
+
+## [Kubernetes (arm64)](script)
