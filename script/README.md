@@ -35,7 +35,8 @@
    - Option 1: Single-node control plane
      ```
      ssh k0
-     kubeadm init --pod-network-cidr=10.244.0.0/16
+     kubeadm init \
+     --pod-network-cidr 172.20.0.0/16 --service-cidr 172.24.0.0/16
      ```
    - Option 2: Multi-node control plane (high availability)
      - The provided pod manifest uses `192.168.64.64` for the cluster virtual IP
@@ -49,8 +50,9 @@
      https://raw.githubusercontent.com/tyholling/deploy/refs/heads/main/kube-vip.yaml
      ```
      ```
-     kubeadm init --pod-network-cidr=10.244.0.0/16 \
-     --control-plane-endpoint 192.168.64.64 --upload-certs
+     kubadm init \
+     --control-plane-endpoint 192.168.64.64 --upload-certs \
+     --pod-network-cidr 172.20.0.0/16 --service-cidr 172.24.0.0/16
      ```
      Add nodes to the control plane:
      ```
