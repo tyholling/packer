@@ -1,3 +1,8 @@
+variable "output_directory" {
+  type    = string
+  default = "ubuntu"
+}
+
 source "qemu" "ubuntu" {
   boot_command = [
     "<esc>c<wait>",
@@ -20,7 +25,7 @@ source "qemu" "ubuntu" {
   iso_target_path  = "ubuntu-25.04-live-server-arm64.iso"
   iso_url          = "https://cdimage.ubuntu.com/releases/25.04/release/ubuntu-25.04-live-server-arm64.iso"
   memory           = "8192"
-  output_directory = "."
+  output_directory = var.output_directory
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
     ["-boot", "menu=on,splash-time=0"],
@@ -30,7 +35,7 @@ source "qemu" "ubuntu" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file=ubuntu.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file=${var.output_directory}/ubuntu.img,if=none,format=qcow2,id=disk"],
     ["-drive", "file=ubuntu-25.04-live-server-arm64.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]

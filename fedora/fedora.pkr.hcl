@@ -1,3 +1,8 @@
+variable "output_directory" {
+  type    = string
+  default = "fedora"
+}
+
 source "qemu" "fedora" {
   boot_command = [
     "<esc>c<wait>",
@@ -19,7 +24,7 @@ source "qemu" "fedora" {
   iso_target_path  = "Fedora-Server-dvd-aarch64-42-1.1.iso"
   iso_url          = "https://download.fedoraproject.org/pub/fedora/linux/releases/42/Server/aarch64/iso/Fedora-Server-dvd-aarch64-42-1.1.iso"
   memory           = "8192"
-  output_directory = "."
+  output_directory = var.output_directory
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
     ["-boot", "menu=on,splash-time=0"],
@@ -29,7 +34,7 @@ source "qemu" "fedora" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file=fedora.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file=${var.output_directory}/fedora.img,if=none,format=qcow2,id=disk"],
     ["-drive", "file=Fedora-Server-dvd-aarch64-42-1.1.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]

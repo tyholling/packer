@@ -1,3 +1,8 @@
+variable "output_directory" {
+  type    = string
+  default = "centos"
+}
+
 source "qemu" "centos" {
   boot_command = [
     "<esc>c<wait>",
@@ -19,7 +24,7 @@ source "qemu" "centos" {
   iso_target_path  = "CentOS-Stream-10-latest-aarch64-dvd1.iso"
   iso_url          = "https://mirror.stream.centos.org/10-stream/BaseOS/aarch64/iso/CentOS-Stream-10-latest-aarch64-dvd1.iso"
   memory           = "8192"
-  output_directory = "."
+  output_directory = var.output_directory
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
     ["-boot", "menu=on,splash-time=0"],
@@ -29,7 +34,7 @@ source "qemu" "centos" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file=centos.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file=${var.output_directory}/centos.img,if=none,format=qcow2,id=disk"],
     ["-drive", "file=CentOS-Stream-10-latest-aarch64-dvd1.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
