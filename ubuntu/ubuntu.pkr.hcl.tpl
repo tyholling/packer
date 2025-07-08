@@ -1,4 +1,4 @@
-{{ range $i, $dir := (datasource "dirs") -}}
+{{ range $dir := (datasource "dirs") -}}
 source "qemu" "ubuntu_{{ $dir }}" {
   boot_command = [
     "<esc>c<wait>",
@@ -44,7 +44,7 @@ source "qemu" "ubuntu_{{ $dir }}" {
 build {
   sources = [
     {{- $dirs := (datasource "dirs") -}}
-    {{- range $i, $dir := (datasource "dirs") }}
+    {{- range $dir := (datasource "dirs") }}
     "source.qemu.ubuntu_{{ $dir }}",
     {{- end }}
   ]
