@@ -4,4 +4,5 @@
 *.img
 *.iso
 *.lock
+*.pkr.hcl
 *.swp
