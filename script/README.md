@@ -3,7 +3,7 @@
 1. Install dependencies
    ```
    brew tap hashicorp/tap
-   brew install ansible go helm kubernetes-cli hashicorp/tap/packer qemu watch
+   brew install ansible go hashicorp/tap/packer qemu watch
    go install github.com/hairyhenderson/gomplate/v4/cmd/gomplate@latest
    ```
 1. Configure SSH
