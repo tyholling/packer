@@ -73,7 +73,7 @@
    Copy `/etc/kubernetes/admin.conf` from a control plane node:
    ```
    mkdir -p ~/.kube
-   scp centos:/etc/kubernetes/admin.conf ~/.kube/config
+   scp k0:/etc/kubernetes/admin.conf ~/.kube/config
    ```
 1. Prepare to deploy services to the cluster
    ```
