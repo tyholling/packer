@@ -50,7 +50,7 @@
      https://raw.githubusercontent.com/tyholling/deploy/refs/heads/main/kube-vip.yaml
      ```
      ```
-     kubadm init \
+     kubeadm init \
      --control-plane-endpoint 192.168.64.64 --upload-certs \
      --pod-network-cidr 172.20.0.0/16 --service-cidr 172.24.0.0/16
      ```
