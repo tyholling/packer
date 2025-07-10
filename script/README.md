@@ -34,7 +34,7 @@
 1. Initialize the cluster
    - Option 1: Single-node control plane
      ```
-     ssh k0
+     ssh a0
      kubeadm init \
      --pod-network-cidr 172.20.0.0/16 --service-cidr 172.24.0.0/16
      ```
@@ -43,7 +43,7 @@
 
      Initialize the cluster:
      ```
-     ssh k0
+     ssh a0
      ```
      ```
      curl -Os --output-dir /etc/kubernetes/manifests/ \
@@ -61,19 +61,19 @@
      ```
      Update and deploy `kube-vip` to the control plane:
      ```
-     ssh k0 sed -i s/super-admin/admin/g /etc/kubernetes/manifests/kube-vip.yaml
-     scp k0:/etc/kubernetes/manifests/kube-vip.yaml k1:/etc/kubernetes/manifests/
+     ssh a0 sed -i s/super-admin/admin/g /etc/kubernetes/manifests/kube-vip.yaml
+     scp a0:/etc/kubernetes/manifests/kube-vip.yaml b0:/etc/kubernetes/manifests/
      ```
 1. Add worker nodes
    ```
-   ssh a0
+   ssh a1
    kubeadm join ...
    ```
 1. On macOS:
    Copy `/etc/kubernetes/admin.conf` from a control plane node:
    ```
    mkdir -p ~/.kube
-   scp k0:/etc/kubernetes/admin.conf ~/.kube/config
+   scp a0:/etc/kubernetes/admin.conf ~/.kube/config
    ```
 1. Prepare to deploy services to the cluster
    ```

@@ -12,14 +12,14 @@ function build_node {
 
 cd ..
 
-# control plane
-build_node centos k0 k1
+# zone a
+build_node centos a0 a1
 
-# zone a workers
-build_node debian a0 a1
+# zone b
+build_node debian b0 b1
 
-# zone b workers
-build_node fedora b0 b1
+# zone c
+build_node fedora c0 c1
 
-# zone c workers
-build_node ubuntu c0 c1
+# zone d
+build_node ubuntu d0 d1
