@@ -61,19 +61,20 @@
      ```
      Update and deploy `kube-vip` to the control plane:
      ```
-     ssh a0 sed -i s/super-admin/admin/g /etc/kubernetes/manifests/kube-vip.yaml
-     scp a0:/etc/kubernetes/manifests/kube-vip.yaml b0:/etc/kubernetes/manifests/
+     ssh k0 sed -i s/super-admin/admin/g /etc/kubernetes/manifests/kube-vip.yaml
+     scp k0:/etc/kubernetes/manifests/kube-vip.yaml k1:/etc/kubernetes/manifests/
+     scp k0:/etc/kubernetes/manifests/kube-vip.yaml k2:/etc/kubernetes/manifests/
      ```
 1. Add worker nodes
    ```
-   ssh a1
+   ssh a0
    kubeadm join ...
    ```
 1. On macOS:
    Copy `/etc/kubernetes/admin.conf` from a control plane node:
    ```
    mkdir -p ~/.kube
-   scp a0:/etc/kubernetes/admin.conf ~/.kube/config
+   scp k0:/etc/kubernetes/admin.conf ~/.kube/config
    ```
 1. Prepare to deploy services to the cluster
    ```
@@ -90,13 +91,15 @@
 1. Deploy services to the cluster
    - https://github.com/cert-manager/cert-manager
    - https://github.com/grafana/grafana
+   - https://github.com/grafana/loki
    - https://github.com/kubernetes-sigs/metrics-server
    - https://github.com/kubernetes/ingress-nginx
    - https://github.com/mariadb/server
    - https://github.com/metallb/metallb
+   - https://github.com/open-telemetry/opentelemetry-operator
    - https://github.com/openebs/dynamic-localpv-provisioner
    ```
    tofu apply
    ```
 1. Login to grafana with username `admin`
-   - https://192.168.64.100/grafana
+   - https://192.168.64.90/grafana
