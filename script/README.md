@@ -34,7 +34,7 @@
 1. Initialize the cluster
    - Option 1: Single-node control plane
      ```
-     ssh a0
+     ssh k0
      kubeadm init \
      --pod-network-cidr 172.20.0.0/16 --service-cidr 172.24.0.0/16
      ```
@@ -43,7 +43,7 @@
 
      Initialize the cluster:
      ```
-     ssh a0
+     ssh k0
      ```
      ```
      curl -Os --output-dir /etc/kubernetes/manifests/ \
