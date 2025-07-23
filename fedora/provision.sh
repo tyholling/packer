@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 [ -z "$1" ] && printf "usage: $0 hostname\n" && exit || hostname="$1"
 cd $hostname
