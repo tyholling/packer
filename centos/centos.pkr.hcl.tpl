@@ -1,5 +1,6 @@
 {{ range $dir := (datasource "dirs") -}}
 source "qemu" "centos_{{ $dir }}" {
+  accelerator = "hvf"
   boot_command = [
     "<esc>c<wait>",
     "linux /images/pxeboot/vmlinuz",
@@ -16,9 +17,9 @@ source "qemu" "centos_{{ $dir }}" {
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
-  iso_checksum     = "file:https://mirror.stream.centos.org/10-stream/BaseOS/aarch64/iso/CentOS-Stream-10-latest-aarch64-dvd1.iso.SHA256SUM"
+  iso_checksum     = "file:CentOS-Stream-10-latest-aarch64-dvd1.iso.SHA256SUM"
   iso_target_path  = "CentOS-Stream-10-latest-aarch64-dvd1.iso"
-  iso_url          = "https://mirror.stream.centos.org/10-stream/BaseOS/aarch64/iso/CentOS-Stream-10-latest-aarch64-dvd1.iso"
+  iso_url          = "CentOS-Stream-10-latest-aarch64-dvd1.iso"
   memory           = "8192"
   output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"

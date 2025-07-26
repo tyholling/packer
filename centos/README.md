@@ -3,7 +3,7 @@
 1. Install dependencies
    ```
    brew tap hashicorp/tap
-   brew install ansible go hashicorp/tap/packer qemu
+   brew install ansible axel go hashicorp/tap/packer qemu
    go install github.com/hairyhenderson/gomplate/v4/cmd/gomplate@latest
    ```
 1. Set SSH key in `kickstart.cfg`

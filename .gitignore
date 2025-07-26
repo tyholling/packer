@@ -1,6 +1,7 @@
 .inventory
 .macaddress
 
+*.SHA256SUM
 *.img
 *.iso
 *.lock
