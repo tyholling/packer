@@ -1,5 +1,6 @@
 {{ range $dir := (datasource "dirs") -}}
 source "qemu" "ubuntu_{{ $dir }}" {
+  accelerator = "hvf"
   boot_command = [
     "<esc>c<wait>",
     "linux /casper/vmlinuz",
@@ -17,9 +18,9 @@ source "qemu" "ubuntu_{{ $dir }}" {
     "/user-data" = file("user-data")
     "/meta-data" = ""
   }
-  iso_checksum     = "file:https://cdimage.ubuntu.com/releases/25.04/release/SHA256SUMS"
+  iso_checksum     = "file:SHA256SUMS"
   iso_target_path  = "ubuntu-25.04-live-server-arm64.iso"
-  iso_url          = "https://cdimage.ubuntu.com/releases/25.04/release/ubuntu-25.04-live-server-arm64.iso"
+  iso_url          = "ubuntu-25.04-live-server-arm64.iso"
   memory           = "8192"
   output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
