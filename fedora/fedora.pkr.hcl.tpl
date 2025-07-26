@@ -1,5 +1,6 @@
 {{ range $dir := (datasource "dirs") -}}
 source "qemu" "fedora_{{ $dir }}" {
+  accelerator = "hvf"
   boot_command = [
     "<esc>c<wait>",
     "linux /images/pxeboot/vmlinuz",
@@ -16,9 +17,9 @@ source "qemu" "fedora_{{ $dir }}" {
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
-  iso_checksum     = "file:https://download.fedoraproject.org/pub/fedora/linux/releases/42/Server/aarch64/iso/Fedora-Server-42-1.1-aarch64-CHECKSUM"
+  iso_checksum     = "file:Fedora-Server-42-1.1-aarch64-CHECKSUM"
   iso_target_path  = "Fedora-Server-dvd-aarch64-42-1.1.iso"
-  iso_url          = "https://download.fedoraproject.org/pub/fedora/linux/releases/42/Server/aarch64/iso/Fedora-Server-dvd-aarch64-42-1.1.iso"
+  iso_url          = "Fedora-Server-dvd-aarch64-42-1.1.iso"
   memory           = "8192"
   output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"

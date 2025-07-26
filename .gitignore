@@ -1,6 +1,7 @@
 .inventory
 .macaddress
 
+*-CHECKSUM
 *.SHA256SUM
 *.img
 *.iso
