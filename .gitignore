@@ -7,3 +7,5 @@
 *.lock
 *.pkr.hcl
 *.swp
+
+SHA256SUMS

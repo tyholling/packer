@@ -1,5 +1,6 @@
 {{ range $dir := (datasource "dirs") -}}
 source "qemu" "debian_{{ $dir }}" {
+  accelerator = "hvf"
   boot_command = [
     "<esc>c<wait>",
     "linux /install.a64/vmlinuz auto=true priority=critical",
@@ -16,9 +17,9 @@ source "qemu" "debian_{{ $dir }}" {
   http_content = {
     "/preseed.cfg" = file("preseed.cfg")
   }
-  iso_checksum     = "file:https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/SHA256SUMS"
+  iso_checksum     = "file:SHA256SUMS"
   iso_target_path  = "debian-12.11.0-arm64-DVD-1.iso"
-  iso_url          = "https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-12.11.0-arm64-DVD-1.iso"
+  iso_url          = "debian-12.11.0-arm64-DVD-1.iso"
   memory           = "8192"
   output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
