@@ -31,41 +31,27 @@
      ```
      ./monitor.sh
      ```
+1. Prepare the control plane
+   - The first node in the list will be used to initialize the cluster
+   - This prepares the cluster to use the virtual IP 192.168.64.64
+   ```
+   ./control.sh k0 k1 k2
+   ```
 1. Initialize the cluster
-   - Option 1: Single-node control plane
-     ```
-     ssh k0
-     kubeadm init \
-     --pod-network-cidr 172.20.0.0/16 --service-cidr 172.24.0.0/16
-     ```
-   - Option 2: Multi-node control plane (high availability)
-     - The provided pod manifest uses `192.168.64.64` for the cluster virtual IP
-
-     Initialize the cluster:
-     ```
-     ssh k0
-     ```
-     ```
-     curl -Os --output-dir /etc/kubernetes/manifests/ \
-     https://raw.githubusercontent.com/tyholling/deploy/refs/heads/main/kube-vip.yaml
-     ```
-     ```
-     kubeadm init \
-     --control-plane-endpoint 192.168.64.64 --upload-certs \
-     --pod-network-cidr 172.20.0.0/16 --service-cidr 172.24.0.0/16
-     ```
-     Add nodes to the control plane:
-     ```
-     ssh k1
-     kubeadm join --control-plane ...
-     ```
-     Update and deploy `kube-vip` to the control plane:
-     ```
-     ssh k0 sed -i s/super-admin/admin/g /etc/kubernetes/manifests/kube-vip.yaml
-     scp k0:/etc/kubernetes/manifests/kube-vip.yaml k1:/etc/kubernetes/manifests/
-     scp k0:/etc/kubernetes/manifests/kube-vip.yaml k2:/etc/kubernetes/manifests/
-     ```
-1. Add worker nodes
+   ```
+   ssh k0
+   ```
+   ```
+   kubeadm init --patches /opt/kubeadm/patches \
+   --control-plane-endpoint 192.168.64.64 --upload-certs \
+   --pod-network-cidr 172.20.0.0/16 --service-cidr 172.24.0.0/16
+   ```
+   Add nodes to the control plane: `[k1, k2]`
+   ```
+   ssh k1
+   kubeadm join --control-plane ... --patches /opt/kubeadm/patches
+   ```
+1. Add worker nodes: `[a0, a1, a2, b0, b1, b2, c0, c1, c2]`
    ```
    ssh a0
    kubeadm join ...
