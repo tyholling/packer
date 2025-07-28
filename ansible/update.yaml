@@ -2,20 +2,15 @@
   hosts: centos, fedora
   tasks:
   - name: update
-    dnf:
-      name: "*"
-      state: latest
-  - name: autoremove
-    dnf:
-      autoremove: true
+    shell: |
+      dnf -y update
+      dnf -y autoremove
 
 - name: update
   hosts: debian, ubuntu
   tasks:
   - name: update
-    apt:
-      name: "*"
-      state: latest
-  - name: autoremove
-    apt:
-      autoremove: true
+    shell: |
+      apt-get -y update
+      apt-get -y upgrade
+      apt-get -y autoremove
