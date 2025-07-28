@@ -3,6 +3,7 @@
 
 *-CHECKSUM
 *.SHA256SUM
+*.bak
 *.img
 *.iso
 *.lock
