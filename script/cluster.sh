@@ -20,7 +20,7 @@ build_node centos 10 k0 k1 k2
 build_node debian 20 a0 a1 a2
 
 # zone b
-build_node fedora 30 b0 b1 b2
+# build_node fedora 30 b0 b1 b2
 
 # zone c
-build_node ubuntu 40 c0 c1 c2
+# build_node ubuntu 40 c0 c1 c2
