@@ -24,6 +24,7 @@ printf \"[fedora]\n$hostname ansible_host=$ip_updated ansible_user=root\n\" > .i
 ansible all -i .inventory -m wait_for_connection --ssh-common-args='-o StrictHostKeyChecking=no'
 ansible all -i .inventory -m hostname -a name=$hostname
 ansible-playbook -i .inventory ../../ansible/locale.yaml
+ansible-playbook -i .inventory ../../ansible/update.yaml
 ssh-keygen -R $ip_updated
 "
 arp -d $ip_address
