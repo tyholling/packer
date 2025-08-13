@@ -1,5 +1,11 @@
 - name: locale
-  hosts: all
+  hosts: centos, fedora, ubuntu
   tasks:
   - name: set locale
     command: localectl set-locale C.UTF-8
+
+- name: locale
+  hosts: debian
+  tasks:
+  - name: set locale
+    command: update-locale LANG=C.UTF-8

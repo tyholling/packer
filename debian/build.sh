@@ -8,8 +8,8 @@ jq -cn '$ARGS.positional' --args $@ \
 if [ ! -f "SHA256SUMS" ]; then
   axel https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/SHA256SUMS
 fi
-if [ ! -f "debian-12.11.0-arm64-DVD-1.iso" ]; then
-  axel https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-12.11.0-arm64-DVD-1.iso
+if [ ! -f "debian-13.0.0-arm64-DVD-1.iso" ]; then
+  axel https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/debian-13.0.0-arm64-DVD-1.iso
 fi
 
 packer build debian.pkr.hcl

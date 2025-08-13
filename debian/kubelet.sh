@@ -17,7 +17,7 @@ sysctl --system
 
 # install cri-o
 
-apt-get install -y software-properties-common curl
+apt-get install -y curl gpg
 
 CRIO_VERSION=v1.33
 curl -fsSL https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$CRIO_VERSION/deb/Release.key \
