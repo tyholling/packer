@@ -51,7 +51,7 @@
    ssh k1
    kubeadm join --control-plane ... --patches /opt/kubeadm/patches
    ```
-1. Add worker nodes: `[a0, a1, a2, b0, b1, b2, c0, c1, c2]`
+1. Add worker nodes: `[a0, a1, a2]`
    ```
    ssh a0
    kubeadm join ...
