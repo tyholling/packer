@@ -2,9 +2,9 @@
 
 1. Install dependencies
    ```
-   brew tap hashicorp/tap
-   brew install ansible go hashicorp/tap/packer qemu watch
+   brew install ansible axel go hashicorp/tap/packer qemu watch
    go install github.com/hairyhenderson/gomplate/v4/cmd/gomplate@latest
+   packer plugins install github.com/hashicorp/qemu
    ```
 1. Configure SSH
    - [centos](../centos/kickstart.cfg)
