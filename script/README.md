@@ -88,4 +88,4 @@
    tofu apply
    ```
 1. Login to grafana with username `admin`
-   - https://192.168.64.90/grafana
+   - http://192.168.64.90/grafana
