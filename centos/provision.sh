@@ -18,7 +18,6 @@ printf \"[centos]\n$hostname ansible_host=$ip_address ansible_user=root\n\" > .i
 ansible all -i .inventory -m wait_for_connection --ssh-common-args='-o StrictHostKeyChecking=no'
 ansible-playbook -i .inventory ../../ansible/static.yaml -e ip_address=$ip_updated
 ansible-playbook -i .inventory ../../ansible/locale.yaml
-ansible-playbook -i .inventory ../../ansible/update.yaml
 ansible all -i .inventory -m hostname -a name=$hostname
 ssh -l root $ip_address reboot
 ssh-keygen -R $ip_address
