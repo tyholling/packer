@@ -34,8 +34,8 @@
   tasks:
   - name: configure netplan
     shell: |
-      sed -i -e '3i\  renderer: NetworkManager' /etc/netplan/50-cloud-init.yaml
-      sed -i -e /dhcp4/s/true/false/ /etc/netplan/50-cloud-init.yaml
+      sed -i -e '3i\  renderer: NetworkManager' /etc/netplan/00-installer-config.yaml
+      sed -i -e /dhcp4/s/true/false/ /etc/netplan/00-installer-config.yaml
   - name: install network manager
     apt:
       name: network-manager

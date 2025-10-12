@@ -4,6 +4,11 @@ autoinstall:
   source:
     search_drivers: false
     id: ubuntu-server-minimal
+  network:
+    version: 2
+    ethernets:
+      enp0s1:
+        dhcp4: true
   storage:
     swap:
       size: 0
