@@ -16,7 +16,7 @@ for distro in centos debian fedora ubuntu; do
       sudo sed -i '' "/$(cat .macaddress)/d" /etc/hosts
     fi
     popd > /dev/null
-    sudo rm -rf $machine
+    rm -rf $machine
   done
   popd > /dev/null
 done
