@@ -8,6 +8,7 @@
 *.iso
 *.lock
 *.pkr.hcl
+*.sha256
 *.swp
 
 SHA256SUMS

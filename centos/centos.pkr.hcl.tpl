@@ -17,7 +17,7 @@ source "qemu" "centos_{{ $dir }}" {
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
-  iso_checksum     = "file:CentOS-Stream-10-latest-aarch64-dvd1.iso.SHA256SUM"
+  iso_checksum     = "file:CentOS-Stream-10-latest-aarch64-dvd1.iso.sha256"
   iso_target_path  = "CentOS-Stream-10-latest-aarch64-dvd1.iso"
   iso_url          = "CentOS-Stream-10-latest-aarch64-dvd1.iso"
   memory           = "8192"
