@@ -18,7 +18,7 @@ source "qemu" "ubuntu_{{ $dir }}" {
     "/user-data" = file("user-data")
     "/meta-data" = ""
   }
-  iso_checksum     = "file:SHA256SUMS"
+  iso_checksum     = "file:ubuntu-25.10-live-server-arm64.iso.sha256"
   iso_target_path  = "ubuntu-25.10-live-server-arm64.iso"
   iso_url          = "ubuntu-25.10-live-server-arm64.iso"
   memory           = "8192"
