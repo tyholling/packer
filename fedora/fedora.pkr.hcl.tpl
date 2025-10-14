@@ -17,7 +17,7 @@ source "qemu" "fedora_{{ $dir }}" {
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
-  iso_checksum     = "file:Fedora-Server-42-1.1-aarch64-CHECKSUM"
+  iso_checksum     = "file:Fedora-Server-dvd-aarch64-42-1.1.iso.sha256"
   iso_target_path  = "Fedora-Server-dvd-aarch64-42-1.1.iso"
   iso_url          = "Fedora-Server-dvd-aarch64-42-1.1.iso"
   memory           = "8192"
