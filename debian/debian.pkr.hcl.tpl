@@ -17,7 +17,7 @@ source "qemu" "debian_{{ $dir }}" {
   http_content = {
     "/preseed.cfg" = file("preseed.cfg")
   }
-  iso_checksum     = "file:SHA256SUMS"
+  iso_checksum     = "file:debian-13.1.0-arm64-DVD-1.iso.sha256"
   iso_target_path  = "debian-13.1.0-arm64-DVD-1.iso"
   iso_url          = "debian-13.1.0-arm64-DVD-1.iso"
   memory           = "8192"
