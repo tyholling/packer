@@ -6,8 +6,11 @@ function build_nodes {
   address=$2
   for hostname in ${@:3}; do
     sudo ./provision.sh $hostname $((address++))
-    ssh $hostname bash -s < kubelet.sh
   done
+  for hostname in ${@:3}; do
+    ssh $hostname bash -s < kubelet.sh &
+  done
+  wait
   popd
 }
 
@@ -19,8 +22,9 @@ function control_plane {
     scp kubeadm/kube-vip.yaml $s:/etc/kubernetes/manifests
     ssh $s mkdir -p /opt/kubeadm/patches
     scp kubeadm/patches/* $s:/opt/kubeadm/patches/*
-    ssh $s kubeadm config images pull
+    ssh $s kubeadm config images pull &
   done
+  wait
 
   for s in ${@:4}; do
     ssh $s sed -i s/super-admin/admin/g /etc/kubernetes/manifests/kube-vip.yaml
