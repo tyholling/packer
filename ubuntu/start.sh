@@ -1,6 +1,14 @@
 #!/bin/bash
 
-[ -f .macaddress ] || printf "0200%x\n" $(date +%s) | sed 's/../&:/g; s/:$//' > .macaddress
+[ -f .macaddress ] || {
+  time=$(date +%s)
+  while (( time )); do
+    next=$(printf "%x" $(( time % 240 + 16 )))
+    nums=($next ${nums[@]})
+    time=$(( time / 240 ))
+  done
+  (IFS=:; echo "02:00:${nums[*]}" > .macaddress)
+}
 read macaddress < .macaddress
 
 qemu-system-aarch64 \
