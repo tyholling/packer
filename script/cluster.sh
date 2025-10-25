@@ -14,7 +14,7 @@ function build_nodes {
   popd
 }
 
-function control_plane {
+function add_control {
   build_nodes $@
   control_plane_nodes+=(${@:3})
 
@@ -31,18 +31,15 @@ function control_plane {
   done
 }
 
-function worker_nodes {
+function add_workers {
   build_nodes $@
   worker_nodes+=(${@:3})
 }
 
-control_plane centos 10 k0 k1 k2
-
-worker_nodes debian 20 a0 a1 a2
-
-# worker_nodes fedora 30 b0 b1 b2
-
-# worker_nodes ubuntu 40 c0 c1 c2
+add_control centos 10 k0 k1 k2
+add_workers debian 20 a0 a1 a2
+# add_workers fedora 30 b0 b1 b2
+# add_workers ubuntu 40 c0 c1 c2
 
 ssh ${control_plane_nodes[0]} "
 kubeadm init --patches /opt/kubeadm/patches \
