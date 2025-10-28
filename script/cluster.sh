@@ -47,7 +47,7 @@ kubeadm init --patches /opt/kubeadm/patches \
 --pod-network-cidr 172.20.0.0/16 --service-cidr 172.24.0.0/16
 "
 
-mkdir -p ~/.kube/config
+mkdir -p ~/.kube
 scp ${control_plane_nodes[0]}:/etc/kubernetes/admin.conf ~/.kube/config
 
 secret=$(kubectl get secrets -n kube-system -o json | jq -r '
