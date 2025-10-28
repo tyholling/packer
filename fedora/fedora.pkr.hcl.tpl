@@ -17,9 +17,9 @@ source "qemu" "fedora_{{ $dir }}" {
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
-  iso_checksum     = "file:Fedora-Server-dvd-aarch64-42-1.1.iso.sha256"
-  iso_target_path  = "Fedora-Server-dvd-aarch64-42-1.1.iso"
-  iso_url          = "Fedora-Server-dvd-aarch64-42-1.1.iso"
+  iso_checksum     = "file:Fedora-Server-dvd-aarch64-43-1.6.iso.sha256"
+  iso_target_path  = "Fedora-Server-dvd-aarch64-43-1.6.iso"
+  iso_url          = "Fedora-Server-dvd-aarch64-43-1.6.iso"
   memory           = "8192"
   output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
@@ -32,7 +32,7 @@ source "qemu" "fedora_{{ $dir }}" {
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
     ["-drive", "file={{ $dir }}/fedora.img,if=none,format=qcow2,id=disk"],
-    ["-drive", "file=Fedora-Server-dvd-aarch64-42-1.1.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=Fedora-Server-dvd-aarch64-43-1.6.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"
