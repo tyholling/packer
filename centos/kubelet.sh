@@ -1,14 +1,5 @@
 #!/bin/bash
 
-# disable selinux
-
-setenforce 0
-sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
-
-# disable firewall
-
-systemctl disable --now firewalld
-
 # load kernel modules
 
 cat << eof > /etc/modules-load.d/kubernetes.conf
