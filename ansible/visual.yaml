@@ -1,0 +1,7 @@
+- name: visual
+  hosts: fedora
+  tasks:
+  - name: install gnome desktop
+    shell: |
+      dnf -y install @gnome-desktop
+      systemctl set-default graphical.target
