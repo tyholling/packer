@@ -1,4 +1,4 @@
-#!/bin/bash -o pipefail
+#!/bin/bash
 
 shopt -s nullglob
 
@@ -6,21 +6,22 @@ cd ..
 
 for distro in centos debian fedora ubuntu; do
   pushd $distro > /dev/null
-  rm -f $distro.pkr.hcl
   for machine in */; do
     machine="${machine%/}"
-    [ -d $machine ] && pushd $machine > /dev/null || continue
+    [ -f $machine/.delete ] && pushd $machine > /dev/null || {
+      echo "skipped: $distro/$machine"
+      continue
+    }
     ssh -q -l root $machine poweroff
     ssh-keygen -R $machine &> /dev/null
     if [ -f .macaddress ]; then
-      sudo sed -i '' "/$(cat .macaddress)/d" /etc/hosts
+      read macaddress < .macaddress
+      sudo arp -d $(grep $macaddress /etc/hosts | awk '{ print $1 }') > /dev/null
+      sudo sed -i '' "/$macaddress/d" /etc/hosts
     fi
     popd > /dev/null
     rm -rf $machine
+    echo "deleted: $distro/$machine"
   done
   popd > /dev/null
 done
-
-while pgrep qemu | xargs; do sleep 1; done
-
-[ -f /var/db/dhcpd_leases ] && sudo rm -i /var/db/dhcpd_leases
