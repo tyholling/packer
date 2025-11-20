@@ -1,7 +1,7 @@
 - name: common
   hosts: centos, fedora
   tasks:
-  - name: install common tools
+  - name: install packages
     shell: |
       dnf -y install curl git tar vim wget
       dnf -y remove rootfiles
@@ -9,6 +9,6 @@
 - name: common
   hosts: debian, ubuntu
   tasks:
-  - name: install common tools
+  - name: install packages
     shell: |
       apt-get -y install curl git tar vim wget

@@ -23,5 +23,6 @@ for distro in centos debian fedora ubuntu; do
     rm -rf $machine
     echo "deleted: $distro/$machine"
   done
+  rm -f $distro.pkr.hcl
   popd > /dev/null
 done

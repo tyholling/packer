@@ -1,0 +1,6 @@
+- name: custom
+  hosts: fedora
+  tasks:
+  - name: install packages
+    shell: |
+      dnf -y install ack btop curl git git-delta go podman tar tmux uv vim wget
