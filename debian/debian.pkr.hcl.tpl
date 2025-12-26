@@ -17,9 +17,9 @@ source "qemu" "debian_{{ $dir }}" {
   http_content = {
     "/preseed.cfg" = file("preseed.cfg")
   }
-  iso_checksum     = "file:debian-13.1.0-arm64-DVD-1.iso.sha256"
-  iso_target_path  = "debian-13.1.0-arm64-DVD-1.iso"
-  iso_url          = "debian-13.1.0-arm64-DVD-1.iso"
+  iso_checksum     = "file:debian-13.2.0-arm64-DVD-1.iso.sha256"
+  iso_target_path  = "debian-13.2.0-arm64-DVD-1.iso"
+  iso_url          = "debian-13.2.0-arm64-DVD-1.iso"
   memory           = "8192"
   output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
@@ -32,7 +32,7 @@ source "qemu" "debian_{{ $dir }}" {
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
     ["-drive", "file={{ $dir }}/debian.img,if=none,format=qcow2,id=disk"],
-    ["-drive", "file=debian-13.1.0-arm64-DVD-1.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=debian-13.2.0-arm64-DVD-1.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"
