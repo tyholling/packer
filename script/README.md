@@ -38,7 +38,7 @@
    cd deploy
    tofu init
    ```
-1. Deplay [flannel](https://github.com/flannel-io/flannel)
+1. Deploy [flannel](https://github.com/flannel-io/flannel)
    - This provides the overlay network to allow pods to communicate
    ```
    tofu apply -target helm_release.flannel
