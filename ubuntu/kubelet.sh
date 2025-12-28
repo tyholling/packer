@@ -19,7 +19,7 @@ sysctl --system
 
 apt-get install -y software-properties-common curl
 
-CRIO_VERSION=v1.34
+CRIO_VERSION=v1.35
 curl -fsSL https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$CRIO_VERSION/deb/Release.key \
 | gpg --dearmor -o /etc/apt/keyrings/cri-o-apt-keyring.gpg
 cat << eof > /etc/apt/sources.list.d/cri-o.list
@@ -33,7 +33,7 @@ systemctl enable --now crio
 
 # install kubernetes
 
-KUBERNETES_VERSION=v1.34
+KUBERNETES_VERSION=v1.35
 curl -fsSL https://pkgs.k8s.io/core:/stable:/$KUBERNETES_VERSION/deb/Release.key \
 | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 cat << eof > /etc/apt/sources.list.d/kubernetes.list
