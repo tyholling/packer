@@ -17,7 +17,7 @@
    ```
 1. Provision the system
    ```
-   sudo ./provision.sh centos
+   sudo ./provision.sh centos 192.168.64.2
    ```
 1. Connect to the machine
    ```

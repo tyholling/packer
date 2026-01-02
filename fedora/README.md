@@ -17,7 +17,7 @@
    ```
 1. Provision the system
    ```
-   sudo ./provision.sh fedora
+   sudo ./provision.sh fedora 192.168.64.4
    ```
 1. Connect to the machine
    ```

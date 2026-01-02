@@ -17,7 +17,7 @@
    ```
 1. Provision the system
    ```
-   sudo ./provision.sh ubuntu
+   sudo ./provision.sh ubuntu 192.168.64.5
    ```
 1. Connect to the machine
    ```

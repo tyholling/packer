@@ -1,6 +1,8 @@
 #!/bin/bash
 
-[ -z "$1" ] && printf "usage: $0 hostname\n" && exit || hostname="$1"
+[[ $# -ne 2 ]] && printf "usage: sudo ./provision.sh <hostname> <ip>\n" && exit
+
+hostname="$1"
 cd $hostname
 
 ../start.sh &
@@ -11,7 +13,7 @@ mac_reduced=$(echo $mac_address | perl -pe 's/0(\w)/\1/g')
 until arp -an | grep -q " $mac_reduced "; do sleep 1; done
 
 ip_address=$(arp -an | grep " $mac_reduced " | grep -o -m1 "192.168.64.\d\+")
-ip_updated="192.168.64.$2"
+ip_updated="$2"
 
 sudo -u $SUDO_USER sh -c "
 printf \"[ubuntu]\n$hostname ansible_host=$ip_address ansible_user=root\n\" > .inventory

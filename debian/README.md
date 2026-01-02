@@ -17,7 +17,7 @@
    ```
 1. Provision the system
    ```
-   sudo ./provision.sh debian
+   sudo ./provision.sh debian 192.168.64.3
    ```
 1. Connect to the machine
    ```
