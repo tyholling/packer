@@ -7,7 +7,7 @@ cd ..
 for machine in "$@"; do
   for distro in centos debian fedora ubuntu; do
     [[ -d $distro/$machine ]] && pushd $distro/$machine > /dev/null || continue
-    ssh -q -l root $machine poweroff
+    ssh -q -l root -o ConnectTimeout=1 $machine poweroff
     ssh-keygen -R $machine &> /dev/null
     if [[ -f .macaddress ]]; then
       read macaddress < .macaddress
