@@ -27,7 +27,7 @@ function add_control {
   wait
 
   for s in ${@:4}; do
-    ssh -l root $s sed -i s/super-admin/admin/g /etc/kubernetes/manifests/kube-vip.yaml
+    ssh -l root $s sed -i -e 's/super-admin/admin/' /etc/kubernetes/manifests/kube-vip.yaml
   done
 }
 

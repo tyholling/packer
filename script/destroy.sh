@@ -12,7 +12,7 @@ for machine in "$@"; do
     if [[ -f .macaddress ]]; then
       read macaddress < .macaddress
       sudo arp -d $(grep $macaddress /etc/hosts | awk '{ print $1 }') > /dev/null
-      sudo sed -i '' "/$macaddress/d" /etc/hosts
+      sudo sed -i -e "/$macaddress/d" /etc/hosts
     fi
     popd > /dev/null
     rm -rf $distro/$machine

@@ -14,7 +14,7 @@
       name: network-manager
   - name: configure network
     shell: |
-      sed -i '/enp0s1/s/^/# /' /etc/network/interfaces
+      sed -i -e '/enp0s1/s/^/# /' /etc/network/interfaces
       nmcli connection add type ethernet ifname enp0s1 con-name enp0s1 \
       ipv4.addresses "{{ ansible_enp0s1.ipv4.address }}/24" \
       ipv4.dns 192.168.64.1 ipv4.gateway 192.168.64.1 ipv4.method manual
@@ -35,7 +35,7 @@
   - name: configure netplan
     shell: |
       sed -i -e '3i\  renderer: NetworkManager' /etc/netplan/00-installer-config.yaml
-      sed -i -e /dhcp4/s/true/false/ /etc/netplan/00-installer-config.yaml
+      sed -i -e '/dhcp4/s/true/false/' /etc/netplan/00-installer-config.yaml
   - name: install network manager
     apt:
       name: network-manager
