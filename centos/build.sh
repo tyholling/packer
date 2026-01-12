@@ -18,3 +18,4 @@ if [ ! -f "CentOS-Stream-10-latest-aarch64-dvd1.iso" ]; then
 fi
 
 packer build centos.pkr.hcl
+rm centos.pkr.hcl

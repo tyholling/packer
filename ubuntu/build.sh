@@ -18,3 +18,4 @@ if [ ! -f "ubuntu-25.10-live-server-arm64.iso" ]; then
 fi
 
 packer build ubuntu.pkr.hcl
+rm ubuntu.pkr.hcl

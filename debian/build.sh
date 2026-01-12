@@ -18,3 +18,4 @@ if [ ! -f "debian-13.3.0-arm64-DVD-1.iso" ]; then
 fi
 
 packer build debian.pkr.hcl
+rm debian.pkr.hcl

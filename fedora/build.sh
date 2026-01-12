@@ -18,3 +18,4 @@ if [ ! -f "Fedora-Server-dvd-aarch64-43-1.6.iso" ]; then
 fi
 
 packer build fedora.pkr.hcl
+rm fedora.pkr.hcl
