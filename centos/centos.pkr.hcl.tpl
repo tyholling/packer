@@ -20,7 +20,7 @@ source "qemu" "centos_{{ $dir }}" {
   iso_checksum     = "file:CentOS-Stream-10-latest-aarch64-dvd1.iso.sha256"
   iso_target_path  = "CentOS-Stream-10-latest-aarch64-dvd1.iso"
   iso_url          = "CentOS-Stream-10-latest-aarch64-dvd1.iso"
-  memory           = "8192"
+  memory           = "4096"
   output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [

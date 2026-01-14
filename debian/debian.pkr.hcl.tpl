@@ -20,7 +20,7 @@ source "qemu" "debian_{{ $dir }}" {
   iso_checksum     = "file:debian-13.3.0-arm64-DVD-1.iso.sha256"
   iso_target_path  = "debian-13.3.0-arm64-DVD-1.iso"
   iso_url          = "debian-13.3.0-arm64-DVD-1.iso"
-  memory           = "8192"
+  memory           = "4096"
   output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [

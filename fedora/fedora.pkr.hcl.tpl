@@ -20,7 +20,7 @@ source "qemu" "fedora_{{ $dir }}" {
   iso_checksum     = "file:Fedora-Server-dvd-aarch64-43-1.6.iso.sha256"
   iso_target_path  = "Fedora-Server-dvd-aarch64-43-1.6.iso"
   iso_url          = "Fedora-Server-dvd-aarch64-43-1.6.iso"
-  memory           = "8192"
+  memory           = "4096"
   output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [

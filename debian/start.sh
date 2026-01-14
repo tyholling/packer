@@ -20,7 +20,7 @@ qemu-system-aarch64 \
 -device scsi-hd,drive=disk \
 -display none \
 -drive file=debian.img,if=none,format=qcow2,id=disk \
--m 8192 \
+-m 4096 \
 -machine accel=hvf,highmem=on,type=virt \
 -nic vmnet-shared,mac=$macaddress \
 -smp 8 \
