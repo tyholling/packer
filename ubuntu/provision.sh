@@ -14,7 +14,7 @@ until arp -an | grep -q " $mac_reduced "; do sleep 1; done
 
 ip_address=$(arp -an | grep " $mac_reduced " | grep -o -m1 "192.168.64.\d\+")
 ip_updated="$2"
-printf '%-15s %s # %s\n' $ip_address $hostname $mac_address >> /etc/hosts
+echo "$ip_address $hostname # $mac_address" >> /etc/hosts
 
 sudo -u $SUDO_USER sh -c "
 printf \"[ubuntu]\n$hostname ansible_user=root\n\n[ubuntu:vars]\n\" > .inventory
