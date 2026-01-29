@@ -2,7 +2,7 @@
 
 1. Install dependencies
    ```
-   brew install ansible axel go hashicorp/tap/packer qemu watch
+   brew install ansible axel flock go kubectl hashicorp/tap/packer qemu watch
    go install github.com/hairyhenderson/gomplate/v4/cmd/gomplate@latest
    packer plugins install github.com/hashicorp/qemu
    ```
