@@ -45,7 +45,7 @@ autoinstall:
       type: mount
   ssh:
     install-server: true
-    authorized-keys: [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFYiOhmcggSo8E3h2roj12qA411ZjTuevACqmEl9SjAx" ]
+    authorized-keys: [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAIFLGEn1x2NoTEXWLUYEaM1qBF1gbZkcja/YX4RuHPo" ]
   timezone: UTC
   shutdown: poweroff
   user-data:
