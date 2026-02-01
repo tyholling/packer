@@ -18,9 +18,9 @@ source "qemu" "ubuntu_{{ $dir }}" {
     "/user-data" = file("user-data")
     "/meta-data" = ""
   }
-  iso_checksum     = "file:ubuntu-25.10-live-server-arm64.iso.sha256"
-  iso_target_path  = "ubuntu-25.10-live-server-arm64.iso"
-  iso_url          = "ubuntu-25.10-live-server-arm64.iso"
+  iso_checksum     = "file:ubuntu.iso.sha256"
+  iso_target_path  = "ubuntu.iso"
+  iso_url          = "ubuntu.iso"
   memory           = "4096"
   output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
@@ -33,7 +33,7 @@ source "qemu" "ubuntu_{{ $dir }}" {
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
     ["-drive", "file={{ $dir }}/ubuntu.img,if=none,format=qcow2,id=disk"],
-    ["-drive", "file=ubuntu-25.10-live-server-arm64.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=ubuntu.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"
