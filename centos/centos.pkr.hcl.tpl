@@ -17,9 +17,9 @@ source "qemu" "centos_{{ $dir }}" {
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
-  iso_checksum     = "file:CentOS-Stream-10-latest-aarch64-dvd1.iso.sha256"
-  iso_target_path  = "CentOS-Stream-10-latest-aarch64-dvd1.iso"
-  iso_url          = "CentOS-Stream-10-latest-aarch64-dvd1.iso"
+  iso_checksum     = "file:centos.iso.sha256"
+  iso_target_path  = "centos.iso"
+  iso_url          = "centos.iso"
   memory           = "4096"
   output_directory = {{ $dir | quote }}
   qemu_binary      = "qemu-system-aarch64"
@@ -32,7 +32,7 @@ source "qemu" "centos_{{ $dir }}" {
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
     ["-drive", "file={{ $dir }}/centos.img,if=none,format=qcow2,id=disk"],
-    ["-drive", "file=CentOS-Stream-10-latest-aarch64-dvd1.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=centos.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"
