@@ -1,9 +1,6 @@
 #!/bin/bash -e
 
-[ -z "$1" ] && set -- "debian"
-
-jq -cn '$ARGS.positional' --args $@ \
-| gomplate -d "dirs=stdin:?type=application/json" -f debian.pkr.hcl.tpl -o debian.pkr.hcl
+[ ! -f "debian.img" ] || exit
 
 if [ ! -f "debian.iso.sha256" ]; then
   curl -Ls https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/SHA256SUMS \
@@ -18,5 +15,4 @@ if [ ! -f "debian.iso" ]; then
   shasum -c debian.iso.sha256
 fi
 
-packer build debian.pkr.hcl
-rm debian.pkr.hcl
+packer build -force debian.pkr.hcl

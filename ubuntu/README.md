@@ -2,20 +2,19 @@
 
 1. Install dependencies
    ```
-   brew install ansible axel flock go hashicorp/tap/packer qemu watch
-   go install github.com/hairyhenderson/gomplate/v4/cmd/gomplate@latest
+   brew install ansible axel flock hashicorp/tap/packer qemu watch
    packer plugins install github.com/hashicorp/qemu
    ```
 1. Set SSH key in `user-data`
    ```
    authorized-keys: [ "..." ]
    ```
-1. Install Ubuntu
-   - Use a unique hostname (`ubuntu`), it will be added to `/etc/hosts`
+1. Build Ubuntu image
    ```
-   ./build.sh ubuntu
+   ./build.sh
    ```
 1. Provision the system
+   - Use a unique hostname (`ubuntu`), it will be added to `/etc/hosts`
    ```
    sudo ./provision.sh ubuntu 192.168.64.5
    ```

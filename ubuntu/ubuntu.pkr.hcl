@@ -1,11 +1,10 @@
-{{ range $dir := (datasource "dirs") -}}
-source "qemu" "centos_{{ $dir }}" {
+source "qemu" "ubuntu" {
   accelerator = "hvf"
   boot_command = [
     "<esc>c<wait>",
-    "linux /images/pxeboot/vmlinuz",
-    " inst.ks=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/kickstart.cfg<enter><wait>",
-    "initrd /images/pxeboot/initrd.img<enter><wait>",
+    "linux /casper/vmlinuz",
+    " autoinstall 'ds=nocloud-net;s=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/'<enter><wait>",
+    "initrd /casper/initrd<enter><wait>",
     "boot<enter>"
   ]
   boot_key_interval = "1ms"
@@ -15,13 +14,14 @@ source "qemu" "centos_{{ $dir }}" {
   disk_size         = "100G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
   http_content = {
-    "/kickstart.cfg" = file("kickstart.cfg")
+    "/user-data" = file("user-data")
+    "/meta-data" = ""
   }
-  iso_checksum     = "file:centos.iso.sha256"
-  iso_target_path  = "centos.iso"
-  iso_url          = "centos.iso"
+  iso_checksum     = "file:ubuntu.iso.sha256"
+  iso_target_path  = "ubuntu.iso"
+  iso_url          = "ubuntu.iso"
   memory           = "4096"
-  output_directory = {{ $dir | quote }}
+  output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
     ["-boot", "menu=on,splash-time=0"],
@@ -31,22 +31,18 @@ source "qemu" "centos_{{ $dir }}" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file={{ $dir }}/centos.img,if=none,format=qcow2,id=disk"],
-    ["-drive", "file=centos.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=ubuntu.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file=ubuntu.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"
-  vm_name          = "centos.img"
+  vm_name          = "ubuntu.img"
   vnc_use_password = "true"
 }
 
-{{ end -}}
 build {
   sources = [
-    {{- $dirs := (datasource "dirs") -}}
-    {{- range $dir := (datasource "dirs") }}
-    "source.qemu.centos_{{ $dir }}",
-    {{- end }}
+    "source.qemu.ubuntu"
   ]
 }
 

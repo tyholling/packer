@@ -1,11 +1,10 @@
-{{ range $dir := (datasource "dirs") -}}
-source "qemu" "debian_{{ $dir }}" {
+source "qemu" "centos" {
   accelerator = "hvf"
   boot_command = [
     "<esc>c<wait>",
-    "linux /install.a64/vmlinuz auto=true priority=critical",
-    " url=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/preseed.cfg<enter><wait>",
-    "initrd /install.a64/initrd.gz<enter><wait>",
+    "linux /images/pxeboot/vmlinuz",
+    " inst.ks=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/kickstart.cfg<enter><wait>",
+    "initrd /images/pxeboot/initrd.img<enter><wait>",
     "boot<enter>"
   ]
   boot_key_interval = "1ms"
@@ -15,13 +14,13 @@ source "qemu" "debian_{{ $dir }}" {
   disk_size         = "100G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
   http_content = {
-    "/preseed.cfg" = file("preseed.cfg")
+    "/kickstart.cfg" = file("kickstart.cfg")
   }
-  iso_checksum     = "file:debian.iso.sha256"
-  iso_target_path  = "debian.iso"
-  iso_url          = "debian.iso"
+  iso_checksum     = "file:centos.iso.sha256"
+  iso_target_path  = "centos.iso"
+  iso_url          = "centos.iso"
   memory           = "4096"
-  output_directory = {{ $dir | quote }}
+  output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
     ["-boot", "menu=on,splash-time=0"],
@@ -31,22 +30,18 @@ source "qemu" "debian_{{ $dir }}" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file={{ $dir }}/debian.img,if=none,format=qcow2,id=disk"],
-    ["-drive", "file=debian.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=centos.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file=centos.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"
-  vm_name          = "debian.img"
+  vm_name          = "centos.img"
   vnc_use_password = "true"
 }
 
-{{ end -}}
 build {
   sources = [
-    {{- $dirs := (datasource "dirs") -}}
-    {{- range $dir := (datasource "dirs") }}
-    "source.qemu.debian_{{ $dir }}",
-    {{- end }}
+    "source.qemu.centos"
   ]
 }
 

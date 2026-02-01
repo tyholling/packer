@@ -1,11 +1,10 @@
-{{ range $dir := (datasource "dirs") -}}
-source "qemu" "ubuntu_{{ $dir }}" {
+source "qemu" "debian" {
   accelerator = "hvf"
   boot_command = [
     "<esc>c<wait>",
-    "linux /casper/vmlinuz",
-    " autoinstall 'ds=nocloud-net;s=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/'<enter><wait>",
-    "initrd /casper/initrd<enter><wait>",
+    "linux /install.a64/vmlinuz auto=true priority=critical",
+    " url=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/preseed.cfg<enter><wait>",
+    "initrd /install.a64/initrd.gz<enter><wait>",
     "boot<enter>"
   ]
   boot_key_interval = "1ms"
@@ -15,14 +14,13 @@ source "qemu" "ubuntu_{{ $dir }}" {
   disk_size         = "100G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
   http_content = {
-    "/user-data" = file("user-data")
-    "/meta-data" = ""
+    "/preseed.cfg" = file("preseed.cfg")
   }
-  iso_checksum     = "file:ubuntu.iso.sha256"
-  iso_target_path  = "ubuntu.iso"
-  iso_url          = "ubuntu.iso"
+  iso_checksum     = "file:debian.iso.sha256"
+  iso_target_path  = "debian.iso"
+  iso_url          = "debian.iso"
   memory           = "4096"
-  output_directory = {{ $dir | quote }}
+  output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
     ["-boot", "menu=on,splash-time=0"],
@@ -32,22 +30,18 @@ source "qemu" "ubuntu_{{ $dir }}" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file={{ $dir }}/ubuntu.img,if=none,format=qcow2,id=disk"],
-    ["-drive", "file=ubuntu.iso,if=none,format=raw,id=cdrom"],
+    ["-drive", "file=debian.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file=debian.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"
-  vm_name          = "ubuntu.img"
+  vm_name          = "debian.img"
   vnc_use_password = "true"
 }
 
-{{ end -}}
 build {
   sources = [
-    {{- $dirs := (datasource "dirs") -}}
-    {{- range $dir := (datasource "dirs") }}
-    "source.qemu.ubuntu_{{ $dir }}",
-    {{- end }}
+    "source.qemu.debian"
   ]
 }
 

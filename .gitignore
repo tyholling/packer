@@ -7,7 +7,6 @@
 *.img
 *.iso
 *.lock
-*.pkr.hcl
 *.sha256
 *.swp
 

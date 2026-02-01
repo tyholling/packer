@@ -3,6 +3,8 @@
 [[ $# -ne 2 ]] && printf "usage: sudo ./provision.sh <hostname> <ip>\n" && exit
 
 hostname="$1"
+sudo -u $SUDO_USER mkdir $hostname
+cp debian.img $hostname/
 cd $hostname
 
 ../start.sh &

@@ -1,9 +1,6 @@
 #!/bin/bash -e
 
-[ -z "$1" ] && set -- "ubuntu"
-
-jq -cn '$ARGS.positional' --args $@ \
-| gomplate -d "dirs=stdin:?type=application/json" -f ubuntu.pkr.hcl.tpl -o ubuntu.pkr.hcl
+[ ! -f "ubuntu.img" ] || exit
 
 if [ ! -f "ubuntu.iso.sha256" ]; then
   curl -Ls https://cdimage.ubuntu.com/releases/25.10/release/SHA256SUMS \
@@ -18,5 +15,4 @@ if [ ! -f "ubuntu.iso" ]; then
   shasum -c ubuntu.iso.sha256
 fi
 
-packer build ubuntu.pkr.hcl
-rm ubuntu.pkr.hcl
+packer build -force ubuntu.pkr.hcl

@@ -2,20 +2,19 @@
 
 1. Install dependencies
    ```
-   brew install ansible axel flock go hashicorp/tap/packer qemu watch
-   go install github.com/hairyhenderson/gomplate/v4/cmd/gomplate@latest
+   brew install ansible axel flock hashicorp/tap/packer qemu watch
    packer plugins install github.com/hashicorp/qemu
    ```
 1. Set SSH key in `kickstart.cfg`
    ```
    sshkey --username=root "..."
    ```
-1. Install Fedora
-   - Use a unique hostname (`fedora`), it will be added to `/etc/hosts`
+1. Build Fedora image
    ```
-   ./build.sh fedora
+   ./build.sh
    ```
 1. Provision the system
+   - Use a unique hostname (`fedora`), it will be added to `/etc/hosts`
    ```
    sudo ./provision.sh fedora 192.168.64.4
    ```

@@ -2,20 +2,19 @@
 
 1. Install dependencies
    ```
-   brew install ansible axel flock go hashicorp/tap/packer qemu watch
-   go install github.com/hairyhenderson/gomplate/v4/cmd/gomplate@latest
+   brew install ansible axel flock hashicorp/tap/packer qemu watch
    packer plugins install github.com/hashicorp/qemu
    ```
 1. Set SSH key in `preseed.cfg`
    ```
    echo "..." > /root/.ssh/authorized_keys
    ```
-1. Install Debian
-   - Use a unique hostname (`debian`), it will be added to `/etc/hosts`
+1. Build Debian image
    ```
-   ./build.sh debian
+   ./build.sh
    ```
 1. Provision the system
+   - Use a unique hostname (`debian`), it will be added to `/etc/hosts`
    ```
    sudo ./provision.sh debian 192.168.64.3
    ```

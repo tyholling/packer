@@ -1,5 +1,4 @@
-{{ range $dir := (datasource "dirs") -}}
-source "qemu" "fedora_{{ $dir }}" {
+source "qemu" "fedora" {
   accelerator = "hvf"
   boot_command = [
     "<esc>c<wait>",
@@ -21,7 +20,7 @@ source "qemu" "fedora_{{ $dir }}" {
   iso_target_path  = "fedora.iso"
   iso_url          = "fedora.iso"
   memory           = "4096"
-  output_directory = {{ $dir | quote }}
+  output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
     ["-boot", "menu=on,splash-time=0"],
@@ -31,7 +30,7 @@ source "qemu" "fedora_{{ $dir }}" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file={{ $dir }}/fedora.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file=fedora.img,if=none,format=qcow2,id=disk"],
     ["-drive", "file=fedora.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
@@ -40,13 +39,9 @@ source "qemu" "fedora_{{ $dir }}" {
   vnc_use_password = "true"
 }
 
-{{ end -}}
 build {
   sources = [
-    {{- $dirs := (datasource "dirs") -}}
-    {{- range $dir := (datasource "dirs") }}
-    "source.qemu.fedora_{{ $dir }}",
-    {{- end }}
+    "source.qemu.fedora"
   ]
 }
 
