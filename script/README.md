@@ -37,21 +37,21 @@
    cd deploy
    tofu init
    ```
-1. Deploy [flannel](https://github.com/flannel-io/flannel)
+1. Deploy https://github.com/flannel-io/flannel
    - This provides the overlay network to allow pods to communicate
    ```
    tofu apply -target helm_release.flannel
    ```
 1. Deploy services to the cluster
-   - https://github.com/cert-manager/cert-manager
+   - https://github.com/fluent/fluent-bit
    - https://github.com/grafana/grafana
    - https://github.com/grafana/loki
    - https://github.com/kubernetes-sigs/metrics-server
-   - https://github.com/kubernetes/ingress-nginx
    - https://github.com/mariadb/server
    - https://github.com/metallb/metallb
-   - https://github.com/open-telemetry/opentelemetry-operator
    - https://github.com/openebs/dynamic-localpv-provisioner
+   - https://github.com/prometheus/node_exporter
+   - https://github.com/prometheus/prometheus
    ```
    tofu apply
    ```
