@@ -2,8 +2,7 @@
 
 1. Install dependencies
    ```
-   brew install ansible axel flock go kubectl hashicorp/tap/packer qemu watch
-   go install github.com/hairyhenderson/gomplate/v4/cmd/gomplate@latest
+   brew install ansible axel flock kubectl hashicorp/tap/packer qemu watch
    packer plugins install github.com/hashicorp/qemu
    ```
 1. Configure SSH
