@@ -22,6 +22,6 @@ qemu-system-aarch64 \
 -drive file=debian.img,if=none,format=qcow2,id=disk \
 -m 4096 \
 -machine accel=hvf,highmem=on,type=virt \
--nic vmnet-shared,id=shared,start-address=192.168.64.1,end-address=192.168.64.255,subnet-mask=255.255.255.0,mac=$macaddress \
+-nic vmnet-shared,start-address=192.168.64.1,end-address=192.168.64.255,subnet-mask=255.255.255.0,mac=$macaddress \
 -smp 8 \
 ;
