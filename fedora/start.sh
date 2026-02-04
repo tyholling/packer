@@ -19,8 +19,8 @@ qemu-system-aarch64 \
 -device virtio-scsi-device \
 -device scsi-hd,drive=disk \
 -display none \
--drive file=fedora.img,if=none,format=qcow2,id=disk \
--m 4096 \
+-drive file=fedora.img,if=none,format=raw,id=disk \
+-m 8192 \
 -machine accel=hvf,highmem=on,type=virt \
 -nic vmnet-shared,start-address=192.168.64.1,end-address=192.168.64.255,subnet-mask=255.255.255.0,mac=$macaddress \
 -smp 8 \

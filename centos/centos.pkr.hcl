@@ -11,15 +11,16 @@ source "qemu" "centos" {
   boot_wait         = "-1s"
   communicator      = "none"
   cpus              = "8"
-  disk_size         = "100G"
+  disk_size         = "10G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
+  format            = "raw"
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
   iso_checksum     = "file:centos.iso.sha256"
   iso_target_path  = "centos.iso"
   iso_url          = "centos.iso"
-  memory           = "4096"
+  memory           = "8192"
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
@@ -30,7 +31,7 @@ source "qemu" "centos" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file=centos.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file=centos.img,if=none,format=raw,id=disk"],
     ["-drive", "file=centos.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]

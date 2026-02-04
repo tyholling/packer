@@ -11,15 +11,16 @@ source "qemu" "debian" {
   boot_wait         = "-1s"
   communicator      = "none"
   cpus              = "8"
-  disk_size         = "100G"
+  disk_size         = "10G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
+  format            = "raw"
   http_content = {
     "/preseed.cfg" = file("preseed.cfg")
   }
   iso_checksum     = "file:debian.iso.sha256"
   iso_target_path  = "debian.iso"
   iso_url          = "debian.iso"
-  memory           = "4096"
+  memory           = "8192"
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
@@ -30,7 +31,7 @@ source "qemu" "debian" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file=debian.img,if=none,format=qcow2,id=disk"],
+    ["-drive", "file=debian.img,if=none,format=raw,id=disk"],
     ["-drive", "file=debian.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]

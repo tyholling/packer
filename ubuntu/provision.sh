@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 [[ $# -ne 2 ]] && printf "usage: sudo ./provision.sh <hostname> <ip>\n" && exit
 
