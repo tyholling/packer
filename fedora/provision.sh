@@ -19,7 +19,10 @@ ip_updated="$2"
 printf '%-15s %s # %s\n' $ip_address $hostname $mac_address >> /etc/hosts
 
 sudo -u $SUDO_USER sh -c "
-printf \"[fedora]\n$hostname ansible_user=root\n\n[fedora:vars]\n\" > .inventory
+export ANSIBLE_DISPLAY_SKIPPED_HOSTS=false
+export ANSIBLE_HOST_PATTERN_MISMATCH=ignore
+
+printf \"[_]\nfedora ansible_host=$hostname ansible_user=root\n\n[all:vars]\n\" > .inventory
 printf \"ansible_python_interpreter = auto_silent\n\" >> .inventory
 printf \"ansible_ssh_common_args = '-o StrictHostKeyChecking=no'\n\" >> .inventory
 
