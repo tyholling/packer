@@ -56,21 +56,21 @@ secret=$(kubectl get secrets -n kube-system -o json | jq -r '
 | select(.data."usage-bootstrap-authentication" | @base64d == "true")]
 | sort_by(.data.expiration | @base64d) | reverse | first | .metadata.name
 ')
-echo "secret:  $secret"
+# echo "secret:  $secret"
 
 token=$(kubectl get secret -n kube-system $secret -o json | jq -r '
 ( .data."token-id" | @base64d ) + "." + ( .data."token-secret" | @base64d )
 ')
-echo "token:   $token"
+# echo "token:   $token"
 
 hash=$(kubectl get configmap -n kube-public cluster-info -o json | jq -r '.data.kubeconfig' \
 | grep certificate-authority-data | awk '{ print $2 }' | base64 -d \
 | openssl x509 -pubkey | openssl rsa -pubin -outform der 2> /dev/null \
 | sha256sum | awk '{ print $1 }')
-echo "sha256:  $hash"
+# echo "sha256:  $hash"
 
 pubkey=$(ssh -l root ${control_plane_nodes[0]} kubeadm init phase upload-certs --upload-certs | tail -n1)
-echo "pubkey:  $pubkey"
+# echo "pubkey:  $pubkey"
 
 for control_plane_node in ${control_plane_nodes[@]:1}; do
   ssh -l root $control_plane_node "
