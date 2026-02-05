@@ -10,8 +10,8 @@ source "qemu" "debian" {
   boot_key_interval = "1ms"
   boot_wait         = "-1s"
   communicator      = "none"
-  cpus              = "8"
-  disk_size         = "10G"
+  cpus              = 8
+  disk_size         = "100G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
   format            = "raw"
   http_content = {
@@ -20,7 +20,7 @@ source "qemu" "debian" {
   iso_checksum     = "file:debian.iso.sha256"
   iso_target_path  = "debian.iso"
   iso_url          = "debian.iso"
-  memory           = "8192"
+  memory           = 8192
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
@@ -37,7 +37,7 @@ source "qemu" "debian" {
   ]
   shutdown_timeout = "10m"
   vm_name          = "debian.img"
-  vnc_use_password = "true"
+  vnc_use_password = true
 }
 
 build {
