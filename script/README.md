@@ -2,7 +2,7 @@
 
 1. Install dependencies
    ```
-   brew install ansible axel flock kubectl hashicorp/tap/packer qemu watch
+   brew install ansible axel kubectl hashicorp/tap/packer qemu watch
    packer plugins install github.com/hashicorp/qemu
    ```
 1. Configure SSH
