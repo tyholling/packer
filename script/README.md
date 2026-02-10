@@ -2,7 +2,7 @@
 
 1. Install dependencies
    ```
-   brew install ansible axel kubectl hashicorp/tap/packer qemu watch
+   brew install ansible axel kubectl opentofu hashicorp/tap/packer qemu watch
    packer plugins install github.com/hashicorp/qemu
    ```
 1. Configure SSH
@@ -32,7 +32,6 @@
      ```
 1. Prepare to deploy services to the cluster
    ```
-   brew install helm kubernetes-cli opentofu
    git clone https://github.com/tyholling/deploy.git
    cd deploy
    tofu init
