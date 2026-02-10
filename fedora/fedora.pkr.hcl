@@ -10,7 +10,7 @@ source "qemu" "fedora" {
   boot_key_interval = "1ms"
   boot_wait         = "-1s"
   communicator      = "none"
-  cpus              = 8
+  cpus              = 4
   disk_size         = "100G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
   format            = "raw"
@@ -20,7 +20,7 @@ source "qemu" "fedora" {
   iso_checksum     = "file:fedora.iso.sha256"
   iso_target_path  = "fedora.iso"
   iso_url          = "fedora.iso"
-  memory           = 8192
+  memory           = 4096
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
