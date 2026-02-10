@@ -16,7 +16,7 @@ until arp -an | grep -q " $mac_reduced "; do sleep 1; done
 
 ip_address=$(arp -an | grep " $mac_reduced " | grep -o -m1 "192.168.64.\d\+")
 ip_updated="$2"
-printf '%-15s %s # %s\n' $ip_address $hostname $mac_address >> /etc/hosts
+flock /etc/hosts printf '%-15s %s # %s\n' $ip_address $hostname $mac_address >> /etc/hosts
 
 sudo -u $SUDO_USER sh -c "
 export ANSIBLE_DISPLAY_SKIPPED_HOSTS=false
@@ -31,8 +31,8 @@ ansible-playbook -i .inventory ../../ansible/static.yaml -e ip_address=$ip_updat
 ansible-playbook -i .inventory ../../ansible/locale.yaml
 ansible all -i .inventory -m hostname -a name=$hostname
 ssh -l root $hostname reboot
-
-sudo sed -i -e '/$mac_address/s/.\{15\}/$(printf %-15s $ip_updated)/' /etc/hosts
-ansible all -i .inventory -m wait_for_connection
 "
+
+flock /etc/hosts sed -i -e "/$mac_address/s/.\{15\}/$(printf %-15s $ip_updated)/" /etc/hosts
+sudo -u $SUDO_USER sh -c "ansible all -i .inventory -m wait_for_connection"
 arp -d $ip_address
