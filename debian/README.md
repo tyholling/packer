@@ -2,7 +2,7 @@
 
 1. Install dependencies
    ```
-   brew install ansible axel hashicorp/tap/packer qemu watch
+   brew install ansible axel flock hashicorp/tap/packer qemu watch
    packer plugins install github.com/hashicorp/qemu
    ```
 1. Set SSH key in `preseed.cfg`
