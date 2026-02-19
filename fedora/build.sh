@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-[ ! -f "fedora.img" ] || exit
+[ -f "fedora.img" ] && exit
 
 if [ ! -f "fedora.iso.sha256" ]; then
   curl -Ls https://download.fedoraproject.org/pub/fedora/linux/releases/43/Server/aarch64/iso/Fedora-Server-43-1.6-aarch64-CHECKSUM \

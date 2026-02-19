@@ -1,6 +1,6 @@
 #!/bin/bash -e
 
-[ ! -f "ubuntu.img" ] || exit
+[ -f "ubuntu.img" ] && exit
 
 if [ ! -f "ubuntu.iso.sha256" ]; then
   curl -Ls https://cdimage.ubuntu.com/releases/25.10/release/SHA256SUMS \
