@@ -13,6 +13,7 @@ source "qemu" "ubuntu" {
   cpus              = 4
   disk_size         = "100G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
+  format            = "raw"
   http_content = {
     "/user-data" = file("user-data")
     "/meta-data" = ""
@@ -31,8 +32,8 @@ source "qemu" "ubuntu" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file=ubuntu.img,if=none,id=disk"],
-    ["-drive", "file=ubuntu.iso,if=none,id=cdrom"],
+    ["-drive", "file=ubuntu.img,if=none,format=raw,id=disk"],
+    ["-drive", "file=ubuntu.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"

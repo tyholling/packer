@@ -4,7 +4,7 @@
 
 hostname="$1"
 sudo -u $SUDO_USER mkdir $hostname
-cp -c fedora.img $hostname/
+cp fedora.img $hostname/
 cd $hostname
 
 ../start.sh &

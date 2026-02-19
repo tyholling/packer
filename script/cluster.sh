@@ -1,18 +1,17 @@
 #!/bin/bash
 
-cd $(dirname $0)
-
 function build_nodes {
-  pushd ../$1 > /dev/null
+  pushd ../$1
   ./build.sh ${@:3}
   address=$2
   for hostname in ${@:3}; do
     sudo ./provision.sh $hostname 192.168.64.$((address++))
   done
   for hostname in ${@:3}; do
-    ssh -l root $hostname bash -s < kubelet.sh
+    ssh -l root $hostname bash -s < kubelet.sh &
   done
-  popd > /dev/null
+  wait
+  popd
 }
 
 function add_control {
@@ -23,8 +22,9 @@ function add_control {
     scp kubeadm/kube-vip.yaml root@$s:/etc/kubernetes/manifests
     ssh -l root $s mkdir -p /opt/kubeadm/patches
     scp kubeadm/patches/* root@$s:/opt/kubeadm/patches/
-    ssh -l root $s kubeadm config images pull
+    ssh -l root $s kubeadm config images pull &
   done
+  wait
 
   for s in ${@:4}; do
     ssh -l root $s sed -i -e 's/super-admin/admin/' /etc/kubernetes/manifests/kube-vip.yaml
