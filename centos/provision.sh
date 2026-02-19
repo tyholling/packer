@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 [[ $# -ne 2 ]] && printf "usage: sudo ./provision.sh <hostname> <ip>\n" && exit
 
@@ -25,8 +25,8 @@ export ANSIBLE_HOST_PATTERN_MISMATCH=ignore
 printf \"[_]\ncentos ansible_host=$hostname ansible_user=root\n\n[all:vars]\n\" > .inventory
 printf \"ansible_python_interpreter = auto_silent\n\" >> .inventory
 printf \"ansible_ssh_common_args = '-o StrictHostKeyChecking=no'\n\" >> .inventory
-
 ansible all -i .inventory -m wait_for_connection
+
 ansible-playbook -i .inventory ../../ansible/static.yaml -e ip_address=$ip_updated
 ansible-playbook -i .inventory ../../ansible/locale.yaml
 ansible all -i .inventory -m hostname -a name=$hostname
