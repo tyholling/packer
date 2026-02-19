@@ -15,19 +15,8 @@
   - name: configure network
     shell: |
       sed -i -e '/enp0s1/s/^/# /' /etc/network/interfaces
-      nmcli connection add type ethernet ifname enp0s1 con-name enp0s1 \
-      ipv4.addresses "{{ ansible_facts.enp0s1.ipv4.address }}/24" \
-      ipv4.dns 192.168.64.1 ipv4.gateway 192.168.64.1 ipv4.method manual
-  - name: restart network manager
-    systemd_service:
-      name: NetworkManager
-      state: restarted
-  - name: enable enp0s1 connection
-    command: nmcli connection up enp0s1
-  - name: configure network
-    shell: |
-      nmcli connection modify enp0s1 ipv4.addresses "{{ ip_address }}/24" \
-      ipv4.dns 192.168.64.1 ipv4.gateway 192.168.64.1 ipv4.method manual
+      nmcli connection add type ethernet ifname enp0s1 con-name enp0s1 ipv4.method manual \
+      ipv4.addresses "{{ ip_address }}/24" ipv4.dns 192.168.64.1 ipv4.gateway 192.168.64.1
 
 - name: static
   hosts: ubuntu

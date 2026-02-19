@@ -4,7 +4,7 @@
 
 hostname="$1"
 sudo -u $SUDO_USER mkdir $hostname
-cp debian.img $hostname/
+cp -c debian.img $hostname/
 cd $hostname
 
 ../start.sh &

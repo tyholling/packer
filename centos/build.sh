@@ -1,6 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
 
-[ ! -f "centos.img" ] || exit
+[ -f "centos.img" ] && exit
 
 if [ ! -f "centos.iso.sha256" ]; then
   curl -Ls https://mirror.stream.centos.org/10-stream/BaseOS/aarch64/iso/CentOS-Stream-10-latest-aarch64-dvd1.iso.SHA256SUM \
