@@ -4,7 +4,7 @@
 
 hostname="$1"
 sudo -u $SUDO_USER mkdir $hostname
-cp ubuntu.img $hostname/
+cp -c ubuntu.img $hostname/
 cd $hostname
 
 ../start.sh &

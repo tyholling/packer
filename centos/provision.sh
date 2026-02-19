@@ -4,7 +4,7 @@
 
 hostname="$1"
 sudo -u $SUDO_USER mkdir $hostname
-cp centos.img $hostname/
+cp -c centos.img $hostname/
 cd $hostname
 
 ../start.sh &
