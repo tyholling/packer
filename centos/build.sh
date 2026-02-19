@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 [ -f "centos.img" ] && exit
 

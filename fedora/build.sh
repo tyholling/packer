@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 [ -f "fedora.img" ] && exit
 

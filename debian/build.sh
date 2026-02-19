@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 [ -f "debian.img" ] && exit
 

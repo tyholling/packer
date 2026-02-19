@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 [ -f "ubuntu.img" ] && exit
 
