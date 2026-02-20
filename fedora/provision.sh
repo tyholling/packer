@@ -33,6 +33,5 @@ ansible all -i .inventory -m hostname -a name=$hostname
 ssh -l root $hostname reboot
 "
 
-arp -d $ip_address
 flock /etc/hosts sed -i -e "/$mac_address/s/.\{15\}/$(printf %-15s $ip_updated)/" /etc/hosts
 sudo -u $SUDO_USER sh -c "ansible all -i .inventory -m wait_for_connection"
