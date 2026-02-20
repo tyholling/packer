@@ -89,4 +89,4 @@ for worker_node in ${worker_nodes[@]}; do
   kubectl wait --for create node $worker_node
 done
 
-kubectl get nodes -o wide
+kubectl get nodes -o wide --sort-by .metadata.creationTimestamp
