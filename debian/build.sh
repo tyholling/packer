@@ -1,6 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
 
-[ ! -f "debian.img" ] || exit
+[ -f "debian.img" ] && exit
 
 if [ ! -f "debian.iso.sha256" ]; then
   curl -Ls https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/SHA256SUMS \
