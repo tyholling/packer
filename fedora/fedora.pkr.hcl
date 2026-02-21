@@ -13,6 +13,7 @@ source "qemu" "fedora" {
   cpus              = 4
   disk_size         = "100G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
+  format            = "raw"
   http_content = {
     "/kickstart.cfg" = file("kickstart.cfg")
   }
@@ -30,8 +31,8 @@ source "qemu" "fedora" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file=fedora.img,if=none,id=disk"],
-    ["-drive", "file=fedora.iso,if=none,id=cdrom"],
+    ["-drive", "file=fedora.img,if=none,format=raw,id=disk"],
+    ["-drive", "file=fedora.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
   shutdown_timeout = "10m"
