@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/bash -e -o pipefail
 
 [ -f "ubuntu.img" ] && exit
 
 if [ ! -f "ubuntu.iso.sha256" ]; then
-  curl -Ls https://cdimage.ubuntu.com/releases/25.10/release/SHA256SUMS \
+  curl -Lfs https://cdimage.ubuntu.com/releases/25.10/release/SHA256SUMS \
   | sed -n 's/^\([a-z0-9]\{64\}\) \*ubuntu-25.10-live-server-arm64.iso$/\1  ubuntu.iso/p' \
   > ubuntu.iso.sha256
 fi
