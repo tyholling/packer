@@ -9,7 +9,6 @@ source "qemu" "centos" {
   ]
   boot_key_interval = "1ms"
   boot_wait         = "-1s"
-  communicator      = "none"
   cpus              = 4
   disk_size         = "100G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
@@ -35,15 +34,21 @@ source "qemu" "centos" {
     ["-drive", "file=centos.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"]
   ]
-  shutdown_timeout = "10m"
-  vm_name          = "centos.img"
-  vnc_use_password = true
+  shutdown_command     = "poweroff"
+  shutdown_timeout     = "10m"
+  ssh_private_key_file = "~/.ssh/id_ed25519"
+  ssh_username         = "root"
+  vm_name              = "centos.img"
+  vnc_use_password     = true
 }
 
 build {
   sources = [
     "source.qemu.centos"
   ]
+  provisioner "shell" {
+    script = "kubelet.sh"
+  }
 }
 
 packer {
