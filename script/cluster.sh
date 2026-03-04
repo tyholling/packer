@@ -9,6 +9,10 @@ function build_nodes {
   for hostname in ${@:3}; do
     sudo ./provision.sh $hostname 192.168.64.$((address++))
   done
+  for hostname in ${@:3}; do
+    ssh -l root $hostname bash -s < kubelet.sh &
+  done
+  wait
   popd
 }
 
