@@ -3,7 +3,7 @@ source "qemu" "fedora" {
   boot_command = [
     "<esc>c<wait>",
     "linux /images/pxeboot/vmlinuz",
-    " inst.ks=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/kickstart.cfg<enter><wait>",
+    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<enter><wait>",
     "initrd /images/pxeboot/initrd.img<enter><wait>",
     "boot<enter>"
   ]

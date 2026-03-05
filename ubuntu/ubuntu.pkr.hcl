@@ -3,7 +3,7 @@ source "qemu" "ubuntu" {
   boot_command = [
     "<esc>c<wait>",
     "linux /casper/vmlinuz",
-    " autoinstall 'ds=nocloud-net;s=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/'<enter><wait>",
+    " autoinstall 'ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/'<enter><wait>",
     "initrd /casper/initrd<enter><wait>",
     "boot<enter>"
   ]

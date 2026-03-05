@@ -3,7 +3,7 @@ source "qemu" "debian" {
   boot_command = [
     "<esc>c<wait>",
     "linux /install.a64/vmlinuz auto=true priority=critical",
-    " url=http://{{`{{ .HTTPIP }}`}}:{{`{{ .HTTPPort }}`}}/preseed.cfg<enter><wait>",
+    " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter><wait>",
     "initrd /install.a64/initrd.gz<enter><wait>",
     "boot<enter>"
   ]
