@@ -1,10 +1,10 @@
 #!/bin/bash
 
-[ -z "$1" ] && set -- "centos"
+hostname="${1:-centos}"
+image="${2:-centos.img}"
 
-hostname="$1"
 sudo -u $SUDO_USER mkdir $hostname
-cp -cn centos.img $hostname/
+cp -cn $image $hostname/centos.img
 cd $hostname
 
 ../start.sh &
@@ -27,8 +27,8 @@ ansible all -i .inventory -m wait_for_connection
 ansible-playbook -i .inventory ../../ansible/locale.yaml
 "
 
-[ -z "$2" ] && exit
-ip_updated="$2"
+[ -z "$3" ] && exit
+ip_updated="$3"
 
 sudo -E -u $SUDO_USER sh -c "
 ansible-playbook -i .inventory ../../ansible/static.yaml -e ip_address=$ip_updated
