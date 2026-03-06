@@ -3,7 +3,7 @@ source "qemu" "fedora" {
   boot_command = [
     "<esc>c<wait>",
     "linux /images/pxeboot/vmlinuz",
-    " inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kickstart.cfg<enter><wait>",
+    " inst.ks=http://1.0.0.1/kickstart.cfg<enter><wait>",
     "initrd /images/pxeboot/initrd.img<enter><wait>",
     "boot<enter>"
   ]
@@ -33,7 +33,8 @@ source "qemu" "fedora" {
     ["-display", "none"],
     ["-drive", "file=fedora.img,if=none,format=raw,id=disk"],
     ["-drive", "file=fedora.iso,if=none,format=raw,id=cdrom"],
-    ["-machine", "accel=hvf,highmem=on,type=virt"]
+    ["-machine", "accel=hvf,highmem=on,type=virt"],
+    ["-netdev", "user,id=user.0,net=1.0.0.0/8,restrict=on,guestfwd=tcp:1.0.0.1:80-tcp::{{ .HTTPPort }}"]
   ]
   shutdown_timeout = "10m"
   vm_name          = "fedora.img"

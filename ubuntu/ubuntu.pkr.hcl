@@ -3,7 +3,7 @@ source "qemu" "ubuntu" {
   boot_command = [
     "<esc>c<wait>",
     "linux /casper/vmlinuz",
-    " autoinstall 'ds=nocloud-net;s=http://{{ .HTTPIP }}:{{ .HTTPPort }}/'<enter><wait>",
+    " autoinstall ds=nocloud-net\\;s=http://1.0.0.1/<enter><wait>",
     "initrd /casper/initrd<enter><wait>",
     "boot<enter>"
   ]
@@ -34,7 +34,8 @@ source "qemu" "ubuntu" {
     ["-display", "none"],
     ["-drive", "file=ubuntu.img,if=none,format=raw,id=disk"],
     ["-drive", "file=ubuntu.iso,if=none,format=raw,id=cdrom"],
-    ["-machine", "accel=hvf,highmem=on,type=virt"]
+    ["-machine", "accel=hvf,highmem=on,type=virt"],
+    ["-netdev", "user,id=user.0,net=1.0.0.0/8,restrict=on,guestfwd=tcp:1.0.0.1:80-tcp::{{ .HTTPPort }}"]
   ]
   shutdown_timeout = "10m"
   vm_name          = "ubuntu.img"
