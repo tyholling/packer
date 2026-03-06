@@ -7,7 +7,7 @@ function build_nodes {
   ./build.sh ${@:3}
   address=$2
   for hostname in ${@:3}; do
-    sudo ./provision.sh $hostname 192.168.64.$((address++))
+    sudo ./provision.sh $hostname $1.img 192.168.64.$((address++))
   done
   for hostname in ${@:3}; do
     ssh -l root $hostname bash -s < kubelet.sh &
