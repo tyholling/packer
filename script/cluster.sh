@@ -47,6 +47,12 @@ kubeadm init --patches /opt/kubeadm/patches \
 mkdir -p ~/.kube
 scp root@${control_plane_nodes[0]}:/etc/kubernetes/admin.conf ~/.kube/config
 
+kubectl patch -n kube-system ds/kube-proxy -p "$(jq -n '
+.spec.template.spec.containers[0] |= (
+.name = "kube-proxy" | .resources |= (
+.limits = null | .requests = { cpu: "10m", memory: "10Mi" }
+))')"
+
 secret=$(kubectl get secrets -n kube-system -o json | jq -r '
 [ .items[]
 | select(.type == "bootstrap.kubernetes.io/token")
