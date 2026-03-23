@@ -20,7 +20,6 @@ qemu-system-aarch64 \
 until ssh -q -l root -p 60522 localhost true; do sleep 1; done
 
 ssh -l root -p 60522 localhost bash -s < kubelet.sh
-ssh -l root -p 60522 localhost kubeadm config images pull
 ssh -l root -p 60522 localhost poweroff
 
 ssh-keygen -R [localhost]:60522

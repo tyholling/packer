@@ -29,7 +29,7 @@ eof
 
 apt-get update
 apt-get install -y cri-o
-systemctl enable --now crio
+systemctl enable crio
 
 # install kubernetes
 

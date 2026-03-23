@@ -28,7 +28,7 @@ gpgkey=https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$CRIO_VERS
 eof
 
 dnf install -y cri-o
-systemctl enable --now crio
+systemctl enable crio
 
 # install kubernetes
 
