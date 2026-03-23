@@ -2,6 +2,6 @@
 
 watch -tx -n1 bash -c "
 pgrep qemu | xargs; echo
-pr -mt -w \$COLUMNS <(arp -an | grep 2:0:) <(grep 02:00: /etc/hosts); echo
-awk '{ print \$1 }' ~/.ssh/known_hosts | xargs
+pr -mt -w \$COLUMNS <(arp -an | grep -E -o '.* 2:0:\S+') <(grep 02:00: /etc/hosts); echo
+grep -v '#' ~/.ssh/known_hosts | awk '{ print \$1 }' | xargs
 "
