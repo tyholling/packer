@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 hostname="${1:-ubuntu}"
 image="${2:-ubuntu.img}"

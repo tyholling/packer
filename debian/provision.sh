@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 hostname="${1:-debian}"
 image="${2:-debian.img}"

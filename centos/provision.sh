@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 hostname="${1:-centos}"
 image="${2:-centos.img}"

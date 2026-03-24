@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 hostname="${1:-fedora}"
 image="${2:-fedora.img}"
