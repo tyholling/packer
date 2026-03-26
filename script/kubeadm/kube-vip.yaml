@@ -8,16 +8,16 @@ spec:
   - args:
     - manager
     env:
-    - name: vip_arp
-      value: "true"
-    - name: vip_interface
-      value: enp0s1
     - name: cp_enable
       value: "true"
-    - name: vip_leaderelection
+    - name: vip_arp
       value: "true"
     - name: address
       value: 192.168.64.64
+    - name: vip_interface
+      value: enp0s1
+    - name: vip_leaderelection
+      value: "true"
     image: ghcr.io/kube-vip/kube-vip
     name: kube-vip
     resources:
@@ -33,14 +33,14 @@ spec:
         drop:
         - ALL
     volumeMounts:
-    - mountPath: /etc/kubernetes/admin.conf
-      name: kubeconfig
+    - name: kubeconfig
+      mountPath: /etc/kubernetes/admin.conf
   hostAliases:
   - hostnames:
     - kubernetes
     ip: 127.0.0.1
   hostNetwork: true
   volumes:
-  - hostPath:
+  - name: kubeconfig
+    hostPath:
       path: /etc/kubernetes/super-admin.conf
-    name: kubeconfig
