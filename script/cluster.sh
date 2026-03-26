@@ -19,6 +19,7 @@ function add_control {
 
   for s in ${@:3}; do
     scp kubeadm/kube-vip.yaml root@$s:/etc/kubernetes/manifests
+    scp kubeadm/registry.yaml root@$s:/etc/kubernetes/manifests
     ssh -l root $s mkdir -p /opt/kubeadm/patches
     scp kubeadm/patches/* root@$s:/opt/kubeadm/patches/
   done

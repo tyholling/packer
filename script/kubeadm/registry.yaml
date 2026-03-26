@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: registry
+  namespace: kube-system
+spec:
+  hostNetwork: true
+  containers:
+  - env:
+    - name: OTEL_TRACES_EXPORTER
+      value: none
+    - name: REGISTRY_HTTP_ADDR
+      value: :5000
+    - name: REGISTRY_HTTP_DEBUG_ADDR
+      value: ""
+    - name: REGISTRY_LOG_LEVEL
+      value: error
+    - name: REGISTRY_PROXY_REMOTEURL
+      value: https://registry-1.docker.io
+    image: ghcr.io/distribution/distribution:3.0.0
+    name: registry-docker
+    ports:
+    - containerPort: 5000
+      hostPort: 5000
+    resources:
+      limits: null
+      requests:
+        cpu: 10m
+        memory: 10Mi
+    volumeMounts:
+    - name: registry
+      mountPath: /var/lib/registry
+  - env:
+    - name: OTEL_TRACES_EXPORTER
+      value: none
+    - name: REGISTRY_HTTP_ADDR
+      value: :5001
+    - name: REGISTRY_HTTP_DEBUG_ADDR
+      value: ""
+    - name: REGISTRY_LOG_LEVEL
+      value: error
+    - name: REGISTRY_PROXY_REMOTEURL
+      value: https://ghcr.io
+    image: ghcr.io/distribution/distribution:3.0.0
+    name: registry-ghcr
+    ports:
+    - containerPort: 5001
+      hostPort: 5001
+    resources:
+      limits: null
+      requests:
+        cpu: 10m
+        memory: 10Mi
+    volumeMounts:
+    - name: registry
+      mountPath: /var/lib/registry
+  - env:
+    - name: OTEL_TRACES_EXPORTER
+      value: none
+    - name: REGISTRY_HTTP_ADDR
+      value: :5002
+    - name: REGISTRY_HTTP_DEBUG_ADDR
+      value: ""
+    - name: REGISTRY_LOG_LEVEL
+      value: error
+    - name: REGISTRY_PROXY_REMOTEURL
+      value: https://quay.io
+    image: ghcr.io/distribution/distribution:3.0.0
+    name: registry-quay
+    ports:
+    - containerPort: 5002
+      hostPort: 5002
+    resources:
+      limits: null
+      requests:
+        cpu: 10m
+        memory: 10Mi
+    volumeMounts:
+    - name: registry
+      mountPath: /var/lib/registry
+  - env:
+    - name: OTEL_TRACES_EXPORTER
+      value: none
+    - name: REGISTRY_HTTP_ADDR
+      value: :5003
+    - name: REGISTRY_HTTP_DEBUG_ADDR
+      value: ""
+    - name: REGISTRY_LOG_LEVEL
+      value: error
+    - name: REGISTRY_PROXY_REMOTEURL
+      value: https://registry.k8s.io
+    image: ghcr.io/distribution/distribution:3.0.0
+    name: registry-k8s
+    ports:
+    - containerPort: 5003
+      hostPort: 5003
+    resources:
+      limits: null
+      requests:
+        cpu: 10m
+        memory: 10Mi
+    volumeMounts:
+    - name: registry
+      mountPath: /var/lib/registry
+  volumes:
+  - name: registry
+    hostPath:
+      path: /var/lib/registry
+      type: DirectoryOrCreate
