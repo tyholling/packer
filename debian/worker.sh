@@ -20,6 +20,8 @@ qemu-system-aarch64 \
 until ssh -q -l root -p 60322 localhost true; do sleep 1; done
 
 ssh -l root -p 60322 localhost bash -s < kubelet.sh
+scp -P 60322 crio-images.conf root@localhost:/etc/crio/crio.conf.d/50-registries.conf
+scp -P 60322 crio-mirror.conf root@localhost:/etc/containers/registries.conf.d/crio.conf
 ssh -l root -p 60322 localhost poweroff
 
 ssh-keygen -R [localhost]:60322
