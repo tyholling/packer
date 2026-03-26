@@ -18,6 +18,10 @@ spec:
       value: enp0s1
     - name: vip_leaderelection
       value: "false"
+    - name: vip_nodename
+      valueFrom:
+        fieldRef:
+          fieldPath: spec.nodeName
     image: ghcr.io/kube-vip/kube-vip:v1.1.1
     name: kube-vip
     resources:
