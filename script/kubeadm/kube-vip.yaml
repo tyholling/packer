@@ -17,8 +17,8 @@ spec:
     - name: vip_interface
       value: enp0s1
     - name: vip_leaderelection
-      value: "true"
-    image: ghcr.io/kube-vip/kube-vip
+      value: "false"
+    image: ghcr.io/kube-vip/kube-vip:v1.1.1
     name: kube-vip
     resources:
       limits: null
@@ -44,3 +44,4 @@ spec:
   - name: kubeconfig
     hostPath:
       path: /etc/kubernetes/super-admin.conf
+      type: File
