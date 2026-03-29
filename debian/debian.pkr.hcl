@@ -2,8 +2,8 @@ source "qemu" "debian" {
   accelerator = "hvf"
   boot_command = [
     "<esc>c<wait>",
-    "linux /install.a64/vmlinuz auto=true priority=critical",
-    " url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<enter><wait>",
+    "linux /install.a64/vmlinuz auto=true url=http://1.0.0.1/preseed.cfg",
+    " netcfg/get_domain= netcfg/get_hostname=debian netcfg/get_nameservers=<enter><wait>",
     "initrd /install.a64/initrd.gz<enter><wait>",
     "boot<enter>"
   ]
@@ -33,7 +33,8 @@ source "qemu" "debian" {
     ["-display", "none"],
     ["-drive", "file=debian.img,if=none,format=raw,id=disk"],
     ["-drive", "file=debian.iso,if=none,format=raw,id=cdrom"],
-    ["-machine", "accel=hvf,highmem=on,type=virt"]
+    ["-machine", "accel=hvf,highmem=on,type=virt"],
+    ["-netdev", "user,id=user.0,net=1.0.0.0/8,restrict=on,guestfwd=tcp:1.0.0.1:80-tcp::{{ .HTTPPort }}"]
   ]
   shutdown_timeout = "10m"
   vm_name          = "debian.img"
