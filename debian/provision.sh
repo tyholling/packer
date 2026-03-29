@@ -38,3 +38,4 @@ ssh -l root $hostname reboot || true
 
 sed -i -e "/$mac_address/s/.\{15\}/$(printf %-15s $ip_updated)/" /etc/hosts
 sudo -u $SUDO_USER sh -c "ansible all -i .inventory -m wait_for_connection"
+arp -d $ip_address
