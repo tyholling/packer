@@ -11,10 +11,10 @@ qemu-system-aarch64 \
 -device scsi-hd,drive=disk \
 -display none \
 -drive file=worker.img,if=none,format=raw,id=disk \
--m 2048 \
+-m 4096 \
 -machine accel=hvf,highmem=on,type=virt \
 -nic user,hostfwd=tcp::60222-:22 \
--smp 2 \
+-smp 4 \
 &
 
 until ssh -q -l root -p 60222 localhost true; do sleep 1; done

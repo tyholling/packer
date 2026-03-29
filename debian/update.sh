@@ -9,10 +9,10 @@ qemu-system-aarch64 \
 -device scsi-hd,drive=disk \
 -display none \
 -drive file=debian.img,if=none,format=raw,id=disk \
--m 2048 \
+-m 4096 \
 -machine accel=hvf,highmem=on,type=virt \
 -nic user,hostfwd=tcp::60322-:22 \
--smp 2 \
+-smp 4 \
 &
 
 until ssh -q -l root -p 60322 localhost true; do sleep 1; done
