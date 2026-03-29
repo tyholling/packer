@@ -2,15 +2,14 @@ source "qemu" "centos" {
   accelerator = "hvf"
   boot_command = [
     "<esc>c<wait>",
-    "linux /images/pxeboot/vmlinuz",
-    " inst.ks=http://1.0.0.1/kickstart.cfg<enter><wait>",
+    "linux /images/pxeboot/vmlinuz inst.ks=http://1.0.0.1/kickstart.cfg<enter><wait>",
     "initrd /images/pxeboot/initrd.img<enter><wait>",
     "boot<enter>"
   ]
   boot_key_interval = "1ms"
   boot_wait         = "-1s"
   communicator      = "none"
-  cpus              = 4
+  cpus              = 2
   disk_size         = "100G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
   format            = "raw"
@@ -20,7 +19,7 @@ source "qemu" "centos" {
   iso_checksum     = "file:centos.iso.sha256"
   iso_target_path  = "centos.iso"
   iso_url          = "centos.iso"
-  memory           = 4096
+  memory           = 2048
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [

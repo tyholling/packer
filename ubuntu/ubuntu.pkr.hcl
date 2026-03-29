@@ -2,15 +2,14 @@ source "qemu" "ubuntu" {
   accelerator = "hvf"
   boot_command = [
     "<esc>c<wait>",
-    "linux /casper/vmlinuz",
-    " autoinstall ds=nocloud\\;s=http://1.0.0.1/<enter><wait>",
+    "linux /casper/vmlinuz autoinstall ds=nocloud\\;s=http://1.0.0.1/<enter><wait>",
     "initrd /casper/initrd<enter><wait>",
     "boot<enter>"
   ]
   boot_key_interval = "1ms"
   boot_wait         = "-1s"
   communicator      = "none"
-  cpus              = 4
+  cpus              = 2
   disk_size         = "100G"
   firmware          = "/opt/homebrew/share/qemu/edk2-aarch64-code.fd"
   format            = "raw"
@@ -21,7 +20,7 @@ source "qemu" "ubuntu" {
   iso_checksum     = "file:ubuntu.iso.sha256"
   iso_target_path  = "ubuntu.iso"
   iso_url          = "ubuntu.iso"
-  memory           = 4096
+  memory           = 2048
   output_directory = "."
   qemu_binary      = "qemu-system-aarch64"
   qemuargs = [
