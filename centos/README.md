@@ -13,10 +13,13 @@
    ```
    ./build.sh
    ```
-1. Provision the system
-   - Use a unique hostname (`centos`), it will be added to `/etc/hosts`
+1. Install updates
    ```
-   sudo ./provision.sh centos 192.168.64.2
+   ./update.sh
+   ```
+1. Provision the system
+   ```
+   sudo ./provision.sh
    ```
 1. Connect to the machine
    ```
