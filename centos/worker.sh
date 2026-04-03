@@ -6,6 +6,7 @@ qemu-system-aarch64 \
 -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
 -boot menu=on,splash-time=0 \
 -cpu host \
+-device virtio-net,netdev=net0 \
 -device virtio-rng-device \
 -device virtio-scsi-device \
 -device scsi-hd,drive=disk \
@@ -13,7 +14,7 @@ qemu-system-aarch64 \
 -drive file=worker.img,if=none,format=raw,id=disk \
 -m 4096 \
 -machine accel=hvf,highmem=on,type=virt \
--nic user,hostfwd=tcp::60222-:22 \
+-netdev user,id=net0,hostfwd=tcp::60222-:22 \
 -smp 4 \
 &
 
