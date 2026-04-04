@@ -15,7 +15,7 @@ spec:
     - name: address
       value: 192.168.64.64
     - name: vip_interface
-      value: enp0s1
+      value: eth0
     - name: vip_leaderelection
       value: "false"
     - name: vip_nodename

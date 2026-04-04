@@ -25,6 +25,7 @@ source "qemu" "centos" {
   qemuargs = [
     ["-boot", "menu=on,splash-time=0"],
     ["-cpu", "host"],
+    ["-device", "virtio-net-device,netdev=user.0"],
     ["-device", "virtio-rng-device"],
     ["-device", "virtio-scsi-device"],
     ["-device", "scsi-hd,drive=disk"],

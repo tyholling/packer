@@ -7,7 +7,7 @@ autoinstall:
   network:
     version: 2
     ethernets:
-      enp0s1:
+      eth0:
         dhcp4: true
   storage:
     swap:

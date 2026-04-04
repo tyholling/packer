@@ -3,7 +3,7 @@
   tasks:
   - name: configure network
     shell: |
-      nmcli connection modify enp0s1 \
+      nmcli connection modify eth0 \
       ipv4.addresses "{{ ip_address }}/24" \
       ipv4.dns 192.168.64.1 ipv4.gateway 192.168.64.1 ipv4.method manual
 
@@ -15,8 +15,8 @@
       name: network-manager
   - name: configure network
     shell: |
-      sed -i -e '/enp0s1/s/^/# /' /etc/network/interfaces
-      nmcli connection add type ethernet ifname enp0s1 con-name enp0s1 \
+      sed -i -e '/eth0/s/^/# /' /etc/network/interfaces
+      nmcli connection add type ethernet ifname eth0 con-name eth0 \
       ipv4.addresses "{{ ip_address }}/24" \
       ipv4.dns 192.168.64.1 ipv4.gateway 192.168.64.1 ipv4.method manual
 
@@ -32,7 +32,7 @@
       name: network-manager
   - name: configure network
     shell: |
-      nmcli connection modify netplan-enp0s1 connection.id enp0s1 \
+      nmcli connection modify netplan-eth0 connection.id eth0 \
       ipv4.addresses "{{ ip_address }}/24" \
       ipv4.dns 192.168.64.1 ipv4.gateway 192.168.64.1 ipv4.method manual
   - name: disable systemd-networkd
