@@ -31,7 +31,7 @@ source "qemu" "debian" {
     ["-device", "scsi-hd,drive=disk"],
     ["-device", "scsi-cd,drive=cdrom"],
     ["-display", "none"],
-    ["-drive", "file=debian.img,if=none,format=raw,id=disk"],
+    ["-drive", "file=debian.img,if=none,format=raw,id=disk,cache=writethrough"],
     ["-drive", "file=debian.iso,if=none,format=raw,id=cdrom"],
     ["-machine", "accel=hvf,highmem=on,type=virt"],
     ["-netdev", "user,id=user.0,net=1.0.0.0/8,restrict=on,guestfwd=tcp:1.0.0.1:80-tcp::{{ .HTTPPort }}"]

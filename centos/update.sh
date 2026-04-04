@@ -9,7 +9,7 @@ qemu-system-aarch64 \
 -device virtio-scsi-device \
 -device scsi-hd,drive=disk \
 -display none \
--drive file=centos.img,if=none,format=raw,id=disk \
+-drive file=centos.img,if=none,format=raw,id=disk,cache=writethrough \
 -m 4096 \
 -machine accel=hvf,highmem=on,type=virt \
 -netdev user,id=net0,hostfwd=tcp::60222-:22 \
