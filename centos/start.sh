@@ -17,8 +17,8 @@ qemu-system-aarch64 \
 -cpu host \
 -device virtio-net-device,netdev=net0,mac=$macaddress \
 -device virtio-rng-device \
--device virtio-scsi-device \
--device scsi-hd,drive=disk \
+-device virtio-scsi-device,hotplug=off,packed=on \
+-device scsi-hd,drive=disk,physical_block_size=4096 \
 -display none \
 -drive file=centos.img,if=none,format=raw,id=disk,cache=writethrough,discard=unmap \
 -m 4096 \
