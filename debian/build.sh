@@ -7,7 +7,7 @@ if [ ! -s "debian.iso.sha256" ]; then
   sed -n -i '' -e 's/^\([a-z0-9]\{64\}\)  debian-.*-arm64-DVD-1.iso$/\1  debian.iso/p' debian.iso.sha256
 fi
 
-if [ ! -f "debian.iso" ]; then
+if [ ! -s "debian.iso" ]; then
   axel -o debian.iso \
   https://cdimage.debian.org/debian-cd/current/arm64/iso-dvd/$(grep 'DVD-1.iso' SHA256SUMS | awk '{ print $2 }')
 
