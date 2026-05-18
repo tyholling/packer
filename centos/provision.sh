@@ -21,7 +21,7 @@ export ANSIBLE_HOST_PATTERN_MISMATCH=ignore
 
 sudo -E -u $SUDO_USER sh -c "
 printf \"[_]\ncentos ansible_host=$hostname ansible_user=root\n\n[all:vars]\n\" > .inventory
-printf \"ansible_python_interpreter = auto_silent\n\" >> .inventory
+printf \"ansible_python_interpreter = /usr/bin/python3\n\" >> .inventory
 printf \"ansible_ssh_common_args = '-o StrictHostKeyChecking=no'\n\" >> .inventory
 ansible all -i .inventory -m wait_for_connection
 ansible-playbook -i .inventory ../../ansible/locale.yaml
