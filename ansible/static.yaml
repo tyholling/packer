@@ -1,10 +1,14 @@
 - name: static
   hosts: centos, fedora
   tasks:
+  - name: get connection uuid
+    shell: |
+      nmcli -t -f uuid,device connection show | grep eth0 | cut -d: -f1
+    register: connection_uuid
   - name: configure network
     shell: |
-      nmcli connection modify eth0 \
-      ipv4.addresses "{{ ip_address }}/24" \
+      nmcli connection modify {{ connection_uuid.stdout }} \
+      connection.id eth0 ipv4.addresses "{{ ip_address }}/24" \
       ipv4.dns 192.168.64.1 ipv4.gateway 192.168.64.1 ipv4.method manual
 
 - name: static
