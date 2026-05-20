@@ -30,7 +30,6 @@
   - name: configure netplan
     shell: |
       sed -i -e '3i\  renderer: NetworkManager' /etc/netplan/00-installer-config.yaml
-      sed -i -e '/dhcp4/s/true/false/' /etc/netplan/00-installer-config.yaml
   - name: install network manager
     apt:
       name: network-manager
@@ -39,6 +38,9 @@
       nmcli connection modify netplan-eth0 connection.id eth0 \
       ipv4.addresses "{{ ip_address }}/24" \
       ipv4.dns 192.168.64.1 ipv4.gateway 192.168.64.1 ipv4.method manual
+  - name: configure netplan
+    shell: |
+      sed -i -e '/dhcp4/s/true/false/' /etc/netplan/00-installer-config.yaml
   - name: disable systemd-networkd
     systemd_service:
       name: systemd-networkd
