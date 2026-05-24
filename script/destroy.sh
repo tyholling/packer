@@ -5,9 +5,9 @@ cd $(dirname $0)/..
 for machine in "$@"; do
   for distro in centos debian fedora ubuntu; do
     [[ -d $distro/$machine ]] && pushd $distro/$machine > /dev/null || continue
-    ssh -q -l root -o ConnectTimeout=1 $machine poweroff
-    if [[ -f .macaddress ]]; then
-      read macaddress < .macaddress
+    ssh -q -l root -o ConnectTimeout=5 $machine poweroff || true
+    if [[ -f .macaddress0 ]]; then
+      read macaddress < .macaddress0
       sudo arp -d $macaddress
       sudo sed -i -e "/$macaddress/d" /etc/hosts
     fi

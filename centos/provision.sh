@@ -8,11 +8,11 @@ cp -cn $image $hostname/centos.img
 cd $hostname
 
 ../start.sh &
-until [ -f .macaddress ]; do sleep 1; done
-read mac_address < .macaddress
+until [ -s .macaddress0 ]; do sleep 1; done
+read mac_address < .macaddress0
 
 mac_reduced=$(echo $mac_address | perl -pe 's/0(\w)/\1/g')
-until arp -an | grep -q " $mac_reduced "; do sleep 1; ping -c1 192.168.64.255 > /dev/null; done
+until arp -an | grep -q " $mac_reduced "; do sleep 1; ping -o 192.168.64.255 > /dev/null; done
 
 ip_address=$(arp -an | sed -E -n "/ $mac_reduced /s/.*\(([0-9.]{7,})\).*/\1/p")
 printf '%-15s %s # %s\n' $ip_address $hostname $mac_address >> /etc/hosts
