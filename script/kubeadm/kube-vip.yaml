@@ -13,16 +13,16 @@ spec:
     - name: vip_arp
       value: "true"
     - name: address
-      value: 192.168.64.64
+      value: 192.168.0.64
     - name: vip_interface
-      value: eth0
+      value: eth1
     - name: vip_leaderelection
-      value: "false"
+      value: "true"
     - name: vip_nodename
       valueFrom:
         fieldRef:
           fieldPath: spec.nodeName
-    image: ghcr.io/kube-vip/kube-vip:v1.1.1
+    image: ghcr.io/kube-vip/kube-vip:v1.1.2
     name: kube-vip
     resources:
       limits: null
@@ -47,5 +47,5 @@ spec:
   volumes:
   - name: kubeconfig
     hostPath:
-      path: /etc/kubernetes/super-admin.conf
+      path: /etc/kubernetes/admin.conf
       type: File
