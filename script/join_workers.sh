@@ -18,7 +18,7 @@ function add_workers {
   done
 }
 
-add_workers debian 20 a0 a1 a2
+add_workers centos 20 a0 a1 a2
 
 secret=$(kubectl get secrets -n kube-system -o json | jq -r '
 [ .items[]
