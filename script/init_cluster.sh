@@ -6,7 +6,7 @@ function build_node {
   pushd ../$1
   ./build.sh
   ./worker.sh
-  sudo ./provision.sh $2 worker.img $3
+  ./provision.sh $2 worker.img $3
   popd
 }
 

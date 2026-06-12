@@ -17,6 +17,8 @@ read macaddress0 < .macaddress0
 [ -s .macaddress1 ] || mac_address > .macaddress1
 read macaddress1 < .macaddress1
 
+/opt/homebrew/opt/socket_vmnet/bin/socket_vmnet_client \
+/var/run/socket_vmnet.bridged.en0 \
 qemu-system-aarch64 \
 -bios /opt/homebrew/share/qemu/edk2-aarch64-code.fd \
 -boot menu=on,splash-time=0 \
@@ -30,7 +32,7 @@ qemu-system-aarch64 \
 -drive file=centos.img,if=none,format=raw,id=disk,cache=writethrough,discard=unmap \
 -m 4096 \
 -machine accel=hvf,highmem=on,type=virt \
+-netdev socket,id=net1,fd=3 \
 -netdev vmnet-shared,id=net0,start-address=192.168.64.1,end-address=192.168.64.255,subnet-mask=255.255.255.0 \
--netdev vmnet-bridged,id=net1,ifname=en0 \
 -smp 4 \
 ;
