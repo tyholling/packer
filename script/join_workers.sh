@@ -13,7 +13,7 @@ function build_node {
 function add_workers {
   local address=$2
   for node in ${@:3}; do
-    build_node $1 $node "192.168.64.$((address++))"
+    build_node $1 $node "192.168.0.$((address++))"
     worker_nodes+=($node)
   done
 }

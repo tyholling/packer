@@ -13,7 +13,7 @@ function build_node {
 function add_control {
   local address=$2
   for node in ${@:3}; do
-    host="192.168.64.$((address++))"
+    host="192.168.0.$((address++))"
     build_node $1 $node $host
     control_plane_nodes+=($node)
     control_plane_hosts+=($host)

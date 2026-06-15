@@ -11,7 +11,7 @@ function build_node {
 }
 
 function add_control {
-  host="192.168.64.$2"
+  host="192.168.0.$2"
   node=$3
   build_node $1 $node $host
 

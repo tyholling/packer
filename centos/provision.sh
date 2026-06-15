@@ -4,12 +4,12 @@ hostname="${1:-centos}"
 image="${2:-centos.img}"
 
 mkdir $hostname
-cp -cnv $image $hostname/centos.img
+cp -cn $image $hostname/centos.img
 cd $hostname
 
-sudo ../start.sh &
-until [ -s .macaddress0 ]; do sleep 1; done
-read mac_address < .macaddress0
+../start.sh &
+until [ -s .macaddress ]; do sleep 1; done
+read mac_address < .macaddress
 
 mac_reduced=$(echo $mac_address | perl -pe 's/0(\w)/\1/g')
 until arp -an | grep -q " $mac_reduced "; do sleep 1; done
@@ -23,13 +23,13 @@ printf "[_]\ncentos ansible_host=$hostname ansible_user=root\n\n[all:vars]\n" > 
 printf "ansible_python_interpreter = /usr/bin/python3\n" >> .inventory
 printf "ansible_ssh_common_args = '-o StrictHostKeyChecking=no'\n" >> .inventory
 ansible all -i .inventory -m wait_for_connection
-ansible all -i .inventory -m hostname -a name=$hostname
 ansible-playbook -i .inventory ../../ansible/locale.yaml
 
 [ -z "$3" ] && exit
 ip_updated="$3"
 
 ansible-playbook -i .inventory ../../ansible/static.yaml -e ip_address=$ip_updated
+ansible all -i .inventory -m hostname -a name=$hostname
 ssh -l root $hostname reboot || true
 
 sudo sed -i -e "/$mac_address/s/.\{15\}/$(printf %-15s $ip_updated)/" /etc/hosts
