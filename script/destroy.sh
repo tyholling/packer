@@ -6,8 +6,8 @@ for machine in "$@"; do
   for distro in centos debian fedora ubuntu; do
     [[ -d $distro/$machine ]] && pushd $distro/$machine > /dev/null || continue
     ssh -q -l root -o ConnectTimeout=5 $machine poweroff || true
-    if [[ -f .macaddress0 ]]; then
-      read macaddress < .macaddress0
+    if [[ -f .macaddress ]]; then
+      read macaddress < .macaddress
       sudo arp -d $macaddress
       sudo sed -i -e "/$macaddress/d" /etc/hosts
     fi

@@ -38,7 +38,7 @@ hash=$(kubectl get configmap -n kube-public cluster-info -o json | jq -r '.data.
 
 for worker_node in ${worker_nodes[@]}; do
   ssh -l root $worker_node "
-  kubeadm join 192.168.0.64:6443 --token $token --discovery-token-ca-cert-hash sha256:$hash
+  kubeadm join 192.168.64.64:6443 --token $token --discovery-token-ca-cert-hash sha256:$hash
   "
   kubectl wait --for create node $worker_node
 done

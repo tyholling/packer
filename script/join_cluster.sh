@@ -45,11 +45,11 @@ hash=$(kubectl get configmap -n kube-public cluster-info -o json | jq -r '.data.
 | openssl x509 -pubkey | openssl rsa -pubin -outform der 2> /dev/null \
 | sha256sum | awk '{ print $1 }')
 
-pubkey=$(ssh -l root 192.168.0.64 kubeadm init phase upload-certs --upload-certs | tail -n1)
+pubkey=$(ssh -l root 192.168.64.64 kubeadm init phase upload-certs --upload-certs | tail -n1)
 
 for i in ${!control_plane_nodes[@]}; do
   ssh -l root ${control_plane_nodes[i]} "
-  kubeadm join 192.168.0.64:6443 --control-plane \
+  kubeadm join 192.168.64.64:6443 --control-plane \
   --apiserver-advertise-address ${control_plane_hosts[i]} --patches /opt/kubeadm/patches \
   --certificate-key $pubkey --token $token --discovery-token-ca-cert-hash sha256:$hash
   "

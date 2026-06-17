@@ -8,8 +8,8 @@ cp -cnv $image $hostname/centos.img
 cd $hostname
 
 sudo ../start.sh &
-until [ -s .macaddress0 ]; do sleep 1; done
-read mac_address < .macaddress0
+until [ -s .macaddress ]; do sleep 1; done
+read mac_address < .macaddress
 
 mac_reduced=$(echo $mac_address | perl -pe 's/0(\w)/\1/g')
 until arp -an | grep -q " $mac_reduced "; do sleep 1; done

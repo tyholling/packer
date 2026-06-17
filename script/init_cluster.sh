@@ -25,7 +25,7 @@ function add_control {
 add_control centos 10 k0
 
 ssh -l root $node "
-kubeadm init --control-plane-endpoint 192.168.0.64 --apiserver-advertise-address $host \
+kubeadm init --control-plane-endpoint 192.168.64.64 --apiserver-advertise-address $host \
 --patches /opt/kubeadm/patches --pod-network-cidr 172.20.0.0/16 --service-cidr 172.24.0.0/16
 "
 
