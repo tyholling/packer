@@ -1,11 +1,11 @@
 apiVersion: kubeadm.k8s.io/v1beta4
 kind: InitConfiguration
 localAPIEndpoint:
-  advertiseAddress: "202:f90:2659:47c4:2cb0:5703:db3b:4328"
+  advertiseAddress: "202:30cb:d884:b689:339e:b169:8a1b:a619"
 nodeRegistration:
   kubeletExtraArgs:
   - name: node-ip
-    value: "202:f90:2659:47c4:2cb0:5703:db3b:4328"
+    value: "202:30cb:d884:b689:339e:b169:8a1b:a619"
 ---
 apiVersion: kubeadm.k8s.io/v1beta4
 kind: ClusterConfiguration

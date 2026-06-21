@@ -27,8 +27,8 @@ tar xf /tmp/yggdrasil.tar.gz -C /opt/yggdrasil
 
 pushd /opt/yggdrasil
 ./build
-./yggdrasil -genconf | sed -e '/IfMTU/s/:.*/: 1280/' > /etc/yggdrasil.conf
-grep -i mtu /etc/yggdrasil.conf
+# ./yggdrasil -genconf | sed -e '/IfMTU/s/:.*/: 1280/' > /etc/yggdrasil.conf
+# grep -i mtu /etc/yggdrasil.conf
 popd
 
 cat << eof > /etc/systemd/system/yggdrasil.service

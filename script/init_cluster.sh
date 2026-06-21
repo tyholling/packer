@@ -23,8 +23,8 @@ function add_control {
 add_control centos 10 k0
 
 ip_address="$(ssh -l root $node /opt/yggdrasil/yggdrasilctl -json getself | jq -r .address)"
-echo "ip address: $ip_address"
-ssh -l root $node ip link set dev tun0 mtu 1500
+# echo "ip address: $ip_address"
+# ssh -l root $node ip link set dev tun0 mtu 1500
 
 echo "$ip_address cluster.lan" >> /opt/homebrew/etc/dnsmasq.hosts
 sudo brew services restart dnsmasq

@@ -23,7 +23,7 @@ function add_control {
     ssh -l root $node mkdir -p /opt/kubeadm/patches
     scp kubeadm/patches/* root@$node:/opt/kubeadm/patches/
 
-    ssh -l root $node ip link set dev tun0 mtu 1500
+    # ssh -l root $node ip link set dev tun0 mtu 1500
   done
 }
 
