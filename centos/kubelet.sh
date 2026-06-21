@@ -11,9 +11,34 @@ modprobe br_netfilter overlay
 # set kernel parameters
 
 cat << eof > /etc/sysctl.d/kubernetes.conf
-net.ipv4.ip_forward = 1
+net.ipv4.conf.all.forwarding = 1
+net.ipv6.conf.all.forwarding = 1
 eof
 sysctl --system
+
+# install yggdrasil
+
+dnf install -y golang tar
+
+curl -Ls -o /tmp/yggdrasil.tar.gz \
+https://github.com/yggdrasil-network/yggdrasil-go/releases/download/v0.5.13/yggdrasil-0.5.13-vendored.tar.gz
+mkdir -p /opt/yggdrasil
+tar xf /tmp/yggdrasil.tar.gz -C /opt/yggdrasil
+
+pushd /opt/yggdrasil
+./build
+./yggdrasil -genconf | sed -e '/IfMTU/s/:.*/: 1280/' > /etc/yggdrasil.conf
+grep -i mtu /etc/yggdrasil.conf
+popd
+
+cat << eof > /etc/systemd/system/yggdrasil.service
+[Service]
+ExecStart=/opt/yggdrasil/yggdrasil -useconf /etc/yggdrasil.conf
+
+[Install]
+WantedBy=multi-user.target
+eof
+systemctl enable yggdrasil
 
 # install cri-o
 
@@ -28,7 +53,7 @@ gpgkey=https://download.opensuse.org/repositories/isv:/cri-o:/stable:/$CRIO_VERS
 eof
 
 dnf install -y cri-o
-systemctl enable crio
+systemctl enable --now crio
 
 # install kubernetes
 
@@ -44,3 +69,4 @@ eof
 
 dnf install -y kubeadm kubelet kubectl kubernetes-cni
 systemctl enable kubelet
+kubeadm config images pull

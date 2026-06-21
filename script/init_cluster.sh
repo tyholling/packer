@@ -15,19 +15,40 @@ function add_control {
   node=$3
   build_node $1 $node $host
 
-  scp kubeadm/kube-vip.yaml root@$node:/etc/kubernetes/manifests
   scp kubeadm/registry.yaml root@$node:/etc/kubernetes/manifests
 
-  ssh -l root $node mkdir -p /opt/kubeadm/patches
-  scp kubeadm/patches/* root@$node:/opt/kubeadm/patches/
+  ssh -l root $node mkdir -p /opt/kubeadm
 }
 
 add_control centos 10 k0
 
-ssh -l root $node "
-kubeadm init --control-plane-endpoint 192.168.64.64 --apiserver-advertise-address $host \
---patches /opt/kubeadm/patches --pod-network-cidr 172.20.0.0/16 --service-cidr 172.24.0.0/16
-"
+ip_address="$(ssh -l root $node /opt/yggdrasil/yggdrasilctl -json getself | jq -r .address)"
+echo "ip address: $ip_address"
+ssh -l root $node ip link set dev tun0 mtu 1500
+
+echo "$ip_address cluster.lan" >> /opt/homebrew/etc/dnsmasq.hosts
+sudo brew services restart dnsmasq
+
+cat << eof > kubeadm-config.yaml
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: InitConfiguration
+localAPIEndpoint:
+  advertiseAddress: "$ip_address"
+nodeRegistration:
+  kubeletExtraArgs:
+  - name: node-ip
+    value: "$ip_address"
+---
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: ClusterConfiguration
+controlPlaneEndpoint: "cluster.lan:6443"
+networking:
+  podSubnet: "fd64:10::/48"
+  serviceSubnet: "fd64:20::/108"
+eof
+scp kubeadm-config.yaml root@$node:/opt/kubeadm/config.yaml
+
+ssh -l root $node kubeadm init --config /opt/kubeadm/config.yaml
 
 mkdir -p ~/.kube
 scp root@$node:/etc/kubernetes/admin.conf ~/.kube/config
