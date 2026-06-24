@@ -19,11 +19,6 @@ function add_control {
     control_plane_hosts+=($host)
 
     scp kubeadm/registry.yaml root@$node:/etc/kubernetes/manifests
-
-    ssh -l root $node mkdir -p /opt/kubeadm/patches
-    scp kubeadm/patches/* root@$node:/opt/kubeadm/patches/
-
-    # ssh -l root $node ip link set dev tun0 mtu 1500
   done
 }
 
@@ -35,39 +30,49 @@ secret=$(kubectl get secrets -n kube-system -o json | jq -r '
 | select(.data."usage-bootstrap-authentication" | @base64d == "true")]
 | sort_by(.data.expiration | @base64d) | last | .metadata.name
 ')
-# echo "secret     : $secret"
 
 token=$(kubectl get secret -n kube-system $secret -o json | jq -r '
 .data | (."token-id" | @base64d) + "." + (."token-secret" | @base64d)
 ')
-# echo "token      : $token"
 
 hash=$(kubectl get configmap -n kube-public cluster-info -o json | jq -r '.data.kubeconfig' \
 | grep certificate-authority-data | awk '{ print $2 }' | base64 -d \
 | openssl x509 -pubkey | openssl rsa -pubin -outform der 2> /dev/null \
 | sha256sum | awk '{ print $1 }')
-# echo "hash       : $hash"
 
-cluster_ip=$(ssh -l root cluster.lan /opt/yggdrasil/yggdrasilctl -json getself | jq -r .address)
-# echo "ip address : $ip_address"
+pubkey=$(ssh -l root cluster.lan kubeadm init phase upload-certs \
+--upload-certs --config /opt/kubeadm/init-config.yaml | tail -n1)
 
-# ssh -l root cluster.lan kubeadm init phase upload-certs --upload-certs --config /opt/kubeadm/config.yaml
+for i in ${!control_plane_nodes[@]}; do
+  node=${control_plane_nodes[i]}
+  host=${control_plane_hosts[i]}
 
-pubkey=$(ssh -l root $cluster_ip kubeadm init phase upload-certs --upload-certs --config /opt/kubeadm/config.yaml | tail -n1)
-# echo "pubkey: $pubkey"
+ip_address="$(ssh -l root $node /opt/yggdrasil/yggdrasilctl -json getself | jq -r .address)"
+cat << eof > /tmp/kubeadm-join-cluster.yaml
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: JoinConfiguration
+nodeRegistration:
+  kubeletExtraArgs:
+  - name: node-ip
+    value: "$ip_address,$host"
+discovery:
+  bootstrapToken:
+    token: "$token"
+    apiServerEndpoint: "cluster.lan:6443"
+    caCertHashes:
+    - "sha256:$hash"
+controlPlane:
+  localAPIEndpoint:
+    advertiseAddress: "$ip_address"
+  certificateKey: "$pubkey"
+eof
 
-for node in ${control_plane_nodes[@]}; do
-  ip_address="$(ssh -l root $node /opt/yggdrasil/yggdrasilctl -json getself | jq -r .address)"
-  echo "ip address: $ip_address"
+  ssh -l root $node mkdir -p /opt/kubeadm
+  scp /tmp/kubeadm-join-cluster.yaml root@$node:/opt/kubeadm/join-config.yaml
 
-  # ssh -l root $node mkdir -p /opt/kubeadm
-  # scp root@[$cluster_ip]:/opt/kubeadm/config.yaml root@$node:/opt/kubeadm/config.yaml
+  ssh -l root $node nmcli con mod lo +ipv6.routes "'fd64:20::/108 ::'"
 
-  ssh -l root $node "
-  kubeadm join cluster.lan:6443 --control-plane \
-  --apiserver-advertise-address $ip_address --patches /opt/kubeadm/patches \
-  --certificate-key $pubkey --token $token --discovery-token-ca-cert-hash sha256:$hash
-  "
+  ssh -l root $node kubeadm join --config /opt/kubeadm/join-config.yaml
   kubectl wait --for create node $node
 done
 

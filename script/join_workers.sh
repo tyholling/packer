@@ -13,8 +13,10 @@ function build_node {
 function add_workers {
   local address=$2
   for node in ${@:3}; do
-    build_node $1 $node "192.168.64.$((address++))"
+    host="192.168.64.$((address++))"
+    build_node $1 $node $host
     worker_nodes+=($node)
+    worker_hosts+=($host)
   done
 }
 
@@ -36,11 +38,33 @@ hash=$(kubectl get configmap -n kube-public cluster-info -o json | jq -r '.data.
 | openssl x509 -pubkey | openssl rsa -pubin -outform der 2> /dev/null \
 | sha256sum | awk '{ print $1 }')
 
-for worker_node in ${worker_nodes[@]}; do
-  ssh -l root $worker_node "
-  kubeadm join 192.168.64.64:6443 --token $token --discovery-token-ca-cert-hash sha256:$hash
-  "
-  kubectl wait --for create node $worker_node
+for i in ${!worker_nodes[@]}; do
+  node=${worker_nodes[i]}
+  host=${worker_hosts[i]}
+
+ip_address="$(ssh -l root $node /opt/yggdrasil/yggdrasilctl -json getself | jq -r .address)"
+cat << eof > /tmp/kubeadm-join-workers.yaml
+apiVersion: kubeadm.k8s.io/v1beta4
+kind: JoinConfiguration
+nodeRegistration:
+  kubeletExtraArgs:
+  - name: node-ip
+    value: "$ip_address,$host"
+discovery:
+  bootstrapToken:
+    token: "$token"
+    apiServerEndpoint: "cluster.lan:6443"
+    caCertHashes:
+    - "sha256:$hash"
+eof
+
+  ssh -l root $node mkdir -p /opt/kubeadm
+  scp /tmp/kubeadm-join-workers.yaml root@$node:/opt/kubeadm/join-config.yaml
+
+  ssh -l root $node nmcli con mod lo +ipv6.routes "'fd64:20::/108 ::'"
+
+  ssh -l root $node kubeadm join --config /opt/kubeadm/join-config.yaml
+  kubectl wait --for create node $node
 done
 
 kubectl get nodes -o wide --sort-by .metadata.creationTimestamp

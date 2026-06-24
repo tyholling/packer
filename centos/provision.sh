@@ -4,7 +4,7 @@ hostname="${1:-centos}"
 image="${2:-centos.img}"
 
 mkdir $hostname
-cp -cnv $image $hostname/centos.img
+cp -cn $image $hostname/centos.img
 cd $hostname
 
 sudo ../start.sh &
